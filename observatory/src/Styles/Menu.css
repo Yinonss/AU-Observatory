@@ -1,0 +1,28 @@
+
+
+nav {
+    text-transform: uppercase;
+    float: right;
+    background-color: black;
+}
+
+nav li {
+    list-style: none;
+    padding-right: 15px;
+    font-size: 22px;
+    color: white;
+    float: left;
+
+    font-weight: bold;
+}
+
+nav li a {
+    text-decoration: none;
+    border: 25px;
+    font-size: 22px;
+    color: white;
+}
+
+nav li a:hover {
+    background-color: #303030;
+}

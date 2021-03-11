@@ -1,15 +1,16 @@
-import logo from './logo.svg';
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 import './App.css';
 import React from "react";
 import Base from './components/Base.js'
-import Editor from "./components/Editor";
 import NewPlan from "./components/NewPlan";
 
 function App() {
   return (
     <div className="App">
-        <Base />
-        <NewPlan />
+        <Router>
+            <Base />
+            <Route path="/newplan"><NewPlan /></Route>
+        </Router>
     </div>
   );
 }
