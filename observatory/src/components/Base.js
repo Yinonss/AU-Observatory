@@ -1,9 +1,9 @@
 import React from "react";
 import Style from './Style.css'
-
+import NavMenu from "./NavMenu";
 /* This function returns the upper page which includes title and menu. */
 
-export  default  function Base() {
+export default function Base() {
     return (
         <div className="UpperPage">
             <table>
@@ -13,12 +13,7 @@ export  default  function Base() {
                         <h1>Observatory</h1>
                     </td>
                     <td>
-                        <ul>
-                            <li><a href="#home">home</a></li>
-                            <li><a href="#newplan">new plan</a> </li>
-                            <li><a href="#settings">settings</a> </li>
-                            <li><a href="#about">about</a> </li>
-                        </ul>
+                        <NavMenu />
                     </td>
                 </tr>
             </table>
