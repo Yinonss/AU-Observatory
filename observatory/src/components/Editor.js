@@ -3,7 +3,7 @@ import Style from './Style.css'
 
 /* This function returns a basic form for observation missions. */
 export default function Editor() {
-    return (s
+    return (
             <form>
                 <table>
                     <tr>
