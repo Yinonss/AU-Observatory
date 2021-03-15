@@ -3,7 +3,7 @@ import Style from './Style.css'
 
 /* This component define the plan's structure and display its targets. */
 
-export default function () {
+export default function TargetList() {
     return (
         <div class="TargetList">
             <table>

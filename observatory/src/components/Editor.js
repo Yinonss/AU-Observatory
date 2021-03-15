@@ -2,8 +2,8 @@ import React from "react";
 import Style from './Style.css'
 
 /* This function returns a basic form for observation missions. */
-export default function () {
-    return (
+export default function Editor() {
+    return (s
             <form>
                 <table>
                     <tr>

@@ -8,7 +8,7 @@ import TargetList from "./TargetList";
 
 //TODO: Add targets to list ability
 
-export default function () {
+export default function NewPlan() {
     return (
         <div className="container">
             <td><Editor /></td>
