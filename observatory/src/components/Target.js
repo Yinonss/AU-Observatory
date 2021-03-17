@@ -1,10 +1,13 @@
 import React from "react"
-
+import targetStye from "./Target.css"
 export default function Target(props) {
 
     return (
-        <div>
-            <h5>{props.name}</h5>
+        <div className="target" data-closable>
+            <button className={"close-button"} aria-label="Close alert" type={"button"} data-close>
+                <span aria-hidden="true">&times;</span>
+            </button>
+                <h5>{props.name}</h5>
         </div>
     )
 }

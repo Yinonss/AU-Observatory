@@ -1,0 +1,19 @@
+.target {
+    list-style: none;
+    background-color: darkgray;
+    border-radius: 10px;
+    padding: 0.00112ch;
+    margin-bottom: 8px;
+
+}
+
+.target h5 {
+    margin-right: 130px;
+    margin-top: 4px;
+}
+
+.target .close-button {
+    padding: 0px;
+    margin-left: 180px;
+    background: none;
+}
