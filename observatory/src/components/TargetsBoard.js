@@ -5,6 +5,10 @@ import Target from "./Target"
 
 export default function TargetsBoard(props) {
 
+    const deleteTarget = (id)=> {
+        props.setTargets(props.allTargets.filter(item => item.targetId != id))
+    }
+
     return (
         <div class="TargetInfo">
             <table>
@@ -15,7 +19,7 @@ export default function TargetsBoard(props) {
             </table>
             <div class="list">
                 {
-                    props.allTargets.map(item => <Target name={item.name}/>)
+                    props.allTargets.map(item => <Target name={item.name} deleteTarget={deleteTarget} targetId={item.targetId}/>)
                 }
             </div>
             <br />
