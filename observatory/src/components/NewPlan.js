@@ -10,9 +10,10 @@ import Target from"./Target"
 
 export default function NewPlan() {
 
-    const allTargets = [{name: "venos"}, {name: "53568m"}]
+    const allTargets = [{name: "venos", targetId: 1}, {name: "53568m", targetId: 2}]
 
     const [targets, setTargets] = useState(allTargets)
+
     const addTarget = (target)=> {
         setTargets([...targets, target])
     }
@@ -20,7 +21,7 @@ export default function NewPlan() {
     return (
         <div className="container">
             <td><Editor addTarget={addTarget}/></td>
-            <td><TargetsBoard allTargets={targets} /></td>
+            <td><TargetsBoard allTargets={targets} setTargets={setTargets} /></td>
         </div>
     );
 }
