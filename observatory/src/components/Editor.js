@@ -1,8 +1,6 @@
 import Style from './Style.css'
 import React, { useState, useEffect } from 'react';
 
-
-
 /* This function returns a basic form for observation missions. */
 export default function Editor(props) {
 
@@ -60,6 +58,7 @@ export default function Editor(props) {
                     </tr>
                 </table>
                 <button type="button" id="add_button" onClick={()=>{
+                    //TODO change the way that we get the elements
                     let name = document.getElementById("name").value
                     // let rightAscension = document.getElementById("rightAscension").value
                     // let declination = document.getElementById("declination").value
@@ -76,7 +75,6 @@ export default function Editor(props) {
 
                     let target2 = {name: name, targetId: count}
                     props.addTarget(target2)
-                    console.log(target2)
                     setCount(count + 1)
                 }}>Add</button>
             </form>
