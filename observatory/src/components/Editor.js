@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 /* This function returns a basic form for observation missions. */
 export default function Editor(props) {
 
-    const [count, setCount] = useState(3);
+    const [count, setCount] = useState(3); // save the id number of the targets on the list
 
     return (
             <form>
@@ -58,7 +58,7 @@ export default function Editor(props) {
                     </tr>
                 </table>
                 <button type="button" id="add_button" onClick={()=>{
-                    //TODO change the way that we get the elements
+                    //TODO change the way that we get the elements!!!!!
                     let name = document.getElementById("name").value
                     // let rightAscension = document.getElementById("rightAscension").value
                     // let declination = document.getElementById("declination").value
