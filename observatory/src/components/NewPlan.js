@@ -10,7 +10,7 @@ import Target from"./Target"
 
 export default function NewPlan() {
 
-    const allTargets = [{name: "venos", targetId: 1}, {name: "53568m", targetId: 2}]
+    const allTargets = []
     const [targets, setTargets] = useState(allTargets)
     const addTarget = (target)=> {
         setTargets([...targets, target])
