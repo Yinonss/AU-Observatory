@@ -4,16 +4,19 @@
     border-radius: 10px;
     padding: 0.00112ch;
     margin-bottom: 8px;
-
+    height: 50px;
+    width: 170px;
+    opacity: 0.5;
 }
 
 .target h5 {
     margin-right: 130px;
-    margin-top: 4px;
+    margin-top: 2px;
+    color: #e0ffff ;
 }
 
 .target .close-button {
     padding: 0px;
-    margin-left: 180px;
+    margin-left: 150px;
     background: none;
 }
