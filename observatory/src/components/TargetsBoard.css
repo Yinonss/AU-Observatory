@@ -1,7 +1,4 @@
-.list {
-    overflow-y: scroll;
-    width: fit-content;
-}
+
 
 #submit{
     background-color: #4CAF50;
@@ -12,4 +9,19 @@
     width: 200px;
     height: 300px;
     margin: auto;
+}
+
+.list {
+    overflow-y: scroll;
+    scrollbar-color: #303030 #b3cccc;
+    scrollbar-base-color: #404040;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #298F85;
+    border-radius: 6px;
 }
