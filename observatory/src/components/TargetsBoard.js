@@ -1,5 +1,4 @@
 import React from "react";
-import Style from './Style.css'
 import Target from "./Target"
 import targetStyle from "./TargetsBoard.css"
 /* This component define the plan's structure and display its targets. */
