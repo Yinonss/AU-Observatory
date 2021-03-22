@@ -48,13 +48,4 @@ tr td {
 
 /*############# Targets list #################*/
 
-#submit{
-    background-color: #4CAF50;
-}
 
-.list {
-    background: #101010;
-    width: 200px;
-    height: 300px;
-    margin: auto;
-}
