@@ -6,7 +6,6 @@ import Target from"./Target"
 /* This component containing Editor and TargetList components.
 *  It is activated after press on "NEW PLAN" button on the main menu.  */
 
-//TODO: Add targets to list ability
 
 export default function NewPlan() {
 

@@ -1,10 +1,10 @@
 import Style from './Style.css'
-import React, { useState, useEffect } from 'react';
+import React, {useState} from 'react';
 
 /* This function returns a basic form for observation missions. */
 export default function Editor(props) {
 
-    const [count, setCount] = useState(3); // save the id number of the targets on the list
+    const [count, setCount] = useState(0); // save the id number of the targets on the list
 
     return (
             <form>
@@ -58,7 +58,7 @@ export default function Editor(props) {
                     </tr>
                 </table>
                 <button type="button" id="add_button" onClick={()=>{
-                    //TODO change the way that we get the elements!!!!!
+                    //TODO change the way that we get the elements!
                     let name = document.getElementById("name").value
                     // let rightAscension = document.getElementById("rightAscension").value
                     // let declination = document.getElementById("declination").value
@@ -73,9 +73,12 @@ export default function Editor(props) {
                     //     exposures: exposures, exposureTime: exposureTime, filter: filter, start:start,
                     //     end: end, priority: priority}
 
-                    let target2 = {name: name, targetId: count}
-                    props.addTarget(target2)
-                    setCount(count + 1)
+                    if (name != "") {
+                        let target2 = {name: name, targetId: count}
+                        props.addTarget(target2)
+                        setCount(count + 1)
+
+                    }
                 }}>Add</button>
             </form>
     );
