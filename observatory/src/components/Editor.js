@@ -1,7 +1,6 @@
 import Style from './Style.css'
 import React, {useState} from 'react';
 import axios from "axios";
-
 /* This function returns a basic form for observation missions. */
 export default function Editor(props) {
 
@@ -12,21 +11,25 @@ export default function Editor(props) {
                 <table>
                     <tr>
                         <td>Target Name:</td>
-                        <td><input type="text" id="name"></input></td>
+                        <td><input type="text" id="name"/></td>
                     </tr>
                     <button type={"button"} name={"searchTarget"} onClick={() => {
                        const name = document.getElementById("name").value
-                        console.log(name)
-                       fetch(`http://simbad.u-strasbg.fr/simbad/sim-nameresolver?Ident=${name}&data=J,M(U,B,V),S,I&output=json`).then(res => res.json)
-                          .then(res => setTarget(res[0]))
+                        axios.get(`http://simbad.u-strasbg.fr/simbad/sim-nameresolver?Ident=${name}&data=J,M(U,B,V),S,I&output=json`)
+                            .then(res => {
+                                const obj = res.data[0]
+                                setTarget(obj)
+                                document.getElementById("rightAscension").value = obj.ra
+                                document.getElementById("declination").value = obj.dec
+                            })
                     }}/>
                     <tr>
                         <td>Right Ascension:</td>
-                        <td><input type="text" id="rightAscension" placeholder="DD:MM:SS.S"></input></td>
+                        <td><input type="text" id="rightAscension" placeholder="DD:MM:SS.S"/></td>
                     </tr>
                     <tr>
                         <td>Declination:</td>
-                        <td><input type="text" id="declination" placeholder="Decimal degrees"></input></td>
+                        <td><input type="text" id="declination" placeholder="Decimal degrees"/></td>
                     </tr>
                     <tr>
                         <td>Exposures:</td>
