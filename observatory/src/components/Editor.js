@@ -13,7 +13,7 @@ export default function Editor(props) {
                         <td>Target Name:</td>
                         <td><input type="text" id="name"/></td>
                     </tr>
-                    <button type={"button"} name={"searchTarget"} onClick={() => {
+                    <button type="button" name="Simbadsearch" onClick={() => {
                        const name = document.getElementById("name").value
                         axios.get(`http://simbad.u-strasbg.fr/simbad/sim-nameresolver?Ident=${name}&data=J,M(U,B,V),S,I&output=json`)
                             .then(res => {
@@ -22,7 +22,7 @@ export default function Editor(props) {
                                 document.getElementById("rightAscension").value = obj.ra
                                 document.getElementById("declination").value = obj.dec
                             })
-                    }}/>
+                    }}>Simbad search</button>
                     <tr>
                         <td>Right Ascension:</td>
                         <td><input type="text" id="rightAscension" placeholder="DD:MM:SS.S"/></td>
@@ -33,11 +33,11 @@ export default function Editor(props) {
                     </tr>
                     <tr>
                         <td>Exposures:</td>
-                        <td><input type="text" id="exposures"></input></td>
+                        <td><input type="text" id="exposures"/></td>
                     </tr>
                     <tr>
                         <td>Exposure Time:</td>
-                        <td><input type="text" id="exposureTime"></input></td>
+                        <td><input type="text" id="exposureTime"/></td>
                     </tr>
                     <tr>
                         <td>Filter:</td>
@@ -50,11 +50,11 @@ export default function Editor(props) {
                     </tr>
                     <tr>
                         <td>Start:</td>
-                        <td><input type="date" id="start"></input></td>
+                        <td><input type="date" id="start"/></td>
                     </tr>
                     <tr>
                         <td>End:</td>
-                        <td><input type="date" id="end"></input></td>
+                        <td><input type="date" id="end"/></td>
                     </tr>
                     <tr>
                         <td>Priority:</td>
@@ -83,7 +83,8 @@ export default function Editor(props) {
                     //     exposures: exposures, exposureTime: exposureTime, filter: filter, start:start,
                     //     end: end, priority: priority}
 
-                    if (name != "") {
+                    // eslint-disable-next-line eqeqeq
+                    if (name !== "") {
                         let target2 = {name: name, targetId: count}
                         props.addTarget(target2)
                         setCount(count + 1)
