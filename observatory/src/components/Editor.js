@@ -13,7 +13,8 @@ export default function Editor(props) {
                         <td>Target Name:</td>
                         <td><input type="text" id="name"/></td>
                     </tr>
-                    <button type="button" name="Simbadsearch" onClick={() => {
+                    <button type="button" name="Simbadsearch" style={{ color: 'black' }}
+                            onClick={() => {
                        const name = document.getElementById("name").value
                         axios.get(`http://simbad.u-strasbg.fr/simbad/sim-nameresolver?Ident=${name}&data=J,M(U,B,V),S,I&output=json`)
                             .then(res => {
