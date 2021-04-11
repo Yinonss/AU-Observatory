@@ -1,11 +1,12 @@
 import Style from './Style.css'
 import React, {useState} from 'react';
+import axios from "axios";
 
 /* This function returns a basic form for observation missions. */
 export default function Editor(props) {
 
     const [count, setCount] = useState(0); // save the id number of the targets on the list
-
+    const [target, setTarget] = useState({})
     return (
             <form>
                 <table>
@@ -13,6 +14,12 @@ export default function Editor(props) {
                         <td>Target Name:</td>
                         <td><input type="text" id="name"></input></td>
                     </tr>
+                    <button type={"button"} name={"searchTarget"} onClick={() => {
+                       const name = document.getElementById("name").value
+                        console.log(name)
+                       fetch(`http://simbad.u-strasbg.fr/simbad/sim-nameresolver?Ident=${name}&data=J,M(U,B,V),S,I&output=json`).then(res => res.json)
+                          .then(res => setTarget(res[0]))
+                    }}/>
                     <tr>
                         <td>Right Ascension:</td>
                         <td><input type="text" id="rightAscension" placeholder="DD:MM:SS.S"></input></td>
