@@ -1,33 +1,44 @@
 import Style from './Style.css'
-import React, { useState, useEffect } from 'react';
-
+import React, {useState} from 'react';
+import axios from "axios";
 /* This function returns a basic form for observation missions. */
 export default function Editor(props) {
 
-    const [count, setCount] = useState(3); // save the id number of the targets on the list
-
+    const [count, setCount] = useState(0); // save the id number of the targets on the list
+    const [target, setTarget] = useState({})
     return (
             <form>
                 <table>
                     <tr>
                         <td>Target Name:</td>
-                        <td><input type="text" id="name"></input></td>
+                        <td><input type="text" id="name"/></td>
                     </tr>
+                    <button type="button" name="Simbadsearch" style={{ color: 'black' }}
+                            onClick={() => {
+                       const name = document.getElementById("name").value
+                        axios.get(`http://simbad.u-strasbg.fr/simbad/sim-nameresolver?Ident=${name}&data=J,M(U,B,V),S,I&output=json`)
+                            .then(res => {
+                                const obj = res.data[0]
+                                setTarget(obj)
+                                document.getElementById("rightAscension").value = obj.ra
+                                document.getElementById("declination").value = obj.dec
+                            })
+                    }}>Simbad search</button>
                     <tr>
                         <td>Right Ascension:</td>
-                        <td><input type="text" id="rightAscension" placeholder="DD:MM:SS.S"></input></td>
+                        <td><input type="text" id="rightAscension" placeholder="DD:MM:SS.S"/></td>
                     </tr>
                     <tr>
                         <td>Declination:</td>
-                        <td><input type="text" id="declination" placeholder="Decimal degrees"></input></td>
+                        <td><input type="text" id="declination" placeholder="Decimal degrees"/></td>
                     </tr>
                     <tr>
                         <td>Exposures:</td>
-                        <td><input type="text" id="exposures"></input></td>
+                        <td><input type="text" id="exposures"/></td>
                     </tr>
                     <tr>
                         <td>Exposure Time:</td>
-                        <td><input type="text" id="exposureTime"></input></td>
+                        <td><input type="text" id="exposureTime"/></td>
                     </tr>
                     <tr>
                         <td>Filter:</td>
@@ -40,11 +51,11 @@ export default function Editor(props) {
                     </tr>
                     <tr>
                         <td>Start:</td>
-                        <td><input type="date" id="start"></input></td>
+                        <td><input type="date" id="start"/></td>
                     </tr>
                     <tr>
                         <td>End:</td>
-                        <td><input type="date" id="end"></input></td>
+                        <td><input type="date" id="end"/></td>
                     </tr>
                     <tr>
                         <td>Priority:</td>
@@ -58,7 +69,7 @@ export default function Editor(props) {
                     </tr>
                 </table>
                 <button type="button" id="add_button" onClick={()=>{
-                    //TODO change the way that we get the elements!!!!!
+                    //TODO change the way that we get the elements!
                     let name = document.getElementById("name").value
                     // let rightAscension = document.getElementById("rightAscension").value
                     // let declination = document.getElementById("declination").value
@@ -73,9 +84,13 @@ export default function Editor(props) {
                     //     exposures: exposures, exposureTime: exposureTime, filter: filter, start:start,
                     //     end: end, priority: priority}
 
-                    let target2 = {name: name, targetId: count}
-                    props.addTarget(target2)
-                    setCount(count + 1)
+                    // eslint-disable-next-line eqeqeq
+                    if (name !== "") {
+                        let target2 = {name: name, targetId: count}
+                        props.addTarget(target2)
+                        setCount(count + 1)
+
+                    }
                 }}>Add</button>
             </form>
     );
