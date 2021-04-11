@@ -20,3 +20,30 @@
     margin-left: 150px;
     background: none;
 }
+
+.target::before,
+.target::after {
+    --scale: 0;
+    top: -.25rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%) scale(var(--scale));
+}
+
+.target::before {
+    content: attr(data-tooltip);
+    background: #303030;
+    color: #298F85;
+    padding: .5rem;
+    text-align: center;
+}
+
+.target:hover::before,
+.target:hover::after {
+    --scale: 1;
+}
+
+.target::after {
+    width: 10px;
+    height: 10px;
+    background: #303030;
+}
