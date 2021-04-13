@@ -14,7 +14,7 @@ export default function TargetsBoard(props) {
             <table>
                 <tr>
                     <td>Plan Name:</td>
-                    <td><input type="text"></input></td>
+                    <td><input type="text" id={"title"}></input></td>
                 </tr>
             </table>
             <div class="list">
