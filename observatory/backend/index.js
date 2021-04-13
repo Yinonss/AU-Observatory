@@ -3,7 +3,7 @@ const app = express()
 const port = 5000
 // const bodyParser = require('body-parser')
  const mongoose = require('mongoose')
- const db = mongoose.connect('mongodb://localhost/database')
+ const db = mongoose.connect('mongodb://localhost/database', {useNewUrlParser: true})
 
 //const Observation = require('../src/Model/Observation')
 //const Plan = require('../src/Model/Plan')
@@ -26,6 +26,10 @@ app.post('/plan', function (req, res){
  app.get('api/plan', (req, res) => {
      res.send("hello world")
  })
+
+app.get('/', (req, res) => {
+    res.send("hello world")
+})
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
