@@ -6,7 +6,7 @@ const port = 5000
  const db = mongoose.connect('mongodb://localhost/database', {useNewUrlParser: true})
 
 //const Observation = require('../src/Model/Observation')
-//const Plan = require('../src/Model/Plan')
+const Plan = require('./Model/Plan')
 
 app.use(express.json())
 
