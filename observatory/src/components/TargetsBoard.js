@@ -1,10 +1,13 @@
 import React from "react";
 import Target from "./Target"
 import targetStyle from "./TargetsBoard.css"
+import axios from "axios";
 /* This component define the plan's structure and display its targets. */
 
-export default function TargetsBoard(props) {
+const server_url = 'http://localhost:5000/plan'
 
+export default function TargetsBoard(props) {
+    //TODO: Fix delete -> when [x] is clicked on one target everything is deleted.
     const deleteTarget = (id)=> {
         props.setTargets(props.allTargets.filter(item => item.targetId != id))
     }
@@ -23,7 +26,15 @@ export default function TargetsBoard(props) {
                 }
             </div>
             <br />
-            <button id="submit">Submit</button>
+            <button id="submit" onClick={()=> {
+                console.log(props.allTargets)
+                //enter title here
+                axios.post(server_url, {
+                    "title" : "plan1",
+                    "observation" : props.allTargets
+                }).then(res => console.log(res))
+            }
+            }>Submit</button>
         </div>
     );
 }
