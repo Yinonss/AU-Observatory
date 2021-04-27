@@ -71,26 +71,31 @@ export default function Editor(props) {
                 <button type="button" id="add_button" onClick={()=>{
                     //TODO change the way that we get the elements!
                     let name = document.getElementById("name").value
-                    // let rightAscension = document.getElementById("rightAscension").value
-                    // let declination = document.getElementById("declination").value
-                    // let exposures = document.getElementById("exposures").value
-                    // let exposureTime = document.getElementById("exposureTime").value
-                    // let filter = document.getElementById("filter").value
-                    // let start = document.getElementById("start").value
-                    // let end = document.getElementById("end").value
-                    // let priority = document.getElementById("priority").value
-                    //
-                    // let target = {name: name, rightAscension: rightAscension, declination: declination,
-                    //     exposures: exposures, exposureTime: exposureTime, filter: filter, start:start,
-                    //     end: end, priority: priority}
+                    let rightAscension = document.getElementById("rightAscension").value
+                    let declination = document.getElementById("declination").value
+                    let exposures = document.getElementById("exposures").value
+                    let exposureTime = document.getElementById("exposureTime").value
+                    let filter = document.getElementById("filter").value
+                    let start = document.getElementById("start").value
+                    let end = document.getElementById("end").value
+                    let priority = document.getElementById("priority").value
 
-                    // eslint-disable-next-line eqeqeq
-                    if (name !== "") {
-                        let target2 = {name: name, targetId: count}
-                        props.addTarget(target2)
-                        setCount(count + 1)
+                    setCount(count + 1)
 
+                    let target = {
+                        id: count,
+                        name: name,
+                        ra: rightAscension,
+                        dec: declination,
+                        exposures: exposures,
+                        exposureTime: exposureTime,
+                        filter: filter,
+                        start: start,
+                        end: end,
+                        priority: priority
                     }
+
+                    props.addTarget(target)
                 }}>Add</button>
             </form>
     );
