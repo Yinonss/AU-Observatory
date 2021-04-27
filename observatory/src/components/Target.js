@@ -6,7 +6,7 @@ export default function Target(props) {
         <div className="target" data-closable>
             <button className={"close-button"} aria-label="Close alert" type={"button"} data-close
                     onClick={() => {
-                        props.deleteTarget(props.targetId)
+                        props.deleteTarget(props.id)
                     }}>
                 <span aria-hidden="true">&times;</span>
             </button>

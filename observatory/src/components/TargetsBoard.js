@@ -9,7 +9,7 @@ const server_url = 'http://localhost:5000/plan'
 export default function TargetsBoard(props) {
     //TODO: Fix delete -> when [x] is clicked on one target everything is deleted.
     const deleteTarget = (id)=> {
-        props.setTargets(props.allTargets.filter(item => item.targetId != id))
+        props.setTargets(props.allTargets.filter(item => item.id !== id))
     }
 
     return (
@@ -17,12 +17,12 @@ export default function TargetsBoard(props) {
             <table>
                 <tr>
                     <td>Plan Name:</td>
-                    <td><input type="text" id={"title"}></input></td>
+                    <td><input type="text" id={"title"}/></td>
                 </tr>
             </table>
             <div class="list">
                 {
-                    props.allTargets.map(item => <Target name={item.name} deleteTarget={deleteTarget} targetId={item.targetId}/>)
+                    props.allTargets.map(item => <Target name={item.name} deleteTarget={deleteTarget} id={item.id}/>)
                 }
             </div>
             <br />

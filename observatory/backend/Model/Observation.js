@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 var observation = new Schema({
+    id : String,
     name : String,
     ra : Number,
     dec : Number,
