@@ -80,7 +80,10 @@ export default function Editor(props) {
                     let end = document.getElementById("end").value
                     let priority = document.getElementById("priority").value
 
+                    setCount(count + 1)
+
                     let target = {
+                        id: count,
                         name: name,
                         ra: rightAscension,
                         dec: declination,
@@ -91,6 +94,7 @@ export default function Editor(props) {
                         end: end,
                         priority: priority
                     }
+
                     props.addTarget(target)
                 }}>Add</button>
             </form>
