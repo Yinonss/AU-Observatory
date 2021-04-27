@@ -7,7 +7,6 @@ import axios from "axios";
 const server_url = 'http://localhost:5000/plan'
 
 export default function TargetsBoard(props) {
-    //TODO: Fix delete -> when [x] is clicked on one target everything is deleted.
     const deleteTarget = (id)=> {
         props.setTargets(props.allTargets.filter(item => item.id !== id))
     }
