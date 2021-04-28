@@ -16,7 +16,7 @@
     "web-vitals": "^1.1.0"
   },
   "scripts": {
-    "start": "concurrently \"react-scripts start\" \"cd backend && nodemon index.js\"",
+    "start": "concurrently \"react-scripts start\" \"cd backend && nodemon app.js\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
