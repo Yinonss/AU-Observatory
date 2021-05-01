@@ -19,7 +19,7 @@ export default function Editor(props) {
                         axios.get(`http://simbad.u-strasbg.fr/simbad/sim-nameresolver?Ident=${name}&data=J,M(U,B,V),S,I&output=json`)
                             .then(res => {
                                 const obj = res.data[0]
-                                setTarget(obj)
+                                setTarget(obj)  // TODO what is that?
                                 document.getElementById("rightAscension").value = obj.ra
                                 document.getElementById("declination").value = obj.dec
                             })
