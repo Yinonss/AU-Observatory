@@ -1,17 +1,17 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-var observation = new Schema({
-    id : String,
-    name : String,
-    ra : Number,
-    dec : Number,
-    exposures : Number,
-    exposure_time : Number,
-    filter : String,
-    start : Date,
-    end : Date,
-    priority : Number
-})
+const observation = new Schema({
+    id: {type: String, required: true},
+    name: {type: String, required: true},
+    ra: {type: Number, required: true},
+    dec: {type: Number, required: true},
+    exposures: {type: Number, required: true},
+    exposure_time: {type: Number, required: true},
+    filter: {type: String, required: true},
+    start: {type: Date, required: true},
+    end: {type: Date, required: true},
+    priority: {type: Number}
+});
 
 module.exports = mongoose.model('Observation', observation)

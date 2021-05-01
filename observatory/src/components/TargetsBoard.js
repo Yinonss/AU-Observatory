@@ -4,7 +4,7 @@ import targetStyle from "./TargetsBoard.css"
 import axios from "axios";
 /* This component define the plan's structure and display its targets. */
 
-const server_url = 'http://localhost:5000/plan'
+const server_url = 'http://localhost:5000/plan/add'
 
 export default function TargetsBoard(props) {
     const deleteTarget = (id)=> {
