@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const Plan = require('../Model/Plan')
+const Obs = require('../Model/Observation')
 
 router.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -10,7 +11,6 @@ router.use(function(req, res, next) {
 
 /*
     Get all the plans from the DB
-    in route "/plan"
  */
 router.route('/').get(((req, res) => {
     Plan.find()
@@ -25,6 +25,7 @@ router.route('/add').post((req, res) => {
     if(!req.body || !req.body.observation || req.body.observation.length === 0) return
     let plan = new Plan();
     plan.title = req.body.title
+    plan.observations = []
     req.body.observation.forEach((item,i) => {
         const name = item.name
         const ra = item.ra
@@ -35,7 +36,17 @@ router.route('/add').post((req, res) => {
         const start = item.start
         const end = item.end
         const priority = item.priority
-        plan.observations[i] = {name, ra, dec , exposures, exposure_time, filter, start, end, priority};
+        plan.observations[i]  = new Obs({
+            name,
+            ra,
+            dec,
+            exposures,
+            exposure_time,
+            filter,
+            start,
+            end,
+            priority
+        })
     })
     plan.save((err, savedPlan) => {
         if(err){

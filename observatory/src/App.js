@@ -3,6 +3,9 @@ import './App.css';
 import React from "react";
 import Base from './components/Base.js'
 import NewPlan from "./components/NewPlan";
+import PlanList from "./components/PlanList";
+//<Route path="/Home"><PlanList /></Route>
+
 
 function App() {
   return (
@@ -10,8 +13,12 @@ function App() {
         <Router>
             <Base />
             <Route path="/newplan"><NewPlan /></Route>
+            <Route exact path={"/"}>
+                <PlanList/>
+            </Route>
         </Router>
     </div>
+
   );
 }
 
