@@ -70,6 +70,7 @@ export default function Editor(props) {
                 </table>
                 <button type="button" id="add_button" onClick={()=>{
                     //TODO change the way that we get the elements!
+                    const NUMBEROFFIELDS = 7;
                     let name = document.getElementById("name").value
                     let rightAscension = document.getElementById("rightAscension").value
                     let declination = document.getElementById("declination").value
@@ -79,23 +80,37 @@ export default function Editor(props) {
                     let start = document.getElementById("start").value
                     let end = document.getElementById("end").value
                     let priority = document.getElementById("priority").value
+                    // Check if there is an empty field. If one found, do not approve it.
+                    const inputFeilds = document.querySelectorAll("input");
+                    const validInputs = Array.from(inputFeilds).filter( input => input.value !== "");
+                    if (validInputs.length != NUMBEROFFIELDS)
+                    {
+                        alert('Please fill in all of the fields')
+                    }
+                    else if(declination == 'undefined' || rightAscension == 'undefined')
+                    {
+                        alert('Target undefined - please search target again.');
+                    }
+                    else
+                    {
+                        setCount(count + 1)
 
-                    setCount(count + 1)
+                        let target = {
+                            id: count,
+                            name: name,
+                            ra: rightAscension,
+                            dec: declination,
+                            exposures: exposures,
+                            exposureTime: exposureTime,
+                            filter: filter,
+                            start: start,
+                            end: end,
+                            priority: priority
+                        }
 
-                    let target = {
-                        id: count,
-                        name: name,
-                        ra: rightAscension,
-                        dec: declination,
-                        exposures: exposures,
-                        exposureTime: exposureTime,
-                        filter: filter,
-                        start: start,
-                        end: end,
-                        priority: priority
+                        props.addTarget(target)
                     }
 
-                    props.addTarget(target)
                 }}>Add</button>
             </form>
     );
