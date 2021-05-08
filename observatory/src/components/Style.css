@@ -28,6 +28,7 @@ table {
     padding-bottom: 10px;
     text-align: center;
     max-height: 520px;
+    overflow: scroll;
 }
 
 button {
@@ -53,10 +54,15 @@ tr td {
     max-height: 80%;
 }
 
+#plansDisplay table {
+    overflow: scroll;
+    table-layout: fixed;
+}
+
 #plansDisplay tr td {
     padding-bottom: 1em;
     font-size: 18px;
     text-align: left;
-
+    word-wrap: break-word;
 }
 
