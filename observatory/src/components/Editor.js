@@ -2,6 +2,9 @@ import Style from './Style.css'
 import React, {useState} from 'react';
 import axios from "axios";
 
+const NUMBEROFFIELDS = 7;
+const UNDEFINED = 'undefined';
+
 /* This function returns a basic form for observation missions. */
 export default function Editor(props) {
 
@@ -71,7 +74,7 @@ export default function Editor(props) {
                 </table>
                 <button type="button" id="add_button" onClick={()=>{
                     //TODO change the way that we get the elements!
-                    const NUMBEROFFIELDS = 7;
+
                     let name = document.getElementById("name").value
                     let rightAscension = document.getElementById("rightAscension").value
                     let declination = document.getElementById("declination").value
@@ -81,18 +84,9 @@ export default function Editor(props) {
                     let start = document.getElementById("start").value
                     let end = document.getElementById("end").value
                     let priority = document.getElementById("priority").value
-                    // Check if there is an empty field. If one found, do not approve it.
-                    const inputFeilds = document.querySelectorAll("input");
-                    const validInputs = Array.from(inputFeilds).filter( input => input.value !== "");
-                    if (validInputs.length != NUMBEROFFIELDS)
-                    {
-                        alert('Please fill in all of the fields')
-                    }
-                    else if(declination == 'undefined' || rightAscension == 'undefined')
-                    {
-                        alert('Target undefined - please search target again.');
-                    }
-                    else
+
+                    let planIsOK = validation(declination, rightAscension);
+                    if(planIsOK)
                     {
                         setCount(count + 1)
 
@@ -115,4 +109,24 @@ export default function Editor(props) {
                 }}>Add</button>
             </form>
     );
+}
+
+// Check if there is an empty field. If one found, do not approve it.
+function validation(declination, rightAscension) {
+    const inputFeilds = document.querySelectorAll("input");
+    const validInputs = Array.from(inputFeilds).filter( input => input.value !== "");
+    if (validInputs.length != NUMBEROFFIELDS)
+    {
+        alert('Please fill in all of the fields')
+        return false;
+    }
+    else if(declination == 'undefined' || rightAscension == UNDEFINED)
+    {
+        alert('Target undefined - please search target again.');
+        return false;
+    }
+    else
+    {
+        return true;
+    }
 }
