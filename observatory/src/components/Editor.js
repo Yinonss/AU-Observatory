@@ -1,6 +1,7 @@
 import Style from './Style.css'
 import React, {useState} from 'react';
 import axios from "axios";
+
 /* This function returns a basic form for observation missions. */
 export default function Editor(props) {
 
@@ -23,7 +24,7 @@ export default function Editor(props) {
                                 document.getElementById("rightAscension").value = obj.ra
                                 document.getElementById("declination").value = obj.dec
                             })
-                    }}>Simbad search</button>
+                    }}>Search Coordinates</button>
                     <tr>
                         <td>Right Ascension:</td>
                         <td><input type="text" id="rightAscension" placeholder="DD:MM:SS.S"/></td>
