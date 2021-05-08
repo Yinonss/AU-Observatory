@@ -4,11 +4,13 @@
     font-family: Serif sans-serif;
 }
 
-table {
+.UpperPage table{
     width: 100%;
+    text-align: center;
+}
+.UpperPage table td{
     text-align: left;
 }
-
 /*############### Editor ##############*/
 #add_button {
     background-color: #202020;
@@ -62,7 +64,7 @@ tr td {
 #plansDisplay tr td {
     padding-bottom: 1em;
     font-size: 18px;
-    text-align: left;
+    text-align: center;
     word-wrap: break-word;
 }
 
