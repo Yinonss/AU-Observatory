@@ -3,7 +3,11 @@ import axios from "axios";
 import Style from './Style.css'
 
 const Plan = props => (
-    <tr><td>{props.plan.title}</td></tr>
+    <tr>
+        <td>{props.plan.title}</td>
+        <td></td>
+        <td></td>
+    </tr>
 )
 
 export default class planList extends Component {

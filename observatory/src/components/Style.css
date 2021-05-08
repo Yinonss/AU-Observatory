@@ -52,9 +52,7 @@ tr td {
     margin-left: auto;
     text-align: center;
 }
-#plansDisplay {
-    max-height: 80%;
-}
+
 
 #plansDisplay table {
     overflow: scroll;
@@ -68,3 +66,6 @@ tr td {
     word-wrap: break-word;
 }
 
+#plansDisplay tr:hover :not(th) {
+    background-color: #101010;
+}
