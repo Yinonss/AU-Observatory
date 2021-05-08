@@ -6,6 +6,7 @@
 
 table {
     width: 100%;
+    text-align: left;
 }
 
 /*############### Editor ##############*/
@@ -26,6 +27,7 @@ table {
     padding-top: 10px;
     padding-bottom: 10px;
     text-align: center;
+    max-height: 520px;
 }
 
 button {
@@ -45,6 +47,16 @@ tr td {
     font-size: 18px;
     margin-right: auto;
     margin-left: auto;
+    text-align: center;
+}
+#plansDisplay {
+    max-height: 80%;
 }
 
+#plansDisplay tr td {
+    padding-bottom: 1em;
+    font-size: 18px;
+    text-align: left;
+
+}
 

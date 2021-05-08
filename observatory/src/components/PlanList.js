@@ -1,10 +1,10 @@
 import React, {Component} from "react";
 import axios from "axios";
+import Style from './Style.css'
 
 const Plan = props => (
-    <li>{props.plan.title}</li>
+    <tr><td>{props.plan.title}</td></tr>
 )
-
 
 export default class planList extends Component {
     constructor(props) {
@@ -24,7 +24,6 @@ export default class planList extends Component {
                 this.setState({plans: res.data, loading: false})
             })
             .catch(err => console.log(err))
-
     }
 
     deletePlan(id) {
@@ -37,7 +36,7 @@ export default class planList extends Component {
 
     showList() {
         if (this.state.loading) {
-            return "loading..."
+            return "Loading..."
         }
         else {
             return this.state.plans.map(plan => {
@@ -47,12 +46,17 @@ export default class planList extends Component {
     }
 
     render() {
-        return(
-            <div>
-                <ul>
+       return(
+            <div class='container'>
+                <table id={'plansDisplay'}>
+                    <tr>
+                        <th>Plan</th>
+                        <th>Status</th>
+                        <th>Creat On</th>
+                    </tr>
                     {this.showList()}
-                </ul>
+                </table>
             </div>
-        )
+        );
     }
 }
