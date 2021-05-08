@@ -4,10 +4,13 @@
     font-family: Serif sans-serif;
 }
 
-table {
+.UpperPage table{
     width: 100%;
+    text-align: center;
 }
-
+.UpperPage table td{
+    text-align: left;
+}
 /*############### Editor ##############*/
 #add_button {
     background-color: #202020;
@@ -26,6 +29,8 @@ table {
     padding-top: 10px;
     padding-bottom: 10px;
     text-align: center;
+    max-height: 520px;
+    overflow: scroll;
 }
 
 button {
@@ -45,6 +50,22 @@ tr td {
     font-size: 18px;
     margin-right: auto;
     margin-left: auto;
+    text-align: center;
 }
 
 
+#plansDisplay table {
+    overflow: scroll;
+    table-layout: fixed;
+}
+
+#plansDisplay tr td {
+    padding-bottom: 1em;
+    font-size: 18px;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+#plansDisplay tr:hover :not(th) {
+    background-color: #101010;
+}

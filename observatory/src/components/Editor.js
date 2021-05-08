@@ -1,6 +1,10 @@
 import Style from './Style.css'
 import React, {useState} from 'react';
 import axios from "axios";
+
+const NUMBEROFFIELDS = 7;
+const UNDEFINED = 'undefined';
+
 /* This function returns a basic form for observation missions. */
 export default function Editor(props) {
 
@@ -23,7 +27,7 @@ export default function Editor(props) {
                                 document.getElementById("rightAscension").value = obj.ra
                                 document.getElementById("declination").value = obj.dec
                             })
-                    }}>Simbad search</button>
+                    }}>Search Coordinates</button>
                     <tr>
                         <td>Right Ascension:</td>
                         <td><input type="text" id="rightAscension" placeholder="DD:MM:SS.S"/></td>
@@ -70,6 +74,7 @@ export default function Editor(props) {
                 </table>
                 <button type="button" id="add_button" onClick={()=>{
                     //TODO change the way that we get the elements!
+
                     let name = document.getElementById("name").value
                     let rightAscension = document.getElementById("rightAscension").value
                     let declination = document.getElementById("declination").value
@@ -80,23 +85,48 @@ export default function Editor(props) {
                     let end = document.getElementById("end").value
                     let priority = document.getElementById("priority").value
 
-                    setCount(count + 1)
+                    let planIsOK = validation(declination, rightAscension);
+                    if(planIsOK)
+                    {
+                        setCount(count + 1)
 
-                    let target = {
-                        id: count,
-                        name: name,
-                        ra: rightAscension,
-                        dec: declination,
-                        exposures: exposures,
-                        exposureTime: exposureTime,
-                        filter: filter,
-                        start: start,
-                        end: end,
-                        priority: priority
+                        let target = {
+                            id: count,
+                            name: name,
+                            ra: rightAscension,
+                            dec: declination,
+                            exposures: exposures,
+                            exposureTime: exposureTime,
+                            filter: filter,
+                            start: start,
+                            end: end,
+                            priority: priority
+                        }
+
+                        props.addTarget(target)
                     }
 
-                    props.addTarget(target)
                 }}>Add</button>
             </form>
     );
+}
+
+// Check if there is an empty field. If one found, do not approve it.
+function validation(declination, rightAscension) {
+    const inputFeilds = document.querySelectorAll("input");
+    const validInputs = Array.from(inputFeilds).filter( input => input.value !== "");
+    if (validInputs.length != NUMBEROFFIELDS)
+    {
+        alert('Please fill in all of the fields')
+        return false;
+    }
+    else if(declination == 'undefined' || rightAscension == UNDEFINED)
+    {
+        alert('Target undefined - please search target again.');
+        return false;
+    }
+    else
+    {
+        return true;
+    }
 }
