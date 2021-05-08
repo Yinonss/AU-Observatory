@@ -52,7 +52,7 @@ export default class planList extends Component {
                     <tr>
                         <th>Plan</th>
                         <th>Status</th>
-                        <th>Creat On</th>
+                        <th>Create On</th>
                     </tr>
                     {this.showList()}
                 </table>
