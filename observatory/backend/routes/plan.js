@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const Plan = require('../Model/Plan')
 const Obs = require('../Model/Observation')
+const fs = require('fs');
 
 router.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -55,6 +56,15 @@ router.route('/add').post((req, res) => {
             res.json(savedPlan)
         }
     })
+
+    // path to save the file
+    // TODO make a string for the file
+    const path = 'C:/Users/Maor/WebstormProjects/AU-Observatory/observatory/backend/Files/' + plan.title + '.txt'
+    fs.writeFile(path, 'Learn Node FS module', function (err) {
+        if (err) throw err;
+        console.log('File is created successfully.');
+    });
+
 })
 
 /*

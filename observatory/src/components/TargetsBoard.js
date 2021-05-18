@@ -12,14 +12,16 @@ export default function TargetsBoard(props) {
     }
 
     return (
-        <div class="TargetInfo">
+        <div className="TargetInfo">
             <table>
-                <tr>
-                    <td>Plan Name:</td>
-                    <td><input type="text" id={"planName"}/></td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <td>Plan Name:</td>
+                        <td><input type="text" id={"planName"}/></td>
+                    </tr>
+                </tbody>
             </table>
-            <div class="list">
+            <div className="list">
                 {
                     props.allTargets.map(item => <Target id={item.id} key={item.id} name={item.name} deleteTarget={deleteTarget}/>)
                 }
@@ -27,7 +29,7 @@ export default function TargetsBoard(props) {
             <br />
             <button id="submit" onClick={()=> {
                 console.log(props.allTargets)
-                axios.post(server_url, {
+                axios.post(server_url, {  // save the plan into the DB
                     "title" : document.getElementById("planName").value,
                     "observation" : props.allTargets
                 }).then(res => console.log(res))

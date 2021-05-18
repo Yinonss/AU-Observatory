@@ -10,7 +10,7 @@ export default function Target(props) {
                     }}>
                 <span aria-hidden="true">&times;</span>
             </button>
-                <h5>{props.name}</h5>
+            <h5>{props.name}</h5>
         </div>
     )
 }
