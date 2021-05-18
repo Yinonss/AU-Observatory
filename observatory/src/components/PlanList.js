@@ -55,16 +55,19 @@ export default class planList extends Component {
         }
     }
 
+
     render() {
        return(
-            <div class='container'>
+            <div className='container'>
                 <table id={'plansDisplay'}>
-                    <tr>
-                        <th>Plan</th>
-                        <th>Status</th>
-                        <th>Create On</th>
-                    </tr>
-                    {this.showList()}
+                    <tbody>
+                        <tr>
+                            <th>Plan</th>
+                            <th>Status</th>
+                            <th>Create On</th>
+                        </tr>
+                        {this.showList()}
+                    </tbody>
                 </table>
             </div>
         );

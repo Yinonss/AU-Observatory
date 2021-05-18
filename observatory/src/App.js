@@ -4,7 +4,6 @@ import React from "react";
 import Base from './components/Base.js'
 import NewPlan from "./components/NewPlan";
 import PlanList from "./components/PlanList";
-//<Route path="/Home"><PlanList /></Route>
 
 
 function App() {
@@ -18,7 +17,6 @@ function App() {
             </Route>
         </Router>
     </div>
-
   );
 }
 

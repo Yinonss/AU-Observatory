@@ -1,4 +1,3 @@
-import Style from './Style.css'
 import React, {useState} from 'react';
 import axios from "axios";
 
@@ -9,68 +8,72 @@ const UNDEFINED = 'undefined';
 export default function Editor(props) {
 
     const [count, setCount] = useState(0); // save the id number of the targets on the list
-    const [target, setTarget] = useState({})
     return (
             <form>
                 <table>
-                    <tr>
-                        <td>Target Name:</td>
-                        <td><input type="text" id="name"/></td>
-                    </tr>
-                    <button type="button" name="SimbadSearch" style={{ color: 'black' }}
-                            onClick={() => {
-                       const name = document.getElementById("name").value
-                        axios.get(`http://simbad.u-strasbg.fr/simbad/sim-nameresolver?Ident=${name}&data=J,M(U,B,V),S,I&output=json`)
-                            .then(res => {
-                                const obj = res.data[0]
-                                setTarget(obj)  // TODO what is that?
-                                document.getElementById("rightAscension").value = obj.ra
-                                document.getElementById("declination").value = obj.dec
-                            })
-                    }}>Search Coordinates</button>
-                    <tr>
-                        <td>Right Ascension:</td>
-                        <td><input type="text" id="rightAscension" placeholder="DD:MM:SS.S"/></td>
-                    </tr>
-                    <tr>
-                        <td>Declination:</td>
-                        <td><input type="text" id="declination" placeholder="Decimal degrees"/></td>
-                    </tr>
-                    <tr>
-                        <td>Exposures:</td>
-                        <td><input type="text" id="exposures"/></td>
-                    </tr>
-                    <tr>
-                        <td>Exposure Time:</td>
-                        <td><input type="text" id="exposureTime"/></td>
-                    </tr>
-                    <tr>
-                        <td>Filter:</td>
-                        <td><select name="filter" id="filter">
-                            <option value="clear">Clear</option>
-                            <option value="red">Red</option>
-                            <option value="green">Green</option>
-                            <option value="blue">Blue</option>
-                        </select></td>
-                    </tr>
-                    <tr>
-                        <td>Start:</td>
-                        <td><input type="date" id="start"/></td>
-                    </tr>
-                    <tr>
-                        <td>End:</td>
-                        <td><input type="date" id="end"/></td>
-                    </tr>
-                    <tr>
-                        <td>Priority:</td>
-                        <td><select name="priority" id="priority">
-                            <option value="1">1</option>
-                            <option value="1">2</option>
-                            <option value="1">3</option>
-                            <option value="1">4</option>
-                            <option value="1">5</option>
-                        </select></td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td>Target Name:</td>
+                            <td><input type="text" id="name"/></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button type="button" name="SimbadSearch" style={{ color: 'black' }}
+                                        onClick={() => {
+                                   const name = document.getElementById("name").value
+                                    axios.get(`http://simbad.u-strasbg.fr/simbad/sim-nameresolver?Ident=${name}&data=J,M(U,B,V),S,I&output=json`)
+                                        .then(res => {
+                                            const obj = res.data[0]
+                                            document.getElementById("rightAscension").value = obj.ra
+                                            document.getElementById("declination").value = obj.dec
+                                        })
+                                }}>Search Coordinates</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Right Ascension:</td>
+                            <td><input type="text" id="rightAscension" placeholder="DD:MM:SS.S"/></td>
+                        </tr>
+                        <tr>
+                            <td>Declination:</td>
+                            <td><input type="text" id="declination" placeholder="Decimal degrees"/></td>
+                        </tr>
+                        <tr>
+                            <td>Exposures:</td>
+                            <td><input type="text" id="exposures"/></td>
+                        </tr>
+                        <tr>
+                            <td>Exposure Time:</td>
+                            <td><input type="text" id="exposureTime"/></td>
+                        </tr>
+                        <tr>
+                            <td>Filter:</td>
+                            <td><select name="filter" id="filter">
+                                <option value="clear">Clear</option>
+                                <option value="red">Red</option>
+                                <option value="green">Green</option>
+                                <option value="blue">Blue</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>Start:</td>
+                            <td><input type="date" id="start"/></td>
+                        </tr>
+                        <tr>
+                            <td>End:</td>
+                            <td><input type="date" id="end"/></td>
+                        </tr>
+                        <tr>
+                            <td>Priority:</td>
+                            <td><select name="priority" id="priority">
+                                <option value="1">1</option>
+                                <option value="1">2</option>
+                                <option value="1">3</option>
+                                <option value="1">4</option>
+                                <option value="1">5</option>
+                            </select></td>
+                        </tr>
+                    </tbody>
                 </table>
                 <button type="button" id="add_button" onClick={()=>{
                     //TODO change the way that we get the elements!
@@ -115,12 +118,12 @@ export default function Editor(props) {
 function validation(declination, rightAscension) {
     const inputFeilds = document.querySelectorAll("input");
     const validInputs = Array.from(inputFeilds).filter( input => input.value !== "");
-    if (validInputs.length != NUMBEROFFIELDS)
+    if (validInputs.length !== NUMBEROFFIELDS)
     {
         alert('Please fill in all of the fields')
         return false;
     }
-    else if(declination == 'undefined' || rightAscension == UNDEFINED)
+    else if(declination === 'undefined' || rightAscension === UNDEFINED)
     {
         alert('Target undefined - please search target again.');
         return false;
