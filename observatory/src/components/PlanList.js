@@ -1,20 +1,6 @@
 import React, {Component} from "react";
 import axios from "axios";
-import Style from './Style.css'
-
-
-const Plan = props => (  // Help us to show each plan in the table
-     <tr>
-         <td>{props.plan.title}</td>
-         <td></td>
-         <td>{formatDate(props.plan.created_at)}</td>
-     </tr>
-)
-
-const formatDate = (dateString) => {  // function to handle the creation date we get from the plan
-    const options = { year: "numeric", month: "long", day: "numeric" }
-    return new Date(dateString).toLocaleDateString(undefined, options)
-}
+import PlanItem from "./PlanItem";
 
 
 export default class planList extends Component {
@@ -50,7 +36,7 @@ export default class planList extends Component {
         }
         else {
             return this.state.plans.map(plan => {
-                return <Plan plan={plan} deletePlan={this.deletePlan} id={plan._id}/>
+                return <PlanItem key={plan._id} plan={plan} deletePlan={this.deletePlan}/>
             })
         }
     }

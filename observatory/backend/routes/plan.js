@@ -15,7 +15,7 @@ router.use(function(req, res, next) {
  */
 router.route('/').get(((req, res) => {
     Plan.find()
-        .then(plans => res.json(plans))
+        .then(plan => res.json(plan))
         .catch(err => res.status(400).json('Error: ' + err))
 }))
 
@@ -28,16 +28,16 @@ router.route('/add').post((req, res) => {
     plan.title = req.body.title
     plan.observations = []
     req.body.observation.forEach((item,i) => {
-        const name = item.name
-        const ra = item.ra
-        const dec = item.dec
-        const exposures = item.exposures
-        const exposure_time = item.exposure_time
-        const filter = item.filter
-        const start = item.start
-        const end = item.end
-        const priority = item.priority
-        plan.observations[i]  = new Obs({
+        let name = item.name
+        let ra = item.ra
+        let dec = item.dec
+        let exposures = item.exposures
+        let exposure_time = item.exposure_time
+        let filter = item.filter
+        let start = item.start
+        let end = item.end
+        let priority = item.priority
+            plan.observations[i]  = new Obs({
             name,
             ra,
             dec,
