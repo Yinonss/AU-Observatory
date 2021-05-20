@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import axios from "axios";
 import PlanItem from "./PlanItem";
-
+import PlanList from "./../Styles/PlanList.css"
 
 export default class planList extends Component {
     constructor(props) {
@@ -45,16 +45,21 @@ export default class planList extends Component {
     render() {
        return(
             <div className='container'>
-                <table id={'plansDisplay'}>
-                    <tbody>
-                        <tr>
-                            <th>Plan</th>
-                            <th>Status</th>
-                            <th>Create On</th>
-                        </tr>
+                <ul>
+                    <li>
                         {this.showList()}
-                    </tbody>
-                </table>
+                    </li>
+                </ul>
+                {/*<table id={'plansDisplay'}>*/}
+                {/*    <tbody>*/}
+                {/*        <tr>*/}
+                {/*            <th>Plan</th>*/}
+                {/*            <th>Status</th>*/}
+                {/*            <th>Create On</th>*/}
+                {/*        </tr>*/}
+                {/*        {this.showList()}*/}
+                {/*    </tbody>*/}
+                {/*</table>*/}
             </div>
         );
     }
