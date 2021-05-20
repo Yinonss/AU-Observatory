@@ -4,7 +4,7 @@ import ReactTooltip from "react-tooltip";
 import PlanList from "../Styles/PlanItem.css"
 
 const formatDate = (dateString) => {  // function to handle the creation date we get from the plan
-    const options = { year: "numeric", month: "long", day: "numeric" }
+    const options = { year: "numeric", month: "numeric", day: "numeric" }
     return new Date(dateString).toLocaleDateString(undefined, options)
 }
 
