@@ -1,10 +1,10 @@
 import React from "react";
 import Style from './Style.css'
 import ReactTooltip from "react-tooltip";
+import PlanList from "../Styles/PlanItem.css"
 
-
-const formatDate = (dateString) => {  // function to handle the creation date we get from the plan
-    const options = { year: "numeric", month: "long", day: "numeric" }
+const formatDate = (dateString) => {  // Function to handle the creation date we get from the plan
+    const options = { year: "numeric", month: "numeric", day: "numeric" }
     return new Date(dateString).toLocaleDateString(undefined, options)
 }
 
@@ -20,18 +20,19 @@ function planTool(plan) {
             </div>)
 }
 
-function plan(props) {
-// planTool(props.plan)
+function PlanItem(props) {
     return (
-        <tr data-for={props.plan._id} data-tip={'tool'}>
-            <td>{props.plan.title}</td>
-            <td>
-                <ReactTooltip id={props.plan._id} border={true}
-                              getContent={(dataTip) => planTool(props.plan)}/>
-            </td>
-            <td>{formatDate(props.plan.created_at)}</td>
-        </tr>
+        <li>
+            <div className={"plan_item"}>
+                <h3 className={"title"}>
+                    {props.plan.title}
+                </h3>
+                <h5 className={"date"}>
+                    {formatDate(props.plan.created_at)}
+                </h5>
+            </div>
+        </li>
     )
 }
 
-export default plan
+export default PlanItem

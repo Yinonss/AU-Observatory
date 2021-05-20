@@ -1,0 +1,25 @@
+.plan_item {
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
+    height: 70px;
+}
+
+.title {
+    padding-right: 380px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    padding-top: 3px;
+}
+
+.date {
+    padding-right: 380px;
+    padding-bottom: 8px;
+    padding-top: 0;
+    margin-top: 0;
+}
+
+ul {
+    list-style-type: none;
+}
+
+

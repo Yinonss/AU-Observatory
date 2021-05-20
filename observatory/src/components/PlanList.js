@@ -13,7 +13,7 @@ export default class planList extends Component {
         }
     }
 
-    componentDidMount() {  // get all the info from the data base
+    componentDidMount() {  // Get all the info from the data base
         this.setState({loading: true})
         axios.get('http://localhost:5000/plan')
             .then(res => {
@@ -36,25 +36,19 @@ export default class planList extends Component {
         }
         else {
             return this.state.plans.map(plan => {
-                return <PlanItem key={plan._id} plan={plan} deletePlan={this.deletePlan}/>
+                return(
+                    <PlanItem key={plan._id} plan={plan} deletePlan={this.deletePlan}/>
+                )
             })
         }
     }
 
-
     render() {
        return(
             <div className='container'>
-                <table id={'plansDisplay'}>
-                    <tbody>
-                        <tr>
-                            <th>Plan</th>
-                            <th>Status</th>
-                            <th>Create On</th>
-                        </tr>
-                        {this.showList()}
-                    </tbody>
-                </table>
+                <ul>
+                    {this.showList()}
+                </ul>
             </div>
         );
     }
