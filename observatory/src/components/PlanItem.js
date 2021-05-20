@@ -3,7 +3,7 @@ import Style from './Style.css'
 import ReactTooltip from "react-tooltip";
 import PlanList from "../Styles/PlanItem.css"
 
-const formatDate = (dateString) => {  // function to handle the creation date we get from the plan
+const formatDate = (dateString) => {  // Function to handle the creation date we get from the plan
     const options = { year: "numeric", month: "numeric", day: "numeric" }
     return new Date(dateString).toLocaleDateString(undefined, options)
 }
@@ -20,8 +20,7 @@ function planTool(plan) {
             </div>)
 }
 
-function plan(props) {
-// planTool(props.plan)
+function PlanItem(props) {
     return (
         <li>
             <div className={"plan_item"}>
@@ -36,4 +35,4 @@ function plan(props) {
     )
 }
 
-export default plan
+export default PlanItem
