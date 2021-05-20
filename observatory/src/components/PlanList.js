@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import axios from "axios";
 import PlanItem from "./PlanItem";
-import PlanList from "./../Styles/PlanList.css"
+
 
 export default class planList extends Component {
     constructor(props) {
@@ -36,7 +36,9 @@ export default class planList extends Component {
         }
         else {
             return this.state.plans.map(plan => {
-                return <PlanItem key={plan._id} plan={plan} deletePlan={this.deletePlan}/>
+                return(
+                    <PlanItem key={plan._id} plan={plan} deletePlan={this.deletePlan}/>
+                )
             })
         }
     }
@@ -46,9 +48,7 @@ export default class planList extends Component {
        return(
             <div className='container'>
                 <ul>
-                    <li>
-                        {this.showList()}
-                    </li>
+                    {this.showList()}
                 </ul>
                 {/*<table id={'plansDisplay'}>*/}
                 {/*    <tbody>*/}
