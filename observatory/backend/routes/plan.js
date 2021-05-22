@@ -57,10 +57,10 @@ router.route('/add').post((req, res) => {
         }
     })
 
-    // path to save the file
-    // TODO make a string for the file
-    const path = 'Files/' + plan.title + '.txt'
-    fs.writeFile(path, 'Learn Node FS module', function (err) {
+
+    const path = 'Files/' + plan.title + '.txt'  // path to save the file
+    let acpScript = acpScriptGenerator(plan)
+    fs.writeFile(path, acpScript, function (err) {
         if (err) throw err;
         console.log('File is created successfully.');
     });
@@ -91,3 +91,21 @@ router.route('update/:id').post(((req, res) => {
 }))
 
 module.exports = router
+
+
+function getFilter(filter) {
+    if(filter == 'Clear') return filter;
+    let newFormatFilter = filter.substring(0, 1).toUpperCase();
+    return newFormatFilter;
+}
+
+
+//TODO : We need to check if date format is acceptable for Windows OS.
+function acpScriptGenerator(plan) {
+    let script = ''
+    for(let i = 0; i < plan.observations.length; i++) {
+       script = script +'#waituntil'+ plan.observations[i].start +'\n#count ' + plan.observations[i].exposures + ' \n#filter ' + getFilter(plan.observations[i].filter) + '\n#interval ' + plan.observations[i].exposure_time +
+        '\n' + plan.observations[i].name + '\n;\n';
+    }
+    return script;
+}
