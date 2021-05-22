@@ -32,7 +32,7 @@ router.route('/add').post((req, res) => {
         let ra = item.ra
         let dec = item.dec
         let exposures = item.exposures
-        let exposure_time = item.exposure_time
+        let exposureTime = item.exposureTime
         let filter = item.filter
         let start = item.start
         let end = item.end
@@ -42,7 +42,7 @@ router.route('/add').post((req, res) => {
             ra,
             dec,
             exposures,
-            exposure_time,
+            exposureTime,
             filter,
             start,
             end,
@@ -104,7 +104,7 @@ function getFilter(filter) {
 function acpScriptGenerator(plan) {
     let script = ''
     for(let i = 0; i < plan.observations.length; i++) {
-       script = script +'#waituntil '+ plan.observations[i].start +'\n#count ' + plan.observations[i].exposures + ' \n#filter ' + getFilter(plan.observations[i].filter) + '\n#interval ' + plan.observations[i].exposure_time +
+       script = script +'#waituntil '+ plan.observations[i].start +'\n#count ' + plan.observations[i].exposures + ' \n#filter ' + getFilter(plan.observations[i].filter) + '\n#interval ' + plan.observations[i].exposureTime +
         '\n' + plan.observations[i].name + '\n;\n;\n';
     }
     return script;
