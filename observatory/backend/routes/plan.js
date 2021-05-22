@@ -59,7 +59,7 @@ router.route('/add').post((req, res) => {
 
     // path to save the file
     // TODO make a string for the file
-    const path = 'C:/Users/Maor/WebstormProjects/AU-Observatory/observatory/backend/Files/' + plan.title + '.txt'
+    const path = 'Files/' + plan.title + '.txt'
     fs.writeFile(path, 'Learn Node FS module', function (err) {
         if (err) throw err;
         console.log('File is created successfully.');
