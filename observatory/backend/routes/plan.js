@@ -104,8 +104,8 @@ function getFilter(filter) {
 function acpScriptGenerator(plan) {
     let script = ''
     for(let i = 0; i < plan.observations.length; i++) {
-       script = script +'#waituntil'+ plan.observations[i].start +'\n#count ' + plan.observations[i].exposures + ' \n#filter ' + getFilter(plan.observations[i].filter) + '\n#interval ' + plan.observations[i].exposure_time +
-        '\n' + plan.observations[i].name + '\n;\n';
+       script = script +'#waituntil '+ plan.observations[i].start +'\n#count ' + plan.observations[i].exposures + ' \n#filter ' + getFilter(plan.observations[i].filter) + '\n#interval ' + plan.observations[i].exposure_time +
+        '\n' + plan.observations[i].name + '\n;\n;\n';
     }
     return script;
 }
