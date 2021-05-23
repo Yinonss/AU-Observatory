@@ -7,7 +7,7 @@ const observation = new Schema({
     ra: {type: Number, required: true},
     dec: {type: Number, required: true},
     exposures: {type: Number, required: true},
-    exposure_time: {type: Number, required: true},
+    exposureTime: {type: Number, required: true},
     filter: {type: String, required: true},
     start: {type: Date, required: true},
     end: {type: Date, required: true},

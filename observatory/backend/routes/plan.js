@@ -32,7 +32,7 @@ router.route('/add').post((req, res) => {
         let ra = item.ra
         let dec = item.dec
         let exposures = item.exposures
-        let exposure_time = item.exposure_time
+        let exposureTime = item.exposureTime
         let filter = item.filter
         let start = item.start
         let end = item.end
@@ -42,7 +42,7 @@ router.route('/add').post((req, res) => {
             ra,
             dec,
             exposures,
-            exposure_time,
+            exposureTime,
             filter,
             start,
             end,
@@ -57,10 +57,10 @@ router.route('/add').post((req, res) => {
         }
     })
 
-    // path to save the file
-    // TODO make a string for the file
-    const path = 'C:/Users/Maor/WebstormProjects/AU-Observatory/observatory/backend/Files/' + plan.title + '.txt'
-    fs.writeFile(path, 'Learn Node FS module', function (err) {
+
+    const path = 'Files/' + plan.title + '.txt'  // path to save the file
+    let acpScript = acpScriptGenerator(plan)
+    fs.writeFile(path, acpScript, function (err) {
         if (err) throw err;
         console.log('File is created successfully.');
     });
@@ -89,5 +89,26 @@ router.route('update/:id').post(((req, res) => {
         })
         .catch(err => res.status(400).json('Error: ' + err))
 }))
+
+
+function getFilter(filter) {
+    if(filter === 'Clear') return filter;
+    let newFormatFilter = filter.substring(0, 1).toUpperCase();
+    return newFormatFilter;
+}
+
+
+//TODO : We need to check if date format is acceptable for Windows OS.
+function acpScriptGenerator(plan) {
+    let script = ''
+    for(let i = 0; i < plan.observations.length; i++) {
+       script = script +'#waituntil '+ plan.observations[i].start +'\n#count ' + plan.observations[i].exposures + ' \n#filter ' + getFilter(plan.observations[i].filter) + '\n#interval ' + plan.observations[i].exposureTime +
+        '\n' + plan.observations[i].name;
+       if(i < plan.observations.length - 1) {
+           script = script + '\n;\n;\n';
+       }
+    }
+    return script;
+}
 
 module.exports = router
