@@ -3,6 +3,8 @@ import axios from "axios";
 import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
 import Container from "@material-ui/core/Container";
+import SearchIcon from '@material-ui/icons/Search';
+import IconButton from '@material-ui/core/IconButton';
 
 const NUMBEROFFIELDS = 7;
 const UNDEFINED = 'undefined';
@@ -59,10 +61,8 @@ export default function Editor(props) {
                 <tr>
                     <td>Target Name:</td>
                     <td><input type="text" id="name"/></td>
-                </tr>
-                <tr>
                     <td>
-                        <button type="button" name="SimbadSearch" style={{ color: 'black' }}
+                            <SearchIcon
                                 onClick={() => {
                                     const name = document.getElementById("name").value
                                     axios.get(`http://simbad.u-strasbg.fr/simbad/sim-nameresolver?Ident=${name}&data=J,M(U,B,V),S,I&output=json`)
@@ -71,7 +71,7 @@ export default function Editor(props) {
                                             document.getElementById("rightAscension").value = obj.ra
                                             document.getElementById("declination").value = obj.dec
                                         })
-                                }}>Search Coordinates</button>
+                                }}>Search Coordinates</SearchIcon>
                     </td>
                 </tr>
                 <tr>
@@ -100,6 +100,8 @@ export default function Editor(props) {
                                                     <option value='green'>Green</option>
                                                     <option value='blue'>Blue</option>
                                                 </select>
+                                            </td>
+                                            <td>
                                                 <input
                                                     key={`${index} exposures`}
                                                     type = 'text'
@@ -110,6 +112,8 @@ export default function Editor(props) {
                                                     value = {inputField.value}
                                                     onChange={event => handleChangeInput(index, event)}
                                                 />
+                                            </td>
+                                            <td>
                                                 <input
                                                     key={`${index} exposureTime`}
                                                     type = 'text'
@@ -119,11 +123,12 @@ export default function Editor(props) {
                                                     placeholder='Duration'
                                                     value = {inputField.value}
                                                     onChange={event => handleChangeInput(index, event)}/>
-
+                                            </td>
+                                            <td>
                                                 <RemoveIcon onClick={() => handleRemoveFields(index)}>  </RemoveIcon>
-
+                                            </td>
+                                            <td>
                                                 <AddIcon onClick={() => handleAddFields()}/>
-
                                             </td>
                                         </tr>
                                         </tbody>
