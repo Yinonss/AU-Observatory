@@ -62,7 +62,6 @@ router.route('/add').post((req, res) => {
         if (err) throw err;
         console.log('File is created successfully.');
     });
-
 })
 
 /*
@@ -98,12 +97,34 @@ function getFilter(filter) {
 
 
 //TODO : We need to check if date format is acceptable for Windows OS.
+//TODO : Add BINNING (Also in the editor).
 function acpScriptGenerator(plan) {
     let script = ''
-    for(let i = 0; i < plan.observations.length; i++) {
-       script = script +'#waituntil '+ plan.observations[i].start +'\n#count ' + plan.observations[i].exposures[0] + ' \n#filter ' + getFilter(plan.observations[i].filter[0]) + '\n#interval ' + plan.observations[i].exposureTime[0] +
-        '\n' + plan.observations[i].name;
-       if(i < plan.observations.length - 1) {
+    for(let j = 0; j < plan.observations.length; j++) {
+        script += '#waituntil ' + plan.observations[j].start + '\n#filter ';
+        for (let i = 0; i < plan.observations[j].filter.length; i++) {
+            if (i != plan.observations[j].filter.length - 1) {
+                script += plan.observations[j].filter[i] + ',';
+            } else {
+                script += plan.observations[j].filter[i] + '\n#count ';
+            }
+        }
+        for (let i = 0; i < plan.observations[j].exposures.length; i++) {
+            if (i != plan.observations[j].exposures.length - 1) {
+                script += plan.observations[j].exposures[i] + ',';
+            } else {
+                script += plan.observations[j].exposures[i] + '\n#interval ';
+            }
+        }
+        for (let i = 0; i < plan.observations[j].exposureTime.length; i++) {
+            if (i != plan.observations[j].exposureTime.length - 1) {
+                script += plan.observations[j].exposureTime[i] + ',';
+            } else {
+                script += plan.observations[j].exposureTime[i];
+            }
+        }
+        script += '\n' + plan.observations[j].name;
+       if(j < plan.observations.length - 1) {
            script = script + '\n;\n;\n';
        }
     }
