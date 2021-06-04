@@ -1,3 +1,4 @@
+
 /*############# Base ###########*/
 
 .UpperPage {
@@ -68,4 +69,26 @@ tr td {
 
 #plansDisplay tr:hover :not(th) {
     background-color: #101010;
+}
+
+input {
+    color: #00CED1;
+    background-color: #404040;
+}
+
+.label {
+    color: #00CED1;
+    font-size: small;
+}
+
+#exposures , #exposureTime , #filter{
+    width: 70px;
+    height: 25px;
+    margin: 10px;
+    background-color: #404040;
+    color: #00CED1;
+}
+
+RemoveIcon, AddIcon:hover {
+    background-color: #404040;
 }

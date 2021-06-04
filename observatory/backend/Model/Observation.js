@@ -11,7 +11,6 @@ const observation = new Schema({
     filter: {type: String, required: true},
     start: {type: Date, required: true},
     end: {type: Date, required: true},
-    priority: {type: Number}
 });
 
 module.exports = mongoose.model('Observation', observation)

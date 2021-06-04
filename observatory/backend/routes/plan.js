@@ -36,7 +36,6 @@ router.route('/add').post((req, res) => {
         let filter = item.filter
         let start = item.start
         let end = item.end
-        let priority = item.priority
             plan.observations[i]  = new Obs({
             name,
             ra,
@@ -45,8 +44,7 @@ router.route('/add').post((req, res) => {
             exposureTime,
             filter,
             start,
-            end,
-            priority
+            end
         })
     })
     plan.save((err, savedPlan) => {
@@ -92,9 +90,10 @@ router.route('update/:id').post(((req, res) => {
 
 
 function getFilter(filter) {
-    if(filter === 'Clear') return filter;
-    let newFormatFilter = filter.substring(0, 1).toUpperCase();
-    return newFormatFilter;
+    //if(filter === 'Clear')
+        return filter;
+    //let newFormatFilter = filter.substring(0, 1).toUpperCase();
+   // return newFormatFilter;
 }
 
 
