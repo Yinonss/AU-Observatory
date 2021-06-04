@@ -90,10 +90,10 @@ router.route('update/:id').post(((req, res) => {
 
 
 function getFilter(filter) {
-    //if(filter === 'Clear')
+    //if(filter === 'Clear' || filter === '')
         return filter;
     //let newFormatFilter = filter.substring(0, 1).toUpperCase();
-   // return newFormatFilter;
+     //return newFormatFilter;
 }
 
 
@@ -101,7 +101,7 @@ function getFilter(filter) {
 function acpScriptGenerator(plan) {
     let script = ''
     for(let i = 0; i < plan.observations.length; i++) {
-       script = script +'#waituntil '+ plan.observations[i].start +'\n#count ' + plan.observations[i].exposures + ' \n#filter ' + getFilter(plan.observations[i].filter) + '\n#interval ' + plan.observations[i].exposureTime +
+       script = script +'#waituntil '+ plan.observations[i].start +'\n#count ' + plan.observations[i].exposures[0] + ' \n#filter ' + getFilter(plan.observations[i].filter[0]) + '\n#interval ' + plan.observations[i].exposureTime[0] +
         '\n' + plan.observations[i].name;
        if(i < plan.observations.length - 1) {
            script = script + '\n;\n;\n';
