@@ -76,11 +76,11 @@ export default function Editor(props) {
                 </tr>
                 <tr>
                     <td>Right Ascension:</td>
-                    <td><input type="text" id="rightAscension" placeholder="DD:MM:SS.S"/></td>
+                    <td><input type="text" id="rightAscension"/></td>
                 </tr>
                 <tr>
                     <td>Declination:</td>
-                    <td><input type="text" id="declination" placeholder="Decimal degrees"/></td>
+                    <td><input type="text" id="declination"/></td>
                 </tr>
                 <Container>
                     <form>
