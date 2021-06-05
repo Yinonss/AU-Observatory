@@ -82,6 +82,9 @@ export default function Editor(props) {
                     <td>Declination:</td>
                     <td><input type="text" id="declination"/></td>
                 </tr>
+                <tr>
+                    <td>Imaging Sessions:</td>
+                    <td>
                 <Container>
                     <form>
                         {
@@ -138,6 +141,8 @@ export default function Editor(props) {
                         }
                     </form>
                 </Container>
+                    </td>
+                </tr>
                 <tr>
                     <td>Start:</td>
                     <td><input type="date" id="start"/></td>
