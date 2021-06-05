@@ -82,6 +82,9 @@ export default function Editor(props) {
                     <td>Declination:</td>
                     <td><input type="text" id="declination"/></td>
                 </tr>
+                <tr>
+                    <td>Imaging Sessions:</td>
+                    <td>
                 <Container>
                     <form>
                         {
@@ -92,7 +95,7 @@ export default function Editor(props) {
                                         <tr>
                                             <td key={`${index} ${inputField.filter.value} ${inputField.exposureTime.value} ${inputField.exposures.value}`}>
                                                 <select name = 'filter' className = 'Filter' id='filter'
-                                                        value = {inputField.value}
+                                                        value = {inputField.filter}
                                                         key={`${index} filter`}
                                                         onChange={event => handleChangeInput(index, event)}>
                                                     <option value='clear'>Clear</option>
@@ -109,7 +112,7 @@ export default function Editor(props) {
                                                     id = 'exposures'
                                                     placeholder='Exposures'
                                                     className = 'exposures'
-                                                    value = {inputField.value}
+                                                    value = {inputField.exposures}
                                                     onChange={event => handleChangeInput(index, event)}
                                                 />
                                             </td>
@@ -121,7 +124,7 @@ export default function Editor(props) {
                                                     id = 'exposureTime'
                                                     className = 'exposureTime'
                                                     placeholder='Duration'
-                                                    value = {inputField.value}
+                                                    value = {inputField.exposureTime}
                                                     onChange={event => handleChangeInput(index, event)}/>
                                             </td>
                                             <td>
@@ -138,6 +141,8 @@ export default function Editor(props) {
                         }
                     </form>
                 </Container>
+                    </td>
+                </tr>
                 <tr>
                     <td>Start:</td>
                     <td><input type="date" id="start"/></td>
