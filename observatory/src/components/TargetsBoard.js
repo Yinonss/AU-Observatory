@@ -2,6 +2,9 @@ import React from "react";
 import Target from "./Target"
 import targetStyle from "./TargetsBoard.css"
 import axios from "axios";
+import ReactTooltip from "react-tooltip";
+
+
 /* This component define the plan's structure and display its targets. */
 
 const server_url = 'http://localhost:5000/plan/add'
@@ -23,7 +26,17 @@ export default function TargetsBoard(props) {
             </table>
             <div className="list">
                 {
-                    props.allTargets.map(item => <Target id={item.id} key={item.id} name={item.name} deleteTarget={deleteTarget}/>)
+                    props.allTargets.map(item => <Target id={item.id}
+                                                         key={item.id}
+                                                         name={item.name}
+                                                         ra={item.ra}
+                                                         dec={item.dec}
+                                                         filter={item.filter}
+                                                         exposures={item.exposures}
+                                                         exposureTime={item.exposureTime}
+                                                         start={item.start}
+                                                         end={item.end}
+                                                         deleteTarget={deleteTarget}/>)
                 }
             </div>
             <br />

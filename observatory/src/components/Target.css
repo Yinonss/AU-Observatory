@@ -10,40 +10,21 @@
 }
 
 .target h5 {
-    margin-right: 130px;
+    margin-right: 100px;
     margin-top: 2px;
     color: #e0ffff ;
 }
 
 .target .close-button {
     padding: 0px;
-    margin-left: 150px;
+    margin-left: 100px;
     background: none;
 }
 
-.target::before,
-.target::after {
-    --scale: 0;
-    top: -.25rem;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%) scale(var(--scale));
+.target .close-button:hover {
+    background-color: #202020;
 }
 
-.target::before {
-    content: attr(data-tooltip);
-    background: #303030;
-    color: #298F85;
-    padding: .5rem;
-    text-align: center;
-}
-
-.target:hover::before,
-.target:hover::after {
-    --scale: 1;
-}
-
-.target::after {
-    width: 10px;
-    height: 10px;
-    background: #303030;
+#targetDetails {
+    background-color: #282c34;
 }
