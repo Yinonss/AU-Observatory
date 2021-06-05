@@ -24,3 +24,7 @@
 .target .close-button:hover {
     background-color: #202020;
 }
+
+#targetDetails {
+    background-color: #282c34;
+}
