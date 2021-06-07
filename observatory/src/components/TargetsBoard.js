@@ -40,7 +40,7 @@ export default function TargetsBoard(props) {
                 }
             </div>
             <br />
-            <button id="submit" onClick={()=> {
+            <button className={"submit_button"} id="submit" onClick={()=> {
                 console.log(props.allTargets)
                 axios.post(server_url, {  // save the plan into the DB
                     "title" : document.getElementById("planName").value,
