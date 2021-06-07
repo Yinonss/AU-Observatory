@@ -5,7 +5,7 @@ import AddIcon from "@material-ui/icons/Add";
 import Container from "@material-ui/core/Container";
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
-
+import editorStyle from '../Styles/Editor.css';
 const NUMBEROFFIELDS = 7;
 const UNDEFINED = 'undefined';
 
@@ -153,7 +153,7 @@ export default function Editor(props) {
                 </tr>
                 </tbody>
             </table>
-            <button type="button" id="add_button" onClick={()=>{
+            <button className={"add_button"} type="button" id="add_button" onClick={()=>{
                 //TODO change the way that we get the elements!
 
                 let name = document.getElementById("name").value
@@ -164,8 +164,6 @@ export default function Editor(props) {
                 let filter = inputFields.map(item => item.filter) //document.getElementsByName("filter").value
                 let start = document.getElementById("start").value
                 let end = document.getElementById("end").value
-
-
                 let planIsOK = validation(declination, rightAscension);
                 if(planIsOK)
                 {
@@ -186,7 +184,7 @@ export default function Editor(props) {
                     props.addTarget(target)
                 }
 
-            }}>Add</button>
+            }}><span>Add </span></button>
         </form>
     );
 }
@@ -210,4 +208,3 @@ function validation(declination, rightAscension) {
         return true;
     }
 }
-
