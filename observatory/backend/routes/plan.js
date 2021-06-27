@@ -34,6 +34,7 @@ router.route('/add').post((req, res) => {
         let exposures = item.exposures
         let exposureTime = item.exposureTime
         let filter = item.filter
+        let bin = item.bin
         let start = item.start
         let end = item.end
             plan.observations[i]  = new Obs({
@@ -43,6 +44,7 @@ router.route('/add').post((req, res) => {
             exposures,
             exposureTime,
             filter,
+                bin,
             start,
             end
         })
@@ -101,19 +103,26 @@ function getFilter(filter) {
 function acpScriptGenerator(plan) {
     let script = ''
     for(let j = 0; j < plan.observations.length; j++) {
-        script += '#waituntil ' + plan.observations[j].start + '\n#filter ';
+        script += '#waituntil ' + plan.observations[j].start + '\n#Filter ';
         for (let i = 0; i < plan.observations[j].filter.length; i++) {
             if (i != plan.observations[j].filter.length - 1) {
                 script += plan.observations[j].filter[i] + ',';
             } else {
-                script += plan.observations[j].filter[i] + '\n#count ';
+                script += plan.observations[j].filter[i] + '\n#Binning ';
+            }
+        }
+        for (let i = 0; i < plan.observations[j].bin.length; i++) {
+            if (i != plan.observations[j].filter.length - 1) {
+                script += plan.observations[j].bin[i] + ',';
+            } else {
+                script += plan.observations[j].bin[i] + '\n#Count ';
             }
         }
         for (let i = 0; i < plan.observations[j].exposures.length; i++) {
             if (i != plan.observations[j].exposures.length - 1) {
                 script += plan.observations[j].exposures[i] + ',';
             } else {
-                script += plan.observations[j].exposures[i] + '\n#interval ';
+                script += plan.observations[j].exposures[i] + '\n#Interval  ';
             }
         }
         for (let i = 0; i < plan.observations[j].exposureTime.length; i++) {

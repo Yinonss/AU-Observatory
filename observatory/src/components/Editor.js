@@ -12,12 +12,9 @@ const UNDEFINED = 'undefined';
 /* This function returns a basic form for observation missions. */
 export default function Editor(props) {
 
-    //let filter = []
-    //let exposures = []
-    //let exposureTime = []
 
     const [inputFields, setInputFields] = useState([
-        {filter : '', exposures: '', exposureTime: ''},
+        {filter : '', exposures: '', exposureTime: '', bin: ''},
     ])
 
     React.useEffect(() => {
@@ -36,7 +33,7 @@ export default function Editor(props) {
     }
 
     const handleAddFields = () => {
-        setInputFields([...inputFields, {filter : '', exposures: '', exposureTime: ''}])
+        setInputFields([...inputFields, {filter : '', exposures: '', exposureTime: '', bin: ''}])
     }
 
     const handleRemoveFields = (index) => {
@@ -128,6 +125,16 @@ export default function Editor(props) {
                                                     onChange={event => handleChangeInput(index, event)}/>
                                             </td>
                                             <td>
+                                                <input
+                                                    type = 'text'
+                                                    name='bin'
+                                                    id = 'bin'
+                                                    className = 'bin'
+                                                    placeholder='Bin'
+                                                    value = {inputField.bin}
+                                                    onChange={event => handleChangeInput(index, event)}/>
+                                            </td>
+                                            <td>
                                                 <RemoveIcon onClick={() => handleRemoveFields(index)}>  </RemoveIcon>
                                             </td>
                                             <td>
@@ -162,6 +169,7 @@ export default function Editor(props) {
                 let exposures = inputFields.map(item => item.exposures) //document.getElementsByName("exposures")
                 let exposureTime = inputFields.map(item => item.exposureTime) //document.getElementsByName("exposureTime")
                 let filter = inputFields.map(item => item.filter) //document.getElementsByName("filter").value
+                let bin = inputFields.map(item => item.bin)
                 let start = document.getElementById("start").value
                 let end = document.getElementById("end").value
                 let planIsOK = validation(declination, rightAscension);
@@ -177,6 +185,7 @@ export default function Editor(props) {
                         exposures: exposures,
                         exposureTime: exposureTime,
                         filter: filter,
+                        bin:bin,
                         start: start,
                         end: end,
                     }

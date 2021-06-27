@@ -82,7 +82,7 @@ input {
     font-size: small;
 }
 
-#exposures , #exposureTime , #filter{
+#exposures , #exposureTime , #filter, #bin{
     width: 70px;
     height: 25px;
     margin: 10px;
