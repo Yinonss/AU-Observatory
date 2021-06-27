@@ -9,6 +9,7 @@ const observation = new Schema({
     exposures: [{type: Number}],
     exposureTime: [{type: Number}],
     filter: [{type: String}],
+    bin: [{type: String}],
     start: {type: Date, required: true},
     end: {type: Date, required: true},
 });
