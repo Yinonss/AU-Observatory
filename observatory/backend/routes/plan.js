@@ -25,7 +25,15 @@ router.route('/').get(((req, res) => {
 router.route('/add').post((req, res) => {
     if(!req.body || !req.body.observation || req.body.observation.length === 0) return
     let plan = new Plan();
+    console.log(req.body.systemShutdown)
     plan.title = req.body.title
+    plan.sets = req.body.sets
+    plan.autofocusPlan = req.body.autofocusPlan
+    plan.alwaysSolve = req.body.alwaysSolve
+    plan.limitTime = req.body.limitTime
+    plan.quitTime = req.body.quitTime
+    plan.shutdownTime = req.body.shutdownTime
+    plan.systemShutdown = req.body.systemShutdown
     plan.observations = []
     req.body.observation.forEach((item,i) => {
         let name = item.name
@@ -37,6 +45,21 @@ router.route('/add').post((req, res) => {
         let bin = item.bin
         let start = item.start
         let end = item.end
+        let repeat = item.repeat
+        let calibrate = item.calibrate
+        let autoGuide = item.autoGuide
+        let autoFocus = item.autoFocus
+        let stack = item.stack
+        let stackAlign = item.stackAlign
+        let pointing = item.pointing
+        let noPointing = item.noPointing
+        let noSolve = item.noSolve
+        let waitFor = item.waitFor
+        let _waitUntil = item._waitUntil
+        let waitLimits = item.waitLimits
+        let waitZenith = item.waitZenith
+        let waitAirMass = item.waitAirMass
+
             plan.observations[i]  = new Obs({
             name,
             ra,
@@ -46,7 +69,21 @@ router.route('/add').post((req, res) => {
             filter,
                 bin,
             start,
-            end
+            end,
+                repeat,
+                calibrate,
+                autoGuide,
+                autoFocus,
+                stack,
+                stackAlign,
+                pointing,
+                noPointing,
+                noSolve,
+                waitFor,
+                _waitUntil,
+                waitLimits,
+                waitZenith,
+                waitAirMass
         })
     })
     plan.save((err, savedPlan) => {
@@ -90,39 +127,103 @@ router.route('update/:id').post(((req, res) => {
 }))
 
 
-function getFilter(filter) {
-    //if(filter === 'Clear' || filter === '')
-        return filter;
-    //let newFormatFilter = filter.substring(0, 1).toUpperCase();
-     //return newFormatFilter;
-}
-
 
 //TODO : We need to check if date format is acceptable for Windows OS.
-//TODO : Add BINNING (Also in the editor).
 function acpScriptGenerator(plan) {
-    let script = ''
+    let script = ';=========================================================\n' +
+        '; Ariel University Observatory Planner - ACP Script \n' +
+        ';=========================================================\n';
+
+
+    if (plan.sets != null) {
+        script += '#SETS '+ plan.sets + '\n';
+    }
+    if (plan.autofocusPlan != null) {
+        script += '#AFINTERVAL ' + plan.autofocusPlan + '\n';
+    }
+    if (plan.alwaysSolve) {
+        script += '#ALWAYSSOLVE \n';
+    }
+    if (plan.limitTime != null) {
+         script += '#MINSETTIME ' + plan.limitTime + '\n';
+     }
+     if (plan.quitTime != null) {
+               script += '#QUITAT ' + plan.quitTime +'\n';
+           }
+           if (plan.shutdownTime != null) {
+               script += '#SHUTDOWNAT ' + plan.shutdownTime + '\n'
+           }
+           if (plan.systemShutdown) {
+               script += '#SHUTDOWN \n';
+           }
     for(let j = 0; j < plan.observations.length; j++) {
-        script += '#waituntil ' + plan.observations[j].start + '\n#Filter ';
+
+        if (plan.observations[j].repeat != 1 && plan.observations[j].repeat != null) {
+            script += '#REPEAT ' + plan.observations[j].repeat + '\n';
+        }
+        if (plan.observations[j].calibrate) {
+            script += '#CALIBRATE \n';
+        }
+        if (plan.observations[j].autoGuide) {
+            script += '#AUTOGUIDE \n';
+        }
+        if (plan.observations[j].autoFocus) {
+            script += '#AUTOFOCUS \n';
+        }
+        if (plan.observations[j].stack) {
+            script += '#STACK\n';
+        }
+        if (plan.observations[j].stackAlign) {
+            script += '#STACKALIGN\n';
+        }
+        if (plan.observations[j].pointing) {
+            script += '#POINTING\n';
+        }
+        if (plan.observations[j].noPointing) {
+            script += '#NOPOINTING\n';
+        }
+        if (plan.observations[j].noSolve) {
+            script += '#NOSOLVE\n';
+        }
+        if (plan.observations[j].waitFor != null) {
+            script += '#WAITFOR ' + plan.observations[j].waitFor + '\n';
+        }
+        if (plan.observations[j]._waitUntil[1] != null) {
+            script += '#WAITUNTIL ' + plan.observations[j]._waitUntil + '\n';
+        }
+        if (plan.observations[j].waitAirMass[1] != null) {
+            script += '#WAITAIRMASS ' + plan.observations[j].waitAirMass + '\n';
+        }
+        if (plan.observations[j].waitZenith[1] != null) {
+            script += '#WAITZENITH '+ plan.observations[j].waitZenith + '\n';
+        }
+
+       /* if (plan.observations[j].waitLimits != null) {
+            script += '#WAITINLIMITS ' + plan.observations[j].waitLimits +'\n';
+        }*/
+        script += '#WAITUNTIL  ' + 1 + ', '+ plan.observations[j].start + '\n#FILTER ';
         for (let i = 0; i < plan.observations[j].filter.length; i++) {
+            //TODO: When Clear filter is chosen it is appear as null - need to be fixed.
+            let filter = plan.observations[j].filter[i];
+            if (filter == '') filter = 'Clear'
             if (i != plan.observations[j].filter.length - 1) {
-                script += plan.observations[j].filter[i] + ',';
+                script += filter + ',';
             } else {
-                script += plan.observations[j].filter[i] + '\n#Binning ';
+                script += filter + '\n#BINNING ';
             }
         }
         for (let i = 0; i < plan.observations[j].bin.length; i++) {
             if (i != plan.observations[j].filter.length - 1) {
                 script += plan.observations[j].bin[i] + ',';
             } else {
-                script += plan.observations[j].bin[i] + '\n#Count ';
+                script += plan.observations[j].bin[i] + '\n#COUNT ';
             }
         }
         for (let i = 0; i < plan.observations[j].exposures.length; i++) {
             if (i != plan.observations[j].exposures.length - 1) {
                 script += plan.observations[j].exposures[i] + ',';
             } else {
-                script += plan.observations[j].exposures[i] + '\n#Interval  ';
+                script += plan.observations[j].exposures[i] + '\n#INTERVAL  ';
             }
         }
         for (let i = 0; i < plan.observations[j].exposureTime.length; i++) {
@@ -134,7 +235,7 @@ function acpScriptGenerator(plan) {
         }
         script += '\n' + plan.observations[j].name;
        if(j < plan.observations.length - 1) {
-           script = script + '\n;\n;\n';
+           script = script + '\n;=========================================================\n;=========================================================\n';
        }
     }
     return script;
