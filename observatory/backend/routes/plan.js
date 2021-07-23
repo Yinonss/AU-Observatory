@@ -25,14 +25,13 @@ router.route('/').get(((req, res) => {
 router.route('/add').post((req, res) => {
     if(!req.body || !req.body.observation || req.body.observation.length === 0) return
     let plan = new Plan();
-    console.log(req.body.systemShutdown)
     plan.title = req.body.title
     plan.sets = req.body.sets
     plan.autofocusPlan = req.body.autofocusPlan
     plan.alwaysSolve = req.body.alwaysSolve
     plan.limitTime = req.body.limitTime
-    plan.quitTime = req.body.quitTime
-    plan.shutdownTime = req.body.shutdownTime
+    plan.quitTime = modifyLocalTime(req.body.quitTime)
+    plan.shutdownTime = modifyLocalTime(req.body.shutdownTime)
     plan.systemShutdown = req.body.systemShutdown
     plan.observations = []
     req.body.observation.forEach((item,i) => {
@@ -240,5 +239,34 @@ function acpScriptGenerator(plan) {
     }
     return script;
 }
+
+
+function modifyLocalTime(timeExpression) {
+    timeExpression = timeExpression.replace('-', ' ');
+    timeExpression = timeExpression.replace('-', ' ');
+    timeExpression= timeExpression.replace('T', ' ');
+    let timeExpressionList = timeExpression.split(" ")
+    let hour = timeExpressionList[3]
+    timeExpressionList = timeExpressionList.splice(0,3);
+    let temp = timeExpressionList[0];
+    timeExpressionList[0] = timeExpressionList[2]
+    timeExpressionList[2] = temp
+    let ans = timeExpressionList.join();
+    for (let i = 0; i < ans.length; i++) {
+        if(ans.charAt(i) === ',') {
+            ans = ans.replaceAt(i, '/');
+        }
+    }
+    return ans + ' ' + hour;
+}
+
+String.prototype.replaceAt = function(index, replacement) {
+    if (index >= this.length) {
+        return this.valueOf();
+    }
+
+    return this.substring(0, index) + replacement + this.substring(index + 1);
+}
+
 
 module.exports = router
