@@ -2,6 +2,7 @@ const router = require('express').Router()
 const Plan = require('../Model/Plan')
 const Obs = require('../Model/Observation')
 const fs = require('fs');
+//const rules = require('../Rules')
 
 router.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
