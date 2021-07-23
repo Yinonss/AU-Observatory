@@ -22,15 +22,15 @@
 
 .container {
     display: grid;
-    grid-template-columns: 65% 30%;
+    grid-template-columns: 75% 25%;
     background: rgba(0, 0, 0, 0.8);
     width: 100%;
     height: 100%;
-    padding-left: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     text-align: center;
-    max-height: 520px;
+    max-height: 720px;
     overflow: scroll;
 }
 
@@ -88,4 +88,19 @@ input {
     margin: 10px;
     background-color: #404040;
     color: #00CED1;
+}
+
+
+.targetOptions input {
+    width: 80px;
+}
+
+.planOptions input {
+    width: 100px;
+}
+
+.fieldsCleaner {
+    text-align: left;
+    color: 	#ADFF2F;
+    font-size: small;
 }

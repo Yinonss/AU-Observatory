@@ -40,10 +40,58 @@ export default function TargetsBoard(props) {
                 }
             </div>
             <br />
+                <table className={'planOptions'}>
+                    <tr>
+                        <td>Sets</td>
+                        <td><input type={'text'} id={'sets'}/></td>
+                    </tr>
+                    <tr>
+                        <td>Autofocus</td>
+                        <td><input type={'text'} id={'autofocusPlan'} placeholder={'Seconds'}/></td>
+                    </tr>
+                    <tr>
+                        <td>Always Solve</td>
+                        <td><input type={'checkbox'} id={'alwaysSolve'}/></td>
+                    </tr>
+                    <tr>
+                        <td>Limit Time</td>
+                        <td><input type={'time'} id={'limitTime'}/></td>
+                    </tr>
+                    <td>
+                        <tr>Quit Time</tr>
+                        <td><input type={'datetime-local'} id={'quitTime'}/></td>
+                    </td>
+                    <tr>
+                        <tr>Shutdown Time</tr>
+                        <td><input type={'datetime-local'} id={'shutdownTime'}/></td>
+                    </tr>
+                    <td>
+                        <tr>Shut Down When Finished</tr>
+                        <td><input type={'checkbox'} id={'systemShutdown'}/></td>
+                    </td>
+                    <tr>
+                        <td></td>
+                    </tr>
+                </table>
             <button className={"submit_button"} id="submit" onClick={()=> {
                 console.log(props.allTargets)
+                let sets = document.getElementById("sets").value
+                let autofocusPlan = document.getElementById("autofocusPlan").value
+                let alwaysSolve =document.getElementById("alwaysSolve").checked
+                let limitTime = document.getElementById("limitTime").value
+                let quitTime = document.getElementById("quitTime").value
+                let shutdownTime = document.getElementById("shutdownTime").value
+                let  systemShutdown = document.getElementById("systemShutdown").checked
+                console.log(typeof limitTime)
                 axios.post(server_url, {  // save the plan into the DB
                     "title" : document.getElementById("planName").value,
+                    "sets" : document.getElementById("sets").value,
+                     "autofocusPlan" : autofocusPlan,
+                     "alwaysSolve": alwaysSolve,
+                     "limitTime" : limitTime,
+                      "quitTime": quitTime,
+                      "shutdownTime" : shutdownTime,
+                    "systemShutdown" : systemShutdown,
                     "observation" : props.allTargets
                 }).then(res => console.log(res))
             }
