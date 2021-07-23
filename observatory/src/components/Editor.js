@@ -90,10 +90,9 @@ export default function Editor(props) {
                                     <table>
                                         <tbody>
                                         <tr>
-                                            <td key={`${index} ${inputField.filter.value} ${inputField.exposureTime.value} ${inputField.exposures.value}`}>
-                                                <select name = 'filter' className = 'Filter' id='filter'
+                                            <td>
+                                                <select name = 'filter' className = 'Filter' id='filter' defaultValue="clear"
                                                         value = {inputField.filter}
-                                                        key={`${index} filter`}
                                                         onChange={event => handleChangeInput(index, event)}>
                                                     <option value='clear'>Clear</option>
                                                     <option value='red'>Red</option>
@@ -103,7 +102,6 @@ export default function Editor(props) {
                                             </td>
                                             <td>
                                                 <input
-                                                    key={`${index} exposures`}
                                                     type = 'text'
                                                     name='exposures'
                                                     id = 'exposures'
@@ -115,7 +113,6 @@ export default function Editor(props) {
                                             </td>
                                             <td>
                                                 <input
-                                                    key={`${index} exposureTime`}
                                                     type = 'text'
                                                     name='exposureTime'
                                                     id = 'exposureTime'
@@ -144,12 +141,76 @@ export default function Editor(props) {
                                         </tbody>
                                     </table>
                                 </div>
-                            ))
-                        }
-                    </form>
-                </Container>
-                    </td>
-                </tr>
+
+                                        ))
+                                        }</form>
+                                    </Container>
+                                </td>
+                            </tr>
+                <div className={'targetOptions'} id={'targetOptions'}>
+                    <table>
+                                            <tr>
+                                                <td>Repeat</td>
+                                                <td><input type="text" id="repeat"></input></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Limit angle</td>
+                                                <td><input type={'text'} id="waituntilSet" placeholder={'Sets'}></input>
+                                                    <input type={'text'} id="waituntilDeg" placeholder={'Degrees'}></input></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Limit Zenith</td>
+                                                <td><input type={'text'} id="waitZenithDeg" placeholder={'Degrees'}></input>
+                                                    <input type={'text'} id="waitZenithMin" placeholder={'Minutes'}></input></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Limit Air Mass</td>
+                                                <td><input type={'text'} id="waitairmassMass" placeholder={'Airmass'}></input>
+                                                    <input type={'text'} id="waitairmassMin" placeholder={'Minutes'}></input></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Wait Limit</td>
+                                                <td><input type={'text'} id="waitlimit"></input></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Wait For</td>
+                                                <td><input type={'text'} id="waitfor"></input></td>
+                                            </tr>
+
+                                            <tr>
+
+                                                <td>Calibrate <input type="checkbox" id="calibrate"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Autoguide</td>
+                                                <td><input type={'checkbox'} id="autoguide"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Autofocus</td>
+                                                <td><input type={'checkbox'} id="autofocus"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Do Not Solve</td>
+                                                <td><input type={'checkbox'} id="nosolve"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Scehdule Pointing</td>
+                                                <input type={'radio'} id="pointing" name={'Point'} value={'pointing'}></input>
+                                                <label htmlFor={'pointing'}>Yes</label>
+                                                <input type={'radio'} id="nopointing" name={'Point'} value={'nopointing'}></input>
+                                                <label htmlFor={'noalign'}>No</label>
+                                            </tr>
+                                            <tr>
+                                                <td>Stack Images</td>
+                                                <input type={'radio'} id="align" name={'stackImages'} value={'align'}></input>
+                                                <label htmlFor={'align'}>Align</label>
+                                                <input type={'radio'} id="noalign" name={'stackImages'} value={'noalign'}></input>
+                                                <label htmlFor={'noalign'}>Without Align</label>
+                                            </tr>
+
+                    </table>
+                </div>
+
                 <tr>
                     <td>Start:</td>
                     <td><input type="date" id="start"/></td>
@@ -166,13 +227,34 @@ export default function Editor(props) {
                 let name = document.getElementById("name").value
                 let rightAscension = document.getElementById("rightAscension").value
                 let declination = document.getElementById("declination").value
-                let exposures = inputFields.map(item => item.exposures) //document.getElementsByName("exposures")
-                let exposureTime = inputFields.map(item => item.exposureTime) //document.getElementsByName("exposureTime")
-                let filter = inputFields.map(item => item.filter) //document.getElementsByName("filter").value
+                let exposures = inputFields.map(item => item.exposures)
+                let exposureTime = inputFields.map(item => item.exposureTime)
+                let filter = inputFields.map(item => item.filter)
                 let bin = inputFields.map(item => item.bin)
                 let start = document.getElementById("start").value
                 let end = document.getElementById("end").value
                 let planIsOK = validation(declination, rightAscension);
+                let repeat = document.getElementById("repeat").value
+                let waituntil = []
+                    waituntil[0] = document.getElementById('waituntilSet').value
+                    waituntil[1] = document.getElementById('waituntilDeg').value
+                let zenith = []
+                    zenith[0] = document.getElementById('waitZenithDeg').value
+                    zenith[1] = document.getElementById('waitZenithMin').value
+                let airmass = []
+                    airmass[0] = document.getElementById('waitairmassMass').value
+                    airmass[1] = document.getElementById('waitairmassMin').value
+                let waitfor = document.getElementById('waitfor').value
+                let calibrate = document.getElementById('calibrate').checked
+                let autoguide = document.getElementById('autoguide').checked
+                let autofocus= document.getElementById('autofocus').checked
+                let nosolve= document.getElementById('nosolve').checked
+                let pointing =  document.getElementById('pointing').checked
+                let nopointing =  document.getElementById('nopointing').checked
+                let align =  document.getElementById('align').checked
+                let noalign =  document.getElementById('noalign').checked
+                let waitlimit = document.getElementById('waitlimit').value
+
                 if(planIsOK)
                 {
                     setCount(count + 1)
@@ -185,9 +267,23 @@ export default function Editor(props) {
                         exposures: exposures,
                         exposureTime: exposureTime,
                         filter: filter,
-                        bin:bin,
+                        bin: bin,
                         start: start,
                         end: end,
+                        repeat: repeat,
+                        calibrate: calibrate,
+                        autoGuide: autoguide,
+                        autoFocus: autofocus,
+                        stack: noalign,
+                        stackAlign: align,
+                        pointing: pointing,
+                        noPointing: nopointing,
+                        noSolve: nosolve,
+                        waitFor: waitfor,
+                        _waitUntil: waituntil,
+                        waitZenith: zenith,
+                        waitAirMass: airmass,
+                        waitLimits: waitlimit
                     }
 
                     props.addTarget(target)
@@ -195,19 +291,21 @@ export default function Editor(props) {
 
             }}><span>Add </span></button>
         </form>
+
     );
 }
 
 // Check if there is an empty field. If one found, do not approve it.
 function validation(declination, rightAscension) {
-    const inputFeilds = document.querySelectorAll("input");
-    const validInputs = Array.from(inputFeilds).filter( input => input.value !== "");
+    const inputFields = document.querySelectorAll("input");
+    const validInputs = Array.from(inputFields).filter( input => input.value !== "");
     /* if (validInputs.length !== NUMBEROFFIELDS)
      {
          alert('Please fill in all of the fields')
          return false;
      }*/
-    if(declination === 'undefined' || rightAscension === UNDEFINED)
+    //TODO Make the next condition a rule
+    if(declination === UNDEFINED || rightAscension === UNDEFINED)
     {
         alert('Target undefined - please search target again.');
         return false;
@@ -217,3 +315,5 @@ function validation(declination, rightAscension) {
         return true;
     }
 }
+
+
