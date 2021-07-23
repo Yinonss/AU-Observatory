@@ -82,7 +82,6 @@ export default function TargetsBoard(props) {
                 let quitTime = document.getElementById("quitTime").value
                 let shutdownTime = document.getElementById("shutdownTime").value
                 let  systemShutdown = document.getElementById("systemShutdown").checked
-                console.log(typeof limitTime)
                 axios.post(server_url, {  // save the plan into the DB
                     "title" : document.getElementById("planName").value,
                     "sets" : document.getElementById("sets").value,
@@ -99,3 +98,4 @@ export default function TargetsBoard(props) {
         </div>
     );
 }
+
