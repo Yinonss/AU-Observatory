@@ -160,6 +160,28 @@ export default function Editor(props) {
                 <div className={'targetOptions'} id={'targetOptions'}>
                     <table>
                                             <tr>
+                                                <td>Frame Friction</td>
+                                                <td><input type={'text'} id={'frameSize'}/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Rotator Degree</td>
+                                                <td><input type={'text'} id={'rotatorDegree'}/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Dithering</td>
+                                                <td><input type={'text'} id={'dithering'}/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Defocus</td>
+                                                <td><input type={'text'} id={'defocus'}/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Track On</td>
+                                                <td><input type={'checkbox'} id={'track'}/></td>
+                                            </tr>
+
+
+                                            <tr>
                                                 <td>Repeat</td>
                                                 <td><input type="text" id="repeat"></input></td>
                                             </tr>
@@ -256,6 +278,11 @@ export default function Editor(props) {
                 let align =  document.getElementById('align').checked
                 let noalign =  document.getElementById('noalign').checked
                 let waitlimit = document.getElementById('waitlimit').value
+                let frameSize = document.getElementById('frameSize').value
+                let rotatorDegree = document.getElementById('rotatorDegree').value
+                let dithering = document.getElementById('dithering').value
+                let track = document.getElementById('track').checked
+                let defocus = document.getElementById('defocus').value
 
                 if(planIsOK)
                 {
@@ -285,7 +312,12 @@ export default function Editor(props) {
                         _waitUntil: waituntil,
                         waitZenith: zenith,
                         waitAirMass: airmass,
-                        waitLimits: waitlimit
+                        waitLimits: waitlimit,
+                        frameSize: frameSize,
+                        rotatorDegree: rotatorDegree,
+                        dithering: dithering,
+                        track: track,
+                        defocus: defocus
                     }
 
                     props.addTarget(target)
