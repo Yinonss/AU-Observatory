@@ -26,6 +26,11 @@ const observation = new Schema({
     waitLimits: {type: Number, required: false},
     waitZenith: [{type: Number, required: false}],
     waitAirMass: [{type: Number, required: false}],
+    frameSize: {type: Number, required:  false},
+    rotatorDegree: {type: Number, required: false},
+    dithering: {type: Number, required: false},
+    track: {type: Boolean, required: false},
+    defocus: {type: Number, required: false},
 });
 
 module.exports = mongoose.model('Observation', observation)

@@ -59,6 +59,11 @@ router.route('/add').post((req, res) => {
         let waitLimits = item.waitLimits
         let waitZenith = item.waitZenith
         let waitAirMass = item.waitAirMass
+        let frameSize = item.frameSize
+        let rotatorDegree = item.rotatorDegree
+        let dithering = item.dithering
+        let track = item.track
+        let defocus = item.defocus
 
             plan.observations[i]  = new Obs({
             name,
@@ -83,7 +88,12 @@ router.route('/add').post((req, res) => {
                 _waitUntil,
                 waitLimits,
                 waitZenith,
-                waitAirMass
+                waitAirMass,
+                frameSize,
+                rotatorDegree,
+                dithering,
+                track,
+                defocus
         })
     })
     plan.save((err, savedPlan) => {
@@ -144,13 +154,13 @@ function acpScriptGenerator(plan) {
     if (plan.alwaysSolve) {
         script += '#ALWAYSSOLVE \n';
     }
-    if (plan.limitTime != null) {
+    if (plan.limitTime != '') {
          script += '#MINSETTIME ' + plan.limitTime + '\n';
      }
-     if (plan.quitTime != null) {
+     if (plan.quitTime != '// undefined') {
                script += '#QUITAT ' + plan.quitTime +'\n';
            }
-           if (plan.shutdownTime != null) {
+           if (plan.shutdownTime != '// undefined') {
                script += '#SHUTDOWNAT ' + plan.shutdownTime + '\n'
            }
            if (plan.systemShutdown) {
@@ -158,6 +168,21 @@ function acpScriptGenerator(plan) {
            }
     for(let j = 0; j < plan.observations.length; j++) {
 
+        if (plan.observations[j].frameSize != null) {
+            script += '#SUBFRAME ' + plan.observations[j].frameSize + '\n'
+        }
+        if (plan.observations[j].rotatorDegree != null) {
+            script += '#POSANG ' + plan.observations[j].rotatorDegree + '\n'
+        }
+        if (plan.observations[j].dithering != null) {
+            script += '#DITHER ' + plan.observations[j].dithering + '\n'
+        }
+        if (plan.observations[j].track) {
+            script += '#TRACKON \n'
+        }
+        if (plan.observations[j].defocus != null) {
+            script += '#DEFOCUS ' + plan.observations[j].defocus + '\n'
+        }
         if (plan.observations[j].repeat != 1 && plan.observations[j].repeat != null) {
             script += '#REPEAT ' + plan.observations[j].repeat + '\n';
         }
@@ -201,7 +226,7 @@ function acpScriptGenerator(plan) {
        /* if (plan.observations[j].waitLimits != null) {
             script += '#WAITINLIMITS ' + plan.observations[j].waitLimits +'\n';
         }*/
-        script += '#WAITUNTIL  ' + 1 + ', '+ plan.observations[j].start + '\n#FILTER ';
+        script += '#WAITUNTIL  ' + 1 + ', '+ modifyLocalTime(plan.observations[j].start) + '\n#FILTER ';
         for (let i = 0; i < plan.observations[j].filter.length; i++) {
             //TODO: When Clear filter is chosen it is appear as null - need to be fixed.
             let filter = plan.observations[j].filter[i];
@@ -232,6 +257,9 @@ function acpScriptGenerator(plan) {
             } else {
                 script += plan.observations[j].exposureTime[i];
             }
+            if (plan.observations[j].track) {
+                script += ' \n#TRACKOFF \n'
+            }
         }
         script += '\n' + plan.observations[j].name;
        if(j < plan.observations.length - 1) {
@@ -258,7 +286,13 @@ function modifyLocalTime(timeExpression) {
             ans = ans.replaceAt(i, '/');
         }
     }
-    return ans + ' ' + hour;
+    if(hour == null || hour == ''){
+        return ans;
+    }
+    else {
+        return ans + ' ' + hour;
+    }
+
 }
 
 String.prototype.replaceAt = function(index, replacement) {
