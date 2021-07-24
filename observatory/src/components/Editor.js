@@ -79,6 +79,15 @@ export default function Editor(props) {
                     <td>Declination:</td>
                     <td><input type="text" id="declination"/></td>
                 </tr>
+
+                <tr>
+                    <td>Start:</td>
+                    <td><input type="date" id="start"/></td>
+                </tr>
+                <tr>
+                    <td>End:</td>
+                    <td><input type="date" id="end"/></td>
+                </tr>
                 <tr>
                     <td>Imaging Sessions:</td>
                     <td>
@@ -138,6 +147,7 @@ export default function Editor(props) {
                                                 <AddIcon onClick={() => handleAddFields()}/>
                                             </td>
                                         </tr>
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -211,14 +221,6 @@ export default function Editor(props) {
                     </table>
                 </div>
 
-                <tr>
-                    <td>Start:</td>
-                    <td><input type="date" id="start"/></td>
-                </tr>
-                <tr>
-                    <td>End:</td>
-                    <td><input type="date" id="end"/></td>
-                </tr>
                 </tbody>
             </table>
             <button className={"add_button"} type="button" id="add_button" onClick={()=>{
