@@ -12,6 +12,23 @@
     margin-bottom: 20px;
 }
 
+button {
+    background-color: #303030;
+    width: min-content;
+}
+
+button:hover {
+    background-color: #404040;
+}
+
+input {
+    width: 120px;
+}
+
+.dummyFrames {
+    width: 70px;
+}
+
 .submit_button:hover {background-color: #3e8e41}
 
 .submit_button:active {
@@ -22,7 +39,7 @@
 
 .list {
     background: #101010;
-    width: 180px;
+    width: 198px;
     height: 300px;
     margin: auto;
     overflow-y: scroll;
