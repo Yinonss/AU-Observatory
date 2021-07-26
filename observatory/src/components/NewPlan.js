@@ -17,7 +17,7 @@ export default function NewPlan() {
     return (
         <div className="container">
             <Editor addTarget={addTarget}/>
-            <TargetsBoard allTargets={targets} setTargets={setTargets} />
+            <TargetsBoard allTargets={targets} setTargets={setTargets} addTarget={addTarget}/>
         </div>
     );
 }

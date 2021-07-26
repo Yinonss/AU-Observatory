@@ -64,7 +64,10 @@ router.route('/add').post((req, res) => {
         let dithering = item.dithering
         let track = item.track
         let defocus = item.defocus
-
+        let frameKind = item.frameKind
+        let darkFrames = item.darkFrames
+        let biasFrames = item.biasFrames
+        //TODO: Change the flag to ENUM in order to differentiate kinds of frames.
             plan.observations[i]  = new Obs({
             name,
             ra,
@@ -93,7 +96,10 @@ router.route('/add').post((req, res) => {
                 rotatorDegree,
                 dithering,
                 track,
-                defocus
+                defocus,
+                frameKind,
+                darkFrames,
+                biasFrames
         })
     })
     plan.save((err, savedPlan) => {
@@ -145,6 +151,9 @@ function acpScriptGenerator(plan) {
         ';=========================================================\n';
 
 
+
+
+
     if (plan.sets != null) {
         script += '#SETS '+ plan.sets + '\n';
     }
@@ -168,104 +177,121 @@ function acpScriptGenerator(plan) {
            }
     for(let j = 0; j < plan.observations.length; j++) {
 
-        if (plan.observations[j].frameSize != null) {
-            script += '#SUBFRAME ' + plan.observations[j].frameSize + '\n'
-        }
-        if (plan.observations[j].rotatorDegree != null) {
-            script += '#POSANG ' + plan.observations[j].rotatorDegree + '\n'
-        }
-        if (plan.observations[j].dithering != null) {
-            script += '#DITHER ' + plan.observations[j].dithering + '\n'
-        }
-        if (plan.observations[j].track) {
-            script += '#TRACKON \n'
-        }
-        if (plan.observations[j].defocus != null) {
-            script += '#DEFOCUS ' + plan.observations[j].defocus + '\n'
-        }
-        if (plan.observations[j].repeat != 1 && plan.observations[j].repeat != null) {
-            script += '#REPEAT ' + plan.observations[j].repeat + '\n';
-        }
-        if (plan.observations[j].calibrate) {
-            script += '#CALIBRATE \n';
-        }
-        if (plan.observations[j].autoGuide) {
-            script += '#AUTOGUIDE \n';
-        }
-        if (plan.observations[j].autoFocus) {
-            script += '#AUTOFOCUS \n';
-        }
-        if (plan.observations[j].stack) {
-            script += '#STACK\n';
-        }
-        if (plan.observations[j].stackAlign) {
-            script += '#STACKALIGN\n';
-        }
-        if (plan.observations[j].pointing) {
-            script += '#POINTING\n';
-        }
-        if (plan.observations[j].noPointing) {
-            script += '#NOPOINTING\n';
-        }
-        if (plan.observations[j].noSolve) {
-            script += '#NOSOLVE\n';
-        }
-        if (plan.observations[j].waitFor != null) {
-            script += '#WAITFOR ' + plan.observations[j].waitFor + '\n';
-        }
-        if (plan.observations[j]._waitUntil[1] != null) {
-            script += '#WAITUNTIL ' + plan.observations[j]._waitUntil + '\n';
-        }
-        if (plan.observations[j].waitAirMass[1] != null) {
-            script += '#WAITAIRMASS ' + plan.observations[j].waitAirMass + '\n';
-        }
-        if (plan.observations[j].waitZenith[1] != null) {
-            script += '#WAITZENITH '+ plan.observations[j].waitZenith + '\n';
-        }
+        if (plan.observations[j].frameKind == 'IMAGE') {
+            if (plan.observations[j].frameSize != null) {
+                script += '#SUBFRAME ' + plan.observations[j].frameSize + '\n'
+            }
+            if (plan.observations[j].rotatorDegree != null) {
+                script += '#POSANG ' + plan.observations[j].rotatorDegree + '\n'
+            }
+            if (plan.observations[j].dithering != null) {
+                script += '#DITHER ' + plan.observations[j].dithering + '\n'
+            }
+            if (plan.observations[j].track) {
+                script += '#TRACKON \n'
+            }
+            if (plan.observations[j].defocus != null) {
+                script += '#DEFOCUS ' + plan.observations[j].defocus + '\n'
+            }
 
-       /* if (plan.observations[j].waitLimits != null) {
-            script += '#WAITINLIMITS ' + plan.observations[j].waitLimits +'\n';
-        }*/
-        script += '#WAITUNTIL  ' + 1 + ', '+ modifyLocalTime(plan.observations[j].start) + '\n#FILTER ';
-        for (let i = 0; i < plan.observations[j].filter.length; i++) {
-            //TODO: When Clear filter is chosen it is appear as null - need to be fixed.
-            let filter = plan.observations[j].filter[i];
-            if (filter == '') filter = 'Clear'
-            if (i != plan.observations[j].filter.length - 1) {
-                script += filter + ',';
-            } else {
-                script += filter + '\n#BINNING ';
+            if (plan.observations[j].repeat != 1 && plan.observations[j].repeat != null) {
+                script += '#REPEAT ' + plan.observations[j].repeat + '\n';
             }
-        }
-        for (let i = 0; i < plan.observations[j].bin.length; i++) {
-            if (i != plan.observations[j].filter.length - 1) {
-                script += plan.observations[j].bin[i] + ',';
-            } else {
-                script += plan.observations[j].bin[i] + '\n#COUNT ';
+            if (plan.observations[j].calibrate) {
+                script += '#CALIBRATE \n';
             }
-        }
-        for (let i = 0; i < plan.observations[j].exposures.length; i++) {
-            if (i != plan.observations[j].exposures.length - 1) {
-                script += plan.observations[j].exposures[i] + ',';
-            } else {
-                script += plan.observations[j].exposures[i] + '\n#INTERVAL  ';
+            if (plan.observations[j].autoGuide) {
+                script += '#AUTOGUIDE \n';
             }
-        }
-        for (let i = 0; i < plan.observations[j].exposureTime.length; i++) {
-            if (i != plan.observations[j].exposureTime.length - 1) {
-                script += plan.observations[j].exposureTime[i] + ',';
-            } else {
-                script += plan.observations[j].exposureTime[i];
+            if (plan.observations[j].autoFocus) {
+                script += '#AUTOFOCUS \n';
             }
+            if (plan.observations[j].stack) {
+                script += '#STACK\n';
+            }
+            if (plan.observations[j].stackAlign) {
+                script += '#STACKALIGN\n';
+            }
+            if (plan.observations[j].pointing) {
+                script += '#POINTING\n';
+            }
+            if (plan.observations[j].noPointing) {
+                script += '#NOPOINTING\n';
+            }
+            if (plan.observations[j].noSolve) {
+                script += '#NOSOLVE\n';
+            }
+            if (plan.observations[j].waitFor != null) {
+                script += '#WAITFOR ' + plan.observations[j].waitFor + '\n';
+            }
+            if (plan.observations[j]._waitUntil[1] != null) {
+                script += '#WAITUNTIL ' + plan.observations[j]._waitUntil + '\n';
+            }
+            if (plan.observations[j].waitAirMass[1] != null) {
+                script += '#WAITAIRMASS ' + plan.observations[j].waitAirMass + '\n';
+            }
+            if (plan.observations[j].waitZenith[1] != null) {
+                script += '#WAITZENDIST ' + plan.observations[j].waitZenith + '\n';
+            }
+
+            /* if (plan.observations[j].waitLimits != null) {
+                 script += '#WAITINLIMITS ' + plan.observations[j].waitLimits +'\n';
+             }*/
+            script += '#WAITUNTIL  ' + 1 + ', ' + modifyLocalTime(plan.observations[j].start) + '\n#FILTER ';
+
+            for (let i = 0; i < plan.observations[j].filter.length; i++) {
+                //TODO: When Clear filter is chosen it is appear as null - need to be fixed.
+                let filter = plan.observations[j].filter[i];
+                if (filter == '') filter = 'Clear'
+                if (i != plan.observations[j].filter.length - 1) {
+                    script += filter + ',';
+                } else {
+                    script += filter + '\n#BINNING ';
+                }
+            }
+            for (let i = 0; i < plan.observations[j].bin.length; i++) {
+                if (i != plan.observations[j].filter.length - 1) {
+                    script += plan.observations[j].bin[i] + ',';
+                } else {
+                    script += plan.observations[j].bin[i] + '\n#COUNT ';
+                }
+            }
+            for (let i = 0; i < plan.observations[j].exposures.length; i++) {
+                if (i != plan.observations[j].exposures.length - 1) {
+                    script += plan.observations[j].exposures[i] + ',';
+                } else {
+                    script += plan.observations[j].exposures[i] + '\n#INTERVAL  ';
+                }
+            }
+            for (let i = 0; i < plan.observations[j].exposureTime.length; i++) {
+                if (i != plan.observations[j].exposureTime.length - 1) {
+                    script += plan.observations[j].exposureTime[i] + ',';
+                } else {
+                    script += plan.observations[j].exposureTime[i];
+                    }
+                }
             if (plan.observations[j].track) {
                 script += ' \n#TRACKOFF \n'
             }
+            script += '\n' + plan.observations[j].name;
+            if (j < plan.observations.length - 1) {
+                script = script + '\n;=========================================================\n;=========================================================\n';
+            }
+
         }
-        script += '\n' + plan.observations[j].name;
-       if(j < plan.observations.length - 1) {
-           script = script + '\n;=========================================================\n;=========================================================\n';
-       }
+
+        else if (plan.observations[j].frameKind == 'DARK') {
+            script += '#SET ' + plan.observations[j].darkFrames + '\n';
+            script += '#DARK \n';
+            script = script + '\n;=========================================================\n;=========================================================\n';
+        }
+        else if (plan.observations[j].frameKind == 'BIAS') {
+            script += '#SET ' + plan.observations[j].biasFrames + '\n';
+            script += '#BIAS \n';
+            script = script + '\n;=========================================================\n;=========================================================\n';
+        }
     }
+
     return script;
 }
 

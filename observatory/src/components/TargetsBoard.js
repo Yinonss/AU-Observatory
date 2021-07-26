@@ -1,19 +1,26 @@
-import React from "react";
+import React, {useState} from "react";
 import Target from "./Target"
 import targetStyle from "./TargetsBoard.css"
 import axios from "axios";
 import ReactTooltip from "react-tooltip";
+import {dark} from "@material-ui/core/styles/createPalette";
 
 
 /* This component define the plan's structure and display its targets. */
 
 const server_url = 'http://localhost:5000/plan/add'
 
+
 export default function TargetsBoard(props) {
     const deleteTarget = (id)=> {
         props.setTargets(props.allTargets.filter(item => item.id !== id))
     }
 
+    const addTarget = (target)=> {
+        props.setTargets([...props.allTargets, target])
+    }
+    const [countDarks, setCountDarks] = useState(0);
+    const [countBias, setCountBias] = useState(0);
     return (
         <div className="TargetInfo">
             <table>
@@ -21,6 +28,38 @@ export default function TargetsBoard(props) {
                     <tr>
                         <td>Plan Name:</td>
                         <td><input type="text" id={"planName"}/></td>
+                    </tr>
+                    <tr>
+                        <td><button onClick={() => {
+                            const darkFrames = document.getElementById('darks').value
+                            const darkTargetName = darkFrames + ' Dark Frames'
+                            setCountDarks(countDarks + 1)
+                            const darkTarget = {
+                                id: 'darks' + countDarks,
+                                frameKind: 'BIAS',
+                                darkFrames: darkFrames,
+                                name: darkTargetName
+                            }
+                            props.addTarget(darkTarget)
+                        }
+                        }>Add Dark</button></td>
+                        <td><input type={'text'} id={'darks'} className={'dummyFrames'}/></td>
+                    </tr>
+                    <tr>
+                        <td><button onClick={() => {
+                            const biasFrames = document.getElementById('biases').value
+                            const biasTargetName = biasFrames + ' Bias Frames'
+                            setCountBias(countBias + 1)
+                            const biasTarget = {
+                                id: 'bias' + countBias,
+                                name: biasTargetName,
+                                frameKind: 'BIAS',
+                                biasFrames: biasFrames,
+                            }
+                            props.addTarget(biasTarget)
+                        }
+                        }>Add Bias</button></td>
+                        <td><input type={'text'} id={'biases'}  className={'dummyFrames'}/></td>
                     </tr>
                 </tbody>
             </table>
@@ -36,11 +75,15 @@ export default function TargetsBoard(props) {
                                                          exposureTime={item.exposureTime}
                                                          start={item.start}
                                                          end={item.end}
+                                                         isDummy={item.isDummy}
+                                                         darkFrams={document.getElementById('darks')}
+                                                         biasFrams={document.getElementById('biases')}
                                                          deleteTarget={deleteTarget}/>)
                 }
             </div>
             <br />
                 <table className={'planOptions'}>
+
                     <tr>
                         <td>Sets</td>
                         <td><input type={'text'} id={'sets'}/></td>
@@ -69,9 +112,6 @@ export default function TargetsBoard(props) {
                         <tr>Shut Down When Finished</tr>
                         <td><input type={'checkbox'} id={'systemShutdown'}/></td>
                     </td>
-                    <tr>
-                        <td></td>
-                    </tr>
                 </table>
             <button className={"submit_button"} id="submit" onClick={()=> {
                 console.log(props.allTargets)
