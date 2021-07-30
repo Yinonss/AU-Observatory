@@ -1,11 +1,10 @@
 const express = require('express')
 const app = express()
 const port = 5000
-// const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-const db = mongoose.connect('mongodb://localhost/database', {useNewUrlParser: true})
+const db = mongoose.connect('mongodb://localhost/database', {useNewUrlParser: true, useUnifiedTopology: true})
 
-
+const rules = require('./Rules')
 app.use(express.json())
 
 const plan = require('./routes/plan')

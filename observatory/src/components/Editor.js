@@ -14,12 +14,12 @@ export default function Editor(props) {
 
 
     const [inputFields, setInputFields] = useState([
-        {filter : '', exposures: '', exposureTime: '', bin: ''},
+        {filter: '', exposures: '', exposureTime: '', bin: ''},
     ])
 
     React.useEffect(() => {
         console.log([...inputFields])
-    },[inputFields])
+    }, [inputFields])
 
     const handleChangeInput = (index, event) => {
         const values = [...inputFields];
@@ -33,13 +33,13 @@ export default function Editor(props) {
     }
 
     const handleAddFields = () => {
-        setInputFields([...inputFields, {filter : '', exposures: '', exposureTime: '', bin: ''}])
+        setInputFields([...inputFields, {filter: '', exposures: '', exposureTime: '', bin: ''}])
     }
 
     const handleRemoveFields = (index) => {
         const values = [...inputFields];
 
-        if(values.length > 1) {
+        if (values.length > 1) {
             console.log([...values])
             // TODO: add alert that says the plan need to have at least one imaging session (rules engine).
             values.splice(index, 1);
@@ -59,16 +59,16 @@ export default function Editor(props) {
                     <td>Target Name:</td>
                     <td><input type="text" id="name"/></td>
                     <td>
-                            <SearchIcon
-                                onClick={() => {
-                                    const name = document.getElementById("name").value
-                                    axios.get(`http://simbad.u-strasbg.fr/simbad/sim-nameresolver?Ident=${name}&data=J,M(U,B,V),S,I&output=json`)
-                                        .then(res => {
-                                            const obj = res.data[0]
-                                            document.getElementById("rightAscension").value = obj.ra
-                                            document.getElementById("declination").value = obj.dec
-                                        })
-                                }}>Search Coordinates</SearchIcon>
+                        <SearchIcon
+                            onClick={() => {
+                                const name = document.getElementById("name").value
+                                axios.get(`http://simbad.u-strasbg.fr/simbad/sim-nameresolver?Ident=${name}&data=J,M(U,B,V),S,I&output=json`)
+                                    .then(res => {
+                                        const obj = res.data[0]
+                                        document.getElementById("rightAscension").value = obj.ra
+                                        document.getElementById("declination").value = obj.dec
+                                    })
+                            }}>Search Coordinates</SearchIcon>
                     </td>
                 </tr>
                 <tr>
@@ -91,161 +91,163 @@ export default function Editor(props) {
                 <tr>
                     <td>Imaging Sessions:</td>
                     <td>
-                <Container>
-                    <form>
-                        {
-                            inputFields.map((inputField, index) => (
-                                <div key={index}>
-                                    <table>
-                                        <tbody>
-                                        <tr>
-                                            <td>
-                                                <select name = 'filter' className = 'Filter' id='filter' defaultValue="clear"
-                                                        value = {inputField.filter}
-                                                        onChange={event => handleChangeInput(index, event)}>
-                                                    <option value='clear'>Clear</option>
-                                                    <option value='red'>Red</option>
-                                                    <option value='green'>Green</option>
-                                                    <option value='blue'>Blue</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <input
-                                                    type = 'text'
-                                                    name='exposures'
-                                                    id = 'exposures'
-                                                    placeholder='Exposures'
-                                                    className = 'exposures'
-                                                    value = {inputField.exposures}
-                                                    onChange={event => handleChangeInput(index, event)}
-                                                />
-                                            </td>
-                                            <td>
-                                                <input
-                                                    type = 'text'
-                                                    name='exposureTime'
-                                                    id = 'exposureTime'
-                                                    className = 'exposureTime'
-                                                    placeholder='Duration'
-                                                    value = {inputField.exposureTime}
-                                                    onChange={event => handleChangeInput(index, event)}/>
-                                            </td>
-                                            <td>
-                                                <input
-                                                    type = 'text'
-                                                    name='bin'
-                                                    id = 'bin'
-                                                    className = 'bin'
-                                                    placeholder='Bin'
-                                                    value = {inputField.bin}
-                                                    onChange={event => handleChangeInput(index, event)}/>
-                                            </td>
-                                            <td>
-                                                <RemoveIcon onClick={() => handleRemoveFields(index)}>  </RemoveIcon>
-                                            </td>
-                                            <td>
-                                                <AddIcon onClick={() => handleAddFields()}/>
-                                            </td>
-                                        </tr>
+                        <Container>
+                            <form>
+                                {
+                                    inputFields.map((inputField, index) => (
+                                        <div key={index}>
+                                            <table>
+                                                <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <select name='filter' className='Filter' id='filter'
+                                                                defaultValue="clear"
+                                                                value={inputField.filter}
+                                                                onChange={event => handleChangeInput(index, event)}>
+                                                            <option value='clear'>Clear</option>
+                                                            <option value='red'>Red</option>
+                                                            <option value='green'>Green</option>
+                                                            <option value='blue'>Blue</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <input
+                                                            type='text'
+                                                            name='exposures'
+                                                            id='exposures'
+                                                            placeholder='Exposures'
+                                                            className='exposures'
+                                                            value={inputField.exposures}
+                                                            onChange={event => handleChangeInput(index, event)}
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <input
+                                                            type='text'
+                                                            name='exposureTime'
+                                                            id='exposureTime'
+                                                            className='exposureTime'
+                                                            placeholder='Duration'
+                                                            value={inputField.exposureTime}
+                                                            onChange={event => handleChangeInput(index, event)}/>
+                                                    </td>
+                                                    <td>
+                                                        <input
+                                                            type='text'
+                                                            name='bin'
+                                                            id='bin'
+                                                            className='bin'
+                                                            placeholder='Bin'
+                                                            value={inputField.bin}
+                                                            onChange={event => handleChangeInput(index, event)}/>
+                                                    </td>
+                                                    <td>
+                                                        <RemoveIcon
+                                                            onClick={() => handleRemoveFields(index)}> </RemoveIcon>
+                                                    </td>
+                                                    <td>
+                                                        <AddIcon onClick={() => handleAddFields()}/>
+                                                    </td>
+                                                </tr>
 
-                                        </tbody>
-                                    </table>
-                                </div>
+                                                </tbody>
+                                            </table>
+                                        </div>
 
-                                        ))
-                                        }</form>
-                                    </Container>
-                                </td>
-                            </tr>
+                                    ))
+                                }</form>
+                        </Container>
+                    </td>
+                </tr>
                 <div className={'targetOptions'} id={'targetOptions'}>
                     <table>
-                                            <tr>
-                                                <td>Frame Friction</td>
-                                                <td><input type={'text'} id={'frameSize'}/></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Rotator Degree</td>
-                                                <td><input type={'text'} id={'rotatorDegree'}/></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Dithering</td>
-                                                <td><input type={'text'} id={'dithering'}/></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Defocus</td>
-                                                <td><input type={'text'} id={'defocus'}/></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Track On</td>
-                                                <td><input type={'checkbox'} id={'track'}/></td>
-                                            </tr>
+                        <tr>
+                            <td>Frame Friction</td>
+                            <td><input type={'text'} id={'frameSize'}/></td>
+                        </tr>
+                        <tr>
+                            <td>Rotator Degree</td>
+                            <td><input type={'text'} id={'rotatorDegree'}/></td>
+                        </tr>
+                        <tr>
+                            <td>Dithering</td>
+                            <td><input type={'text'} id={'dithering'}/></td>
+                        </tr>
+                        <tr>
+                            <td>Defocus</td>
+                            <td><input type={'text'} id={'defocus'}/></td>
+                        </tr>
+                        <tr>
+                            <td>Track On</td>
+                            <td><input type={'checkbox'} id={'track'}/></td>
+                        </tr>
 
 
-                                            <tr>
-                                                <td>Repeat</td>
-                                                <td><input type="text" id="repeat"></input></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Limit angle</td>
-                                                <td><input type={'text'} id="waituntilSet" placeholder={'Sets'}></input>
-                                                    <input type={'text'} id="waituntilDeg" placeholder={'Degrees'}></input></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Limit Zenith</td>
-                                                <td><input type={'text'} id="waitZenithDeg" placeholder={'Degrees'}></input>
-                                                    <input type={'text'} id="waitZenithMin" placeholder={'Minutes'}></input></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Limit Air Mass</td>
-                                                <td><input type={'text'} id="waitairmassMass" placeholder={'Airmass'}></input>
-                                                    <input type={'text'} id="waitairmassMin" placeholder={'Minutes'}></input></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Wait Limit</td>
-                                                <td><input type={'text'} id="waitlimit"></input></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Wait For</td>
-                                                <td><input type={'text'} id="waitfor"></input></td>
-                                            </tr>
+                        <tr>
+                            <td>Repeat</td>
+                            <td><input type="text" id="repeat"></input></td>
+                        </tr>
+                        <tr>
+                            <td>Limit angle</td>
+                            <td><input type={'text'} id="waituntilSet" placeholder={'Sets'}></input>
+                                <input type={'text'} id="waituntilDeg" placeholder={'Degrees'}></input></td>
+                        </tr>
+                        <tr>
+                            <td>Limit Zenith</td>
+                            <td><input type={'text'} id="waitZenithDeg" placeholder={'Degrees'}></input>
+                                <input type={'text'} id="waitZenithMin" placeholder={'Minutes'}></input></td>
+                        </tr>
+                        <tr>
+                            <td>Limit Air Mass</td>
+                            <td><input type={'text'} id="waitairmassMass" placeholder={'Airmass'}></input>
+                                <input type={'text'} id="waitairmassMin" placeholder={'Minutes'}></input></td>
+                        </tr>
+                        <tr>
+                            <td>Wait Limit</td>
+                            <td><input type={'text'} id="waitlimit"></input></td>
+                        </tr>
+                        <tr>
+                            <td>Wait For</td>
+                            <td><input type={'text'} id="waitfor"></input></td>
+                        </tr>
 
-                                            <tr>
+                        <tr>
 
-                                                <td>Calibrate <input type="checkbox" id="calibrate"/></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Autoguide</td>
-                                                <td><input type={'checkbox'} id="autoguide"/></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Autofocus</td>
-                                                <td><input type={'checkbox'} id="autofocus"/></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Do Not Solve</td>
-                                                <td><input type={'checkbox'} id="nosolve"/></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Scehdule Pointing</td>
-                                                <input type={'radio'} id="pointing" name={'Point'} value={'pointing'}></input>
-                                                <label htmlFor={'pointing'}>Yes</label>
-                                                <input type={'radio'} id="nopointing" name={'Point'} value={'nopointing'}></input>
-                                                <label htmlFor={'noalign'}>No</label>
-                                            </tr>
-                                            <tr>
-                                                <td>Stack Images</td>
-                                                <input type={'radio'} id="align" name={'stackImages'} value={'align'}></input>
-                                                <label htmlFor={'align'}>Align</label>
-                                                <input type={'radio'} id="noalign" name={'stackImages'} value={'noalign'}></input>
-                                                <label htmlFor={'noalign'}>Without Align</label>
-                                            </tr>
+                            <td>Calibrate <input type="checkbox" id="calibrate"/></td>
+                        </tr>
+                        <tr>
+                            <td>Autoguide</td>
+                            <td><input type={'checkbox'} id="autoguide"/></td>
+                        </tr>
+                        <tr>
+                            <td>Autofocus</td>
+                            <td><input type={'checkbox'} id="autofocus"/></td>
+                        </tr>
+                        <tr>
+                            <td>Do Not Solve</td>
+                            <td><input type={'checkbox'} id="nosolve"/></td>
+                        </tr>
+                        <tr>
+                            <td>Scehdule Pointing</td>
+                            <input type={'radio'} id="pointing" name={'Point'} value={'pointing'}></input>
+                            <label htmlFor={'pointing'}>Yes</label>
+                            <input type={'radio'} id="nopointing" name={'Point'} value={'nopointing'}></input>
+                            <label htmlFor={'noalign'}>No</label>
+                        </tr>
+                        <tr>
+                            <td>Stack Images</td>
+                            <input type={'radio'} id="align" name={'stackImages'} value={'align'}></input>
+                            <label htmlFor={'align'}>Align</label>
+                            <input type={'radio'} id="noalign" name={'stackImages'} value={'noalign'}></input>
+                            <label htmlFor={'noalign'}>Without Align</label>
+                        </tr>
 
                     </table>
                 </div>
 
                 </tbody>
             </table>
-            <button className={"add_button"} type="button" id="add_button" onClick={()=>{
+            <button className={"add_button"} type="button" id="add_button" onClick={() => {
                 //TODO change the way that we get the elements!
 
                 let name = document.getElementById("name").value
@@ -260,23 +262,23 @@ export default function Editor(props) {
                 let planIsOK = validation(declination, rightAscension);
                 let repeat = document.getElementById("repeat").value
                 let waituntil = []
-                    waituntil[0] = document.getElementById('waituntilSet').value
-                    waituntil[1] = document.getElementById('waituntilDeg').value
+                waituntil[0] = document.getElementById('waituntilSet').value
+                waituntil[1] = document.getElementById('waituntilDeg').value
                 let zenith = []
-                    zenith[0] = document.getElementById('waitZenithDeg').value
-                    zenith[1] = document.getElementById('waitZenithMin').value
+                zenith[0] = document.getElementById('waitZenithDeg').value
+                zenith[1] = document.getElementById('waitZenithMin').value
                 let airmass = []
-                    airmass[0] = document.getElementById('waitairmassMass').value
-                    airmass[1] = document.getElementById('waitairmassMin').value
+                airmass[0] = document.getElementById('waitairmassMass').value
+                airmass[1] = document.getElementById('waitairmassMin').value
                 let waitfor = document.getElementById('waitfor').value
                 let calibrate = document.getElementById('calibrate').checked
                 let autoguide = document.getElementById('autoguide').checked
-                let autofocus= document.getElementById('autofocus').checked
-                let nosolve= document.getElementById('nosolve').checked
-                let pointing =  document.getElementById('pointing').checked
-                let nopointing =  document.getElementById('nopointing').checked
-                let align =  document.getElementById('align').checked
-                let noalign =  document.getElementById('noalign').checked
+                let autofocus = document.getElementById('autofocus').checked
+                let nosolve = document.getElementById('nosolve').checked
+                let pointing = document.getElementById('pointing').checked
+                let nopointing = document.getElementById('nopointing').checked
+                let align = document.getElementById('align').checked
+                let noalign = document.getElementById('noalign').checked
                 let waitlimit = document.getElementById('waitlimit').value
                 let frameSize = document.getElementById('frameSize').value
                 let rotatorDegree = document.getElementById('rotatorDegree').value
@@ -284,45 +286,53 @@ export default function Editor(props) {
                 let track = document.getElementById('track').checked
                 let defocus = document.getElementById('defocus').value
 
-                if(planIsOK)
-                {
-                    setCount(count + 1)
+                setCount(count + 1)
 
-                    let target = {
-                        id: count,
-                        name: name,
-                        ra: rightAscension,
-                        dec: declination,
-                        exposures: exposures,
-                        exposureTime: exposureTime,
-                        filter: filter,
-                        bin: bin,
-                        start: start,
-                        end: end,
-                        repeat: repeat,
-                        calibrate: calibrate,
-                        autoGuide: autoguide,
-                        autoFocus: autofocus,
-                        stack: noalign,
-                        stackAlign: align,
-                        pointing: pointing,
-                        noPointing: nopointing,
-                        noSolve: nosolve,
-                        waitFor: waitfor,
-                        _waitUntil: waituntil,
-                        waitZenith: zenith,
-                        waitAirMass: airmass,
-                        waitLimits: waitlimit,
-                        frameSize: frameSize,
-                        rotatorDegree: rotatorDegree,
-                        dithering: dithering,
-                        track: track,
-                        defocus: defocus
-                    }
-
-                    props.addTarget(target)
+                let target = {
+                    id: count,
+                    name: name,
+                    ra: rightAscension,
+                    dec: declination,
+                    exposures: exposures,
+                    exposureTime: exposureTime,
+                    filter: filter,
+                    bin: bin,
+                    start: start,
+                    end: end,
+                    repeat: repeat,
+                    calibrate: calibrate,
+                    autoGuide: autoguide,
+                    autoFocus: autofocus,
+                    stack: noalign,
+                    stackAlign: align,
+                    pointing: pointing,
+                    noPointing: nopointing,
+                    noSolve: nosolve,
+                    waitFor: waitfor,
+                    _waitUntil: waituntil,
+                    waitZenith: zenith,
+                    waitAirMass: airmass,
+                    waitLimits: waitlimit,
+                    frameSize: frameSize,
+                    rotatorDegree: rotatorDegree,
+                    dithering: dithering,
+                    track: track,
+                    defocus: defocus
                 }
 
+                axios.post('http://localhost:5001/rules/1', { target: target})
+                    .then(res => {
+                        if (res.data.isValid) {
+                            props.addTarget(target)
+                        }
+                        else {
+                            setCount(count - 1)  // target not added so we need to lower his id
+                            alert(res.data.reason)
+                        }
+
+                    }).catch(err => {
+                        console.error(err)
+                })
             }}><span>Add </span></button>
         </form>
 
