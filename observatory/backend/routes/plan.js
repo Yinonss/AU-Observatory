@@ -281,12 +281,12 @@ function acpScriptGenerator(plan) {
         }
 
         else if (plan.observations[j].frameKind == 'DARK') {
-            script += '#SET ' + plan.observations[j].darkFrames + '\n';
+            script += '#SETS ' + plan.observations[j].darkFrames + '\n';
             script += '#DARK \n';
             script = script + '\n;=========================================================\n;=========================================================\n';
         }
         else if (plan.observations[j].frameKind == 'BIAS') {
-            script += '#SET ' + plan.observations[j].biasFrames + '\n';
+            script += '#SETS ' + plan.observations[j].biasFrames + '\n';
             script += '#BIAS \n';
             script = script + '\n;=========================================================\n;=========================================================\n';
         }
