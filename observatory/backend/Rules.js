@@ -49,13 +49,10 @@ R.register(RAAndDERule);
 // request rules for section 1
 app.post('/rules/1', (req, res) => {
     let obj = req.body.target
-    console.log(obj)
     R.execute(obj, function (data) {
         if (data.result) {
-            console.log("valid")
             res.send({isValid: data.result})
         } else {
-            console.log("Blocked" + data.reason);
             res.send({isValid: data.result, reason: data.reason})
         }
     })
