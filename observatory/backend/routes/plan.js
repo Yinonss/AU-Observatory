@@ -111,7 +111,7 @@ router.route('/add').post((req, res) => {
     })
 
 
-    const path = 'Files/' + plan.title + '.txt'  // path to save the file
+    const path = 'C:/Users/yinon/Documents/ACP Astronomy/Plans/' + plan.title + '.txt'  // path to save the file
     let acpScript = acpScriptGenerator(plan)
     fs.writeFile(path, acpScript, function (err) {
         if (err) throw err;
@@ -166,15 +166,13 @@ function acpScriptGenerator(plan) {
     if (plan.limitTime != '') {
          script += '#MINSETTIME ' + plan.limitTime + '\n';
      }
-     if (plan.quitTime != '// undefined') {
+     if (plan.quitTime != '// undefined' && plan.quitTime != '//' ) {
                script += '#QUITAT ' + plan.quitTime +'\n';
            }
-           if (plan.shutdownTime != '// undefined') {
+           if (plan.shutdownTime != '// undefined' && plan.shutdownTime != '//' ) {
                script += '#SHUTDOWNAT ' + plan.shutdownTime + '\n'
            }
-           if (plan.systemShutdown) {
-               script += '#SHUTDOWN \n';
-           }
+
     for(let j = 0; j < plan.observations.length; j++) {
 
         if (plan.observations[j].frameKind == 'IMAGE') {
@@ -237,43 +235,61 @@ function acpScriptGenerator(plan) {
             /* if (plan.observations[j].waitLimits != null) {
                  script += '#WAITINLIMITS ' + plan.observations[j].waitLimits +'\n';
              }*/
-            script += '#WAITUNTIL  ' + 1 + ', ' + modifyLocalTime(plan.observations[j].start) + '\n#FILTER ';
-
-            for (let i = 0; i < plan.observations[j].filter.length; i++) {
-                //TODO: When Clear filter is chosen it is appear as null - need to be fixed.
-                let filter = plan.observations[j].filter[i];
-                if (filter == '') filter = 'Clear'
-                if (i != plan.observations[j].filter.length - 1) {
-                    script += filter + ',';
-                } else {
-                    script += filter + '\n#BINNING ';
-                }
-            }
-            for (let i = 0; i < plan.observations[j].bin.length; i++) {
-                if (i != plan.observations[j].filter.length - 1) {
-                    script += plan.observations[j].bin[i] + ',';
-                } else {
-                    script += plan.observations[j].bin[i] + '\n#COUNT ';
-                }
-            }
-            for (let i = 0; i < plan.observations[j].exposures.length; i++) {
-                if (i != plan.observations[j].exposures.length - 1) {
-                    script += plan.observations[j].exposures[i] + ',';
-                } else {
-                    script += plan.observations[j].exposures[i] + '\n#INTERVAL  ';
-                }
-            }
-            for (let i = 0; i < plan.observations[j].exposureTime.length; i++) {
-                if (i != plan.observations[j].exposureTime.length - 1) {
-                    script += plan.observations[j].exposureTime[i] + ',';
-                } else {
-                    script += plan.observations[j].exposureTime[i];
+             if(plan.observations[j].start != null && plan.observations[j].start != '') {
+                script += '#WAITUNTIL  ' + 1 + ', '+ modifyLocalTime(plan.observations[j].start);
+             }
+            if(plan.observations[j].filter != '') {
+                script += '\n#FILTER ';
+            
+                for (let i = 0; i < plan.observations[j].filter.length; i++) {
+                    //TODO: When Clear filter is chosen it is appear as null - need to be fixed.
+                    console.log('in filter')
+                    let filter = plan.observations[j].filter[i];
+                    if (filter == '') filter = 'Clear'
+                    if (i != plan.observations[j].filter.length - 1) {
+                        script += filter + ',';
+                    } else {
+                        script += filter ;
                     }
                 }
+            }
+            if (plan.observations[j].bin != '') {
+                console.log('in binning')
+                script += '\n#BINNING '
+                for (let i = 0; i < plan.observations[j].bin.length; i++) {
+                    if (i != plan.observations[j].filter.length - 1) {
+                        script += plan.observations[j].bin[i] + ',';
+                    } else {
+                        script += plan.observations[j].bin[i];
+                    }
+                }
+            }
+            if (plan.observations[j].exposures != '') {
+                console.log('in exposures')
+                script +=  '\n#COUNT ';
+                for (let i = 0; i < plan.observations[j].exposures.length; i++) {
+                    if (i != plan.observations[j].exposures.length - 1) {
+                        script += plan.observations[j].exposures[i] + ',';
+                    } else {
+                        script += plan.observations[j].exposures[i];
+                    }
+                }
+             }
+            if (plan.observations[j].exposureTime != '') {
+                console.log('in exposureTime')
+                script += '\n#INTERVAL  ';
+                for (let i = 0; i < plan.observations[j].exposureTime.length; i++) {
+                    if (i != plan.observations[j].exposureTime.length - 1) {
+                        script += plan.observations[j].exposureTime[i] + ',';
+                    } else {
+                        script += plan.observations[j].exposureTime[i];
+                        }
+                    }
+            }
             if (plan.observations[j].track) {
                 script += ' \n#TRACKOFF \n'
             }
-            script += '\n' + plan.observations[j].name;
+            script += '\n' + plan.observations[j].name + '  '+plan.observations[j].ra+'    '+plan.observations[j].dec;
             if (j < plan.observations.length - 1) {
                 script = script + '\n;=========================================================\n;=========================================================\n';
             }
@@ -290,6 +306,10 @@ function acpScriptGenerator(plan) {
             script += '#BIAS \n';
             script = script + '\n;=========================================================\n;=========================================================\n';
         }
+
+    }
+    if (plan.systemShutdown) {
+        script += '#SHUTDOWN \n';
     }
 
     return script;
