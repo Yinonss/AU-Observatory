@@ -36,7 +36,7 @@ export default function TargetsBoard(props) {
                             setCountDarks(countDarks + 1)
                             const darkTarget = {
                                 id: 'darks' + countDarks,
-                                frameKind: 'BIAS',
+                                frameKind: 'DARK',
                                 darkFrames: darkFrames,
                                 name: darkTargetName
                             }
