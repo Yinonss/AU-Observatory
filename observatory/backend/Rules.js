@@ -39,10 +39,42 @@ var RAAndDERule = {
     }
 };
 
+var StartAndEndRule = {
+    "condition": function(R) {
+        R.when(this.start === null  || this.end == null); //TO FIX
+    },
+    "consequence": function(R) {
+        this.result = false;
+        this.reason = "Please fill start-time and end-time of the plan";
+        R.stop();
+    },
+    "condition": function(R) {
+        R.when(this.start > this.end);
+    },
+    "consequence": function(R) {
+        this.result = false;
+        this.reason = "end-time is invalid";
+        R.stop();
+    }
+};
+
+var RAAndDERule = {
+    "condition": function(R) {
+        R.when(this.ra === '' || this.dec === '');
+    },
+    "consequence": function(R) {
+        this.result = false;
+        this.reason = "Right Ascension or Declination are empty";
+        R.stop();
+    }
+};
+
 
 /* Apply the rules */
 R.register(TargetNameRule);
 R.register(RAAndDERule);
+R.register(StartAndEndRule);
+
 
 
 
