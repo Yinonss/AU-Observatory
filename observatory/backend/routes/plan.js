@@ -111,7 +111,7 @@ router.route('/add').post((req, res) => {
     })
 
 
-    const path = 'C:/Users/yinon/Documents/ACP Astronomy/Plans/' + plan.title + '.txt'  // path to save the file
+    const path = 'C:/Documents/ACP Astronomy/Plans/' + plan.title + '.txt'  // path to save the file
     let acpScript = acpScriptGenerator(plan)
     fs.writeFile(path, acpScript, function (err) {
         if (err) throw err;
