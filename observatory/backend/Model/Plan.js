@@ -8,6 +8,7 @@ const plan = new Schema({
     sets: {type: Number, required: false},
     autofocusPlan: {type: Number, required: false},
     alwaysSolve: {type: Boolean, required: false},
+    minTime: {type: String, required: false},
     limitTime: {type: String, required: false},
     quitTime: {type: String, required: false},
     shutdownTime: {type: String, required: false},

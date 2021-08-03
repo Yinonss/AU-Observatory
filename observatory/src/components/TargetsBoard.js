@@ -97,6 +97,10 @@ export default function TargetsBoard(props) {
                         <td><input type={'checkbox'} id={'alwaysSolve'}/></td>
                     </tr>
                     <tr>
+                        <td>Minimum Time</td>
+                        <td><input type={'time'} id={'minTime'}/></td>
+                    </tr>
+                    <tr>
                         <td>Limit Time</td>
                         <td><input type={'time'} id={'limitTime'}/></td>
                     </tr>
@@ -118,6 +122,7 @@ export default function TargetsBoard(props) {
                 let sets = document.getElementById("sets").value
                 let autofocusPlan = document.getElementById("autofocusPlan").value
                 let alwaysSolve =document.getElementById("alwaysSolve").checked
+                let minTime = document.getElementById("minTime").value
                 let limitTime = document.getElementById("limitTime").value
                 let quitTime = document.getElementById("quitTime").value
                 let shutdownTime = document.getElementById("shutdownTime").value
@@ -127,6 +132,7 @@ export default function TargetsBoard(props) {
                     "sets" : document.getElementById("sets").value,
                      "autofocusPlan" : autofocusPlan,
                      "alwaysSolve": alwaysSolve,
+                     "minTime": minTime,
                      "limitTime" : limitTime,
                       "quitTime": quitTime,
                       "shutdownTime" : shutdownTime,

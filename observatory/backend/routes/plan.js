@@ -30,6 +30,7 @@ router.route('/add').post((req, res) => {
     plan.sets = req.body.sets
     plan.autofocusPlan = req.body.autofocusPlan
     plan.alwaysSolve = req.body.alwaysSolve
+    plan.minTime = req.body.minTime
     plan.limitTime = req.body.limitTime
     plan.quitTime = modifyLocalTime(req.body.quitTime)
     plan.shutdownTime = modifyLocalTime(req.body.shutdownTime)
@@ -111,7 +112,7 @@ router.route('/add').post((req, res) => {
     })
 
 
-    const path = 'C:/Documents/ACP Astronomy/Plans/' + plan.title + '.txt'  // path to save the file
+    const path = 'Files/' + plan.title + '.txt'  // path to save the file
     let acpScript = acpScriptGenerator(plan)
     fs.writeFile(path, acpScript, function (err) {
         if (err) throw err;
@@ -163,15 +164,18 @@ function acpScriptGenerator(plan) {
     if (plan.alwaysSolve) {
         script += '#ALWAYSSOLVE \n';
     }
+    if(plan.minTime != '') {
+        script += '#MINSETTIME ' + plan.minTime + '\n'
+    }
     if (plan.limitTime != '') {
          script += '#MINSETTIME ' + plan.limitTime + '\n';
      }
-     if (plan.quitTime != '// undefined' && plan.quitTime != '//' ) {
+    if (plan.quitTime != '// undefined' && plan.quitTime != '//' ) {
                script += '#QUITAT ' + plan.quitTime +'\n';
-           }
-           if (plan.shutdownTime != '// undefined' && plan.shutdownTime != '//' ) {
+        }
+    if (plan.shutdownTime != '// undefined' && plan.shutdownTime != '//' ) {
                script += '#SHUTDOWNAT ' + plan.shutdownTime + '\n'
-           }
+        }
 
     for(let j = 0; j < plan.observations.length; j++) {
 
@@ -289,7 +293,7 @@ function acpScriptGenerator(plan) {
             if (plan.observations[j].track) {
                 script += ' \n#TRACKOFF \n'
             }
-            script += '\n' + plan.observations[j].name + '  '+plan.observations[j].ra+'    '+plan.observations[j].dec;
+            script += '\n' + plan.observations[j].name;
             if (j < plan.observations.length - 1) {
                 script = script + '\n;=========================================================\n;=========================================================\n';
             }
