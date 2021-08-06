@@ -126,10 +126,10 @@ export default function TargetsBoard(props) {
                 let limitTime = document.getElementById("limitTime").value
                 let quitTime = document.getElementById("quitTime").value
                 let shutdownTime = document.getElementById("shutdownTime").value
-                let  systemShutdown = document.getElementById("systemShutdown").checked
+                let systemShutdown = document.getElementById("systemShutdown").checked
                 axios.post(server_url, {  // save the plan into the DB
                     "title" : document.getElementById("planName").value,
-                    "sets" : document.getElementById("sets").value,
+                    "sets" : sets,
                      "autofocusPlan" : autofocusPlan,
                      "alwaysSolve": alwaysSolve,
                      "minTime": minTime,
@@ -139,6 +139,32 @@ export default function TargetsBoard(props) {
                     "systemShutdown" : systemShutdown,
                     "observation" : props.allTargets
                 }).then(res => console.log(res))
+
+                let targetsBoard = {
+                    sets : sets,
+                    autofocusPlan : autofocusPlan,
+                    alwaysSolve : alwaysSolve,
+                    minTime : minTime,
+                    limitTime : limitTime,
+                    quitTime : quitTime,
+                    shutdownTime : shutdownTime,
+                    systemShutdown : systemShutdown,
+                    observation : props.allTargets
+                }
+
+
+                axios.post('http://localhost:5001/rules/1', { targetsBoard: targetsBoard})
+                    .then(res => {
+                        if (res.data.isValid) {
+                            props.addTarget(targetsBoard)
+                        }
+                        else {
+                            alert(res.data.reason) // TODO::how do not add the plan?
+                        }
+
+                    }).catch(err => {
+                    console.error(err)
+                })
             }
             }>Submit</button>
         </div>
