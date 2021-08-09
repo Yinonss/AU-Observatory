@@ -4,12 +4,59 @@ import targetStyle from "./TargetsBoard.css"
 import axios from "axios";
 import ReactTooltip from "react-tooltip";
 import {dark} from "@material-ui/core/styles/createPalette";
+import BootButton from 'react-bootstrap/Button'
+import { withStyles } from '@material-ui/core/styles';
+import MuiAccordion from '@material-ui/core/Accordion';
+import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
+import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
+import {Accordion, AccordionSummary, AccordionDetails} from '@material-ui/core'
 
 
 /* This component define the plan's structure and display its targets. */
 
 const server_url = 'http://localhost:5000/plan/add'
 
+const AccordionStyle = withStyles({
+    root: {
+      border: '#37474f',
+      boxShadow: 'none',
+      '&:not(:last-child)': {
+        borderBottom: 0,
+      },
+      '&:before': {
+        display: 'none',
+      },
+      '&$expanded': {
+        margin: 'auto',
+      },
+    },
+    expanded: {},
+  })(MuiAccordion);
+
+  const AccordionDetailsStyle = withStyles((theme) => ({
+    root: {
+      padding: theme.spacing(2),
+      backgroundColor: '#424242'
+    },
+  }))(MuiAccordionDetails);
+
+  const AccordionSummaryStyle = withStyles({
+root: {
+backgroundColor: '#263238',
+borderBottom: '1px solid rgba(0, 0, 0, .125)',
+marginBottom: -1,
+minHeight: 56,
+'&$expanded': {
+  minHeight: 56,
+},
+},
+content: {
+'&$expanded': {
+  margin: '12px 0',
+},
+},
+expanded: {},
+})(MuiAccordionSummary);
 
 export default function TargetsBoard(props) {
     const deleteTarget = (id)=> {
@@ -42,13 +89,13 @@ export default function TargetsBoard(props) {
                             }
                             props.addTarget(darkTarget)
                         }
-                        }>Add Dark</button></td>
+                        }>Dark</button></td>
                         <td><input type={'text'} id={'darks'} className={'dummyFrames'}/></td>
                     </tr>
                     <tr>
                         <td><button onClick={() => {
                             const biasFrames = document.getElementById('biases').value
-                            const biasTargetName = biasFrames + ' Bias Frames'
+                            const biasTargetName = biasFrames + ' Bias Frams'
                             setCountBias(countBias + 1)
                             const biasTarget = {
                                 id: 'bias' + countBias,
@@ -58,7 +105,7 @@ export default function TargetsBoard(props) {
                             }
                             props.addTarget(biasTarget)
                         }
-                        }>Add Bias</button></td>
+                        }>Bias</button></td>
                         <td><input type={'text'} id={'biases'}  className={'dummyFrames'}/></td>
                     </tr>
                 </tbody>
@@ -82,6 +129,9 @@ export default function TargetsBoard(props) {
                 }
             </div>
             <br />
+            <AccordionStyle>
+                <AccordionSummaryStyle>Plan Settings</AccordionSummaryStyle>
+                <AccordionDetailsStyle>
                 <table className={'planOptions'}>
 
                     <tr>
@@ -117,6 +167,9 @@ export default function TargetsBoard(props) {
                         <td><input type={'checkbox'} id={'systemShutdown'}/></td>
                     </td>
                 </table>
+                </AccordionDetailsStyle>
+                </AccordionStyle>
+                <br/>
             <button className={"submit_button"} id="submit" onClick={()=> {
                 console.log(props.allTargets)
                 let sets = document.getElementById("sets").value

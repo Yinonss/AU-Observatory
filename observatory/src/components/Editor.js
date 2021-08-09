@@ -5,13 +5,63 @@ import AddIcon from "@material-ui/icons/Add";
 import Container from "@material-ui/core/Container";
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
+import { withStyles } from '@material-ui/core/styles';
+import MuiAccordion from '@material-ui/core/Accordion';
+import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
+import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
 import editorStyle from '../Styles/Editor.css';
+//import { Button, Grid } from '@material-ui/core';
+import {Accordion, AccordionSummary, AccordionDetails} from '@material-ui/core'
+import {Button} from 'react-bootstrap';
 const NUMBEROFFIELDS = 7;
 const UNDEFINED = 'undefined';
+
 
 /* This function returns a basic form for observation missions. */
 export default function Editor(props) {
 
+
+    const Accordion = withStyles({
+        root: {
+          border: '#37474f',
+          boxShadow: 'none',
+          '&:not(:last-child)': {
+            borderBottom: 0,
+          },
+          '&:before': {
+            display: 'none',
+          },
+          '&$expanded': {
+            margin: 'auto',
+          },
+        },
+        expanded: {},
+      })(MuiAccordion);
+
+      const AccordionDetails = withStyles((theme) => ({
+        root: {
+          padding: theme.spacing(2),
+          backgroundColor: '#424242'
+        },
+      }))(MuiAccordionDetails);
+
+      const AccordionSummary = withStyles({
+  root: {
+    backgroundColor: '#263238',
+    borderBottom: '1px solid rgba(0, 0, 0, .125)',
+    marginBottom: -1,
+    minHeight: 56,
+    '&$expanded': {
+      minHeight: 56,
+    },
+  },
+  content: {
+    '&$expanded': {
+      margin: '12px 0',
+    },
+  },
+  expanded: {},
+})(MuiAccordionSummary);
 
     const [inputFields, setInputFields] = useState([
         {filter: '', exposures: '', exposureTime: '', bin: ''},
@@ -49,7 +99,7 @@ export default function Editor(props) {
         }
 
     }
-
+    const [open, setOpen] = useState(true);
     const [count, setCount] = useState(0); // save the id number of the targets on the list
     return (
         <form>
@@ -159,8 +209,12 @@ export default function Editor(props) {
                         </Container>
                     </td>
                 </tr>
+                <Accordion className={'Accordion'}>
+                    <AccordionSummary>Options</AccordionSummary>
+                    <AccordionDetails>
                 <div className={'targetOptions'} id={'targetOptions'}>
-                    <table>
+                    
+                    <table >
                         <tr>
                             <td>Frame Friction</td>
                             <td><input type={'text'} id={'frameSize'}/></td>
@@ -181,8 +235,6 @@ export default function Editor(props) {
                             <td>Track On</td>
                             <td><input type={'checkbox'} id={'track'}/></td>
                         </tr>
-
-
                         <tr>
                             <td>Repeat</td>
                             <td><input type="text" id="repeat"></input></td>
@@ -210,9 +262,7 @@ export default function Editor(props) {
                             <td>Wait For</td>
                             <td><input type={'text'} id="waitfor"></input></td>
                         </tr>
-
                         <tr>
-
                             <td>Calibrate <input type="checkbox" id="calibrate"/></td>
                         </tr>
                         <tr>
@@ -241,10 +291,10 @@ export default function Editor(props) {
                             <input type={'radio'} id="noalign" name={'stackImages'} value={'noalign'}></input>
                             <label htmlFor={'noalign'}>Without Align</label>
                         </tr>
-
                     </table>
                 </div>
-
+                </AccordionDetails>
+                </Accordion>
                 </tbody>
             </table>
             <button className={"add_button"} type="button" id="add_button" onClick={() => {
