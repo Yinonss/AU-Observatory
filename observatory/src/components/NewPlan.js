@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import Editor from "./Editor";
 import TargetsBoard from "./TargetsBoard";
-
+import { Grid } from '@material-ui/core';
 
 /* This component containing Editor and TargetList components.
 *  It is activated after press on "NEW PLAN" button on the main menu.  */
@@ -15,9 +15,9 @@ export default function NewPlan() {
     }
 
     return (
-        <div className="container">
-            <Editor addTarget={addTarget}/>
-            <TargetsBoard allTargets={targets} setTargets={setTargets} addTarget={addTarget}/>
+        <div className={'container'}>
+             <Editor addTarget={addTarget}/>
+             <TargetsBoard allTargets={targets} setTargets={setTargets} addTarget={addTarget}/>
         </div>
     );
 }
