@@ -9,6 +9,7 @@ import { withStyles } from '@material-ui/core/styles';
 import MuiAccordion from '@material-ui/core/Accordion';
 import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
 import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
+import Tooltip from '@material-ui/core/Tooltip';
 import editorStyle from '../Styles/Editor.css';
 //import { Button, Grid } from '@material-ui/core';
 import {Accordion, AccordionSummary, AccordionDetails} from '@material-ui/core'
@@ -63,6 +64,17 @@ export default function Editor(props) {
   expanded: {},
 })(MuiAccordionSummary);
 
+const HtmlTooltip = withStyles((theme) => ({
+    tooltip: {
+      backgroundColor: '#666666',
+      color: '#ffff4d',
+      maxWidth: 220,
+      fontSize: theme.typography.pxToRem(16),
+      border: '1px solid #dadde9',
+    },
+  }))(Tooltip);
+
+
     const [inputFields, setInputFields] = useState([
         {filter: '', exposures: '', exposureTime: '', bin: ''},
     ])
@@ -73,13 +85,8 @@ export default function Editor(props) {
 
     const handleChangeInput = (index, event) => {
         const values = [...inputFields];
-        //console.log('index : ' + index)
-        // console.log('event : ' + event.target.name)
-        // console.log(values)
-
         values[index][event.target.name] = event.target.value;
         setInputFields([...values]);
-        //console.log(values)
     }
 
     const handleAddFields = () => {
@@ -99,7 +106,6 @@ export default function Editor(props) {
         }
 
     }
-    const [open, setOpen] = useState(true);
     const [count, setCount] = useState(0); // save the id number of the targets on the list
     return (
         <form>
@@ -107,8 +113,8 @@ export default function Editor(props) {
                 <tbody>
                 <tr>
                     <td>Target Name:</td>
-                    <td><input type="text" id="name"/></td>
-                    <td>
+                    <td><input type="text" id="name"/>
+                    
                         <SearchIcon
                             onClick={() => {
                                 const name = document.getElementById("name").value
@@ -209,7 +215,7 @@ export default function Editor(props) {
                         </Container>
                     </td>
                 </tr>
-                <Accordion className={'Accordion'}>
+                <Accordion>
                     <AccordionSummary>Options</AccordionSummary>
                     <AccordionDetails>
                 <div className={'targetOptions'} id={'targetOptions'}>
@@ -217,79 +223,200 @@ export default function Editor(props) {
                     <table >
                         <tr>
                             <td>Frame Friction</td>
+                            <HtmlTooltip
+                            title={
+                                <React.Fragment>
+                                    <p>Sets the fraction of the chip to be used for subsequent images. Legal values are 0.1 to 1.0 (full frame). </p>
+                                    <p id>For example, if the chip is 1K by 1K (1024 by 1024), a ratio of 0.5 will result in using the center 512 by 512 pixels of the chip.</p>
+                                </React.Fragment>
+                            }>
                             <td><input type={'text'} id={'frameSize'}/></td>
+                            </HtmlTooltip>
                         </tr>
                         <tr>
                             <td>Rotator Degree</td>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>Required if a rotator is connected. If a rotator is installed and connected, sets the position angle for subsequent images.</p>
+                                    <p>The value of the position angle ranges from 0 up to but not including 360 degrees. 0 Degrees is pole-up, and the angle increases counterclockwise, that is, north toward east.</p>
+                                </React.Fragment>
+                            }>
                             <td><input type={'text'} id={'rotatorDegree'}/></td>
+                            </HtmlTooltip>
                         </tr>
                         <tr>
                             <td>Dithering</td>
-                            <td><input type={'text'} id={'dithering'}/></td>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>Offset each image in a repeat-set by some small amount away from the original target location.</p>
+                                </React.Fragment>
+                            }>
+                            <td><input type={'text'} id={'dithering'} placeholder={'Pixels'}/></td>
+                            </HtmlTooltip>
                         </tr>
                         <tr>
                             <td>Defocus</td>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>Moves the focuser the given number of integer steps away from proper focus just before acquiring each subsequent image.</p>
+                                </React.Fragment>
+                            }>
                             <td><input type={'text'} id={'defocus'}/></td>
+                            </HtmlTooltip>
                         </tr>
                         <tr>
                             <td>Track On</td>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>Initiates orbital tracking of solar system bodies.</p>
+                                </React.Fragment>
+                            }>
                             <td><input type={'checkbox'} id={'track'}/></td>
+                            </HtmlTooltip>
                         </tr>
                         <tr>
                             <td>Repeat</td>
-                            <td><input type="text" id="repeat"></input></td>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>This option will take the given number of filter groups of the next target in a row.</p>
+                                    <p> Limited to 3.</p>
+                                </React.Fragment>
+                            }>
+                                <td><input type="text" id="repeat"></input></td>
+                            </HtmlTooltip>
                         </tr>
                         <tr>
-                            <td>Limit angle</td>
+                            <td>Limit Sun Angle</td>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>Pause during a specific set until the Sun gets below the given angle.</p>
+                                    <p>If the set number is 0, it means that this would apply on all of the sets.</p>
+                                </React.Fragment>
+                            }>
                             <td><input type={'text'} id="waituntilSet" placeholder={'Sets'}></input>
                                 <input type={'text'} id="waituntilDeg" placeholder={'Degrees'}></input></td>
+                            </HtmlTooltip>
                         </tr>
                         <tr>
                             <td>Limit Zenith</td>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>Pause until the target is within the given zenith distance (deg) for up to the given time (min). If the target will never get within the given zenith distance, or won't get there within the time limit, it is skipped.</p>
+                                </React.Fragment>
+                            }>
                             <td><input type={'text'} id="waitZenithDeg" placeholder={'Degrees'}></input>
                                 <input type={'text'} id="waitZenithMin" placeholder={'Minutes'}></input></td>
+                            </HtmlTooltip>
                         </tr>
                         <tr>
                             <td>Limit Air Mass</td>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>Pause until the target is at or below the given air mass. If the target will never get within the given air mass, or won't Get there within the time limit, it is skipped.</p>
+                                </React.Fragment>
+                            }>
                             <td><input type={'text'} id="waitairmassMass" placeholder={'Airmass'}></input>
                                 <input type={'text'} id="waitairmassMin" placeholder={'Minutes'}></input></td>
+                            </HtmlTooltip>
                         </tr>
                         <tr>
                             <td>Wait Limit</td>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>???</p>
+                                </React.Fragment>
+                            }>
                             <td><input type={'text'} id="waitlimit"></input></td>
+                            </HtmlTooltip>
                         </tr>
                         <tr>
-                            <td>Wait For</td>
-                            <td><input type={'text'} id="waitfor"></input></td>
+                            <td>Delay</td>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>Pause for the given number of seconds before processing the next target.</p>
+                                </React.Fragment>
+                            }>
+                            <td><input type={'text'} id="waitfor" placeholder = "Seconds"></input></td>
+                            </HtmlTooltip>
                         </tr>
                         <tr>
-                            <td>Calibrate <input type="checkbox" id="calibrate"/></td>
+                            <td>Calibrate</td>
+                        <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>Forces calibration of the images for this target. This will not cause calibration of pointing exposures, only the final images.</p>
+                                </React.Fragment>
+                            }>
+                            <td> <input type="checkbox" id="calibrate"/></td>
+                            </HtmlTooltip>
                         </tr>
                         <tr>
                             <td>Autoguide</td>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>Forces the next target's images to be guided by the guiding camera.</p>
+                                </React.Fragment>
+                            }>
                             <td><input type={'checkbox'} id="autoguide"/></td>
+                            </HtmlTooltip>
                         </tr>
                         <tr>
                             <td>Autofocus</td>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>Automatically refocus the optical system before each filter group in the filter group for this target.</p>
+                                </React.Fragment>
+                            }>
                             <td><input type={'checkbox'} id="autofocus"/></td>
+                            </HtmlTooltip>
                         </tr>
                         <tr>
                             <td>Do Not Solve</td>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>Prevent final/data image plate solving for all of the images of the current target.</p>
+                                </React.Fragment>
+                            }>
                             <td><input type={'checkbox'} id="nosolve"/></td>
+                            </HtmlTooltip>
                         </tr>
                         <tr>
                             <td>Scehdule Pointing</td>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>Schedule a pointing update prior to the target.</p>
+                                </React.Fragment>
+                            }>
                             <input type={'radio'} id="pointing" name={'Point'} value={'pointing'}></input>
+                            </HtmlTooltip>
                             <label htmlFor={'pointing'}>Yes</label>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>Prevent the pointing update prior to the target.</p>
+                                </React.Fragment>
+                            }>
                             <input type={'radio'} id="nopointing" name={'Point'} value={'nopointing'}></input>
+                            </HtmlTooltip>
                             <label htmlFor={'noalign'}>No</label>
                         </tr>
                         <tr>
                             <td>Stack Images</td>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>This option will take the given number of filter groups of the next target in a row. Limited to 3.</p>
+                                </React.Fragment>
+                            }>
                             <input type={'radio'} id="align" name={'stackImages'} value={'align'}></input>
+                            </HtmlTooltip>
                             <label htmlFor={'align'}>Align</label>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>This option will take the given number of filter groups of the next target in a row. Limited to 3.</p>
+                                </React.Fragment>
+                            }>
                             <input type={'radio'} id="noalign" name={'stackImages'} value={'noalign'}></input>
+                            </HtmlTooltip>
                             <label htmlFor={'noalign'}>Without Align</label>
+
                         </tr>
                     </table>
                 </div>

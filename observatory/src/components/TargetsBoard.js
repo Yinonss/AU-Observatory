@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import Target from "./Target"
 import targetStyle from "./TargetsBoard.css"
 import axios from "axios";
+import Tooltip from '@material-ui/core/Tooltip';
 import ReactTooltip from "react-tooltip";
 import {dark} from "@material-ui/core/styles/createPalette";
 import BootButton from 'react-bootstrap/Button'
@@ -15,6 +16,17 @@ import {Accordion, AccordionSummary, AccordionDetails} from '@material-ui/core'
 /* This component define the plan's structure and display its targets. */
 
 const server_url = 'http://localhost:5000/plan/add'
+
+const HtmlTooltip = withStyles((theme) => ({
+    tooltip: {
+      backgroundColor: '#666666',
+      color: '#ffff4d',
+      maxWidth: 220,
+      fontSize: theme.typography.pxToRem(16),
+      border: '1px solid #dadde9',
+    },
+  }))(Tooltip);
+
 
 const AccordionStyle = withStyles({
     root: {
@@ -77,7 +89,16 @@ export default function TargetsBoard(props) {
                         <td><input type="text" id={"planName"}/></td>
                     </tr>
                     <tr>
-                        <td><button onClick={() => {
+                        <td>
+                        <HtmlTooltip
+                            title={
+                                <React.Fragment>
+                                    <p>Acquire a dark frame using the current target exposure interval.</p>
+                                    <p>The input is the number for frame that would be take. If clicked without insert a number, the observatory will take one frame.</p>
+                                    <p>(Optional)</p>
+                                </React.Fragment>
+                            }>
+                            <button onClick={() => {
                             const darkFrames = document.getElementById('darks').value
                             const darkTargetName = darkFrames + ' Dark Frames'
                             setCountDarks(countDarks + 1)
@@ -89,10 +110,21 @@ export default function TargetsBoard(props) {
                             }
                             props.addTarget(darkTarget)
                         }
-                        }>Dark</button></td>
+                        }>Dark</button>
+                        </HtmlTooltip>
+                        </td>
+                    
                         <td><input type={'text'} id={'darks'} className={'dummyFrames'}/></td>
                     </tr>
                     <tr>
+                    <HtmlTooltip
+                            title={
+                                <React.Fragment>
+                                    <p>Acquire a bias frame using the current target exposure interval.</p>
+                                    <p>The input is the number for frame that would be take. If clicked without insert a number, the observatory will take one frame.</p>
+                                    <p>(Optional)</p>
+                                </React.Fragment>
+                            }>
                         <td><button onClick={() => {
                             const biasFrames = document.getElementById('biases').value
                             const biasTargetName = biasFrames + ' Bias Frams'
@@ -105,8 +137,9 @@ export default function TargetsBoard(props) {
                             }
                             props.addTarget(biasTarget)
                         }
-                        }>Bias</button></td>
+                        }>Bias</button></td></HtmlTooltip>
                         <td><input type={'text'} id={'biases'}  className={'dummyFrames'}/></td>
+                        
                     </tr>
                 </tbody>
             </table>
@@ -136,36 +169,94 @@ export default function TargetsBoard(props) {
 
                     <tr>
                         <td>Sets</td>
+                        <HtmlTooltip
+                            title={
+                                <React.Fragment>
+                                    <p>Repeat the entire plan a given number of times.</p>
+                                </React.Fragment>
+                            }>
                         <td><input type={'text'} id={'sets'}/></td>
+                        </HtmlTooltip>
                     </tr>
                     <tr>
                         <td>Autofocus</td>
-                        <td><input type={'text'} id={'autofocusPlan'} placeholder={'Seconds'}/></td>
+                        <HtmlTooltip
+                            title={
+                                <React.Fragment>
+                                    <p>Turns on periodic autofocus and forces an autofocus at the start (or resumption) of the plan.</p>
+                                    <p>The input is the interval duration in minutes.</p>
+                                </React.Fragment>
+                            }>
+                        <td><input type={'text'} id={'autofocusPlan'} placeholder={'Minutes'}/></td>
+                        </HtmlTooltip>
                     </tr>
                     <tr>
                         <td>Always Solve</td>
+                        <HtmlTooltip
+                            title={
+                                <React.Fragment>
+                                    <p>Force solving image process for every image in the plan.</p>
+                                </React.Fragment>
+                            }>
                         <td><input type={'checkbox'} id={'alwaysSolve'}/></td>
+                        </HtmlTooltip>
                     </tr>
                     <tr>
                         <td>Minimum Time</td>
+                        <HtmlTooltip
+                            title={
+                                <React.Fragment>
+                                    <p>The minimum amount of time that a set is allowed to take.</p>
+                                </React.Fragment>
+                            }>
                         <td><input type={'time'} id={'minTime'}/></td>
+                        </HtmlTooltip>
                     </tr>
                     <tr>
                         <td>Limit Time</td>
+                        <HtmlTooltip
+                            title={
+                                <React.Fragment>
+                                    <p>???</p>
+                                </React.Fragment>
+                            }>
                         <td><input type={'time'} id={'limitTime'}/></td>
+                        </HtmlTooltip>
                     </tr>
-                    <td>
-                        <tr>Quit Time</tr>
-                        <td><input type={'datetime-local'} id={'quitTime'}/></td>
-                    </td>
                     <tr>
-                        <tr>Shutdown Time</tr>
-                        <td><input type={'datetime-local'} id={'shutdownTime'}/></td>
+                        <td>Quit Time</td>
+                        <HtmlTooltip
+                            title={
+                                <React.Fragment>
+                                    <p>Set a quitting time at which the plan will stop acquiring images.</p>
+                                </React.Fragment>
+                            }>
+                        <td><input type={'datetime-local'} id={'quitTime'}/></td>
+                        </HtmlTooltip>
                     </tr>
-                    <td>
-                        <tr>Shut Down When Finished</tr>
+                    <tr>
+                        <td>Shutdown Time</td>
+                        <HtmlTooltip
+                            title={
+                                <React.Fragment>
+                                    <p>Set a shutdown time at which the plan will stop acquiring images.</p>
+                                    <p>If there is no imaging sessions left - the observatory will shut down Automatically.</p>
+                                </React.Fragment>
+                            }>
+                        <td><input type={'datetime-local'} id={'shutdownTime'}/></td>
+                        </HtmlTooltip>
+                    </tr>
+                    <tr>
+                        <td>Shut Down When Finished</td>
+                        <HtmlTooltip
+                            title={
+                                <React.Fragment>
+                                    <p>Shut down the observatory at the enb of the plan.</p>
+                                </React.Fragment>
+                            }>
                         <td><input type={'checkbox'} id={'systemShutdown'}/></td>
-                    </td>
+                        </HtmlTooltip>
+                    </tr>
                 </table>
                 </AccordionDetailsStyle>
                 </AccordionStyle>
