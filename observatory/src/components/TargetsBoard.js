@@ -10,6 +10,7 @@ import { withStyles } from '@material-ui/core/styles';
 import MuiAccordion from '@material-ui/core/Accordion';
 import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
 import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
+import IconButton from '@material-ui/core/IconButton';
 import {Accordion, AccordionSummary, AccordionDetails} from '@material-ui/core'
 
 
@@ -98,6 +99,7 @@ export default function TargetsBoard(props) {
                                     <p>(Optional)</p>
                                 </React.Fragment>
                             }>
+                                <IconButton>
                             <button onClick={() => {
                             const darkFrames = document.getElementById('darks').value
                             const darkTargetName = darkFrames + ' Dark Frames'
@@ -111,6 +113,7 @@ export default function TargetsBoard(props) {
                             props.addTarget(darkTarget)
                         }
                         }>Dark</button>
+                        </IconButton>
                         </HtmlTooltip>
                         </td>
                     
@@ -125,19 +128,22 @@ export default function TargetsBoard(props) {
                                     <p>(Optional)</p>
                                 </React.Fragment>
                             }>
+                        <IconButton>
                         <td><button onClick={() => {
-                            const biasFrames = document.getElementById('biases').value
-                            const biasTargetName = biasFrames + ' Bias Frams'
-                            setCountBias(countBias + 1)
-                            const biasTarget = {
-                                id: 'bias' + countBias,
-                                name: biasTargetName,
-                                frameKind: 'BIAS',
-                                biasFrames: biasFrames,
+                                const biasFrames = document.getElementById('biases').value
+                                const biasTargetName = biasFrames + ' Bias Frams'
+                                setCountBias(countBias + 1)
+                                const biasTarget = {
+                                    id: 'bias' + countBias,
+                                    name: biasTargetName,
+                                    frameKind: 'BIAS',
+                                    biasFrames: biasFrames,
+                                }
+                                props.addTarget(biasTarget)
                             }
-                            props.addTarget(biasTarget)
-                        }
-                        }>Bias</button></td></HtmlTooltip>
+                            }>Bias</button></td>
+                        </IconButton>
+                        </HtmlTooltip>
                         <td><input type={'text'} id={'biases'}  className={'dummyFrames'}/></td>
                         
                     </tr>

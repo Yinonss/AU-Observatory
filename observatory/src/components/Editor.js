@@ -114,7 +114,7 @@ const HtmlTooltip = withStyles((theme) => ({
                 <tr>
                     <td>Target Name:</td>
                     <td><input type="text" id="name"/>
-                    
+                    <IconButton color='inherit'>
                         <SearchIcon
                             onClick={() => {
                                 const name = document.getElementById("name").value
@@ -124,7 +124,10 @@ const HtmlTooltip = withStyles((theme) => ({
                                         document.getElementById("rightAscension").value = obj.ra
                                         document.getElementById("declination").value = obj.dec
                                     })
-                            }}>Search Coordinates</SearchIcon>
+                            }}>Search Coordinates
+                            
+                                </SearchIcon>
+                            </IconButton>
                     </td>
                 </tr>
                 <tr>
@@ -198,11 +201,16 @@ const HtmlTooltip = withStyles((theme) => ({
                                                             onChange={event => handleChangeInput(index, event)}/>
                                                     </td>
                                                     <td>
+                                                    <IconButton color='inherit'>
                                                         <RemoveIcon
-                                                            onClick={() => handleRemoveFields(index)}> </RemoveIcon>
+                                                            onClick={() => handleRemoveFields(index)}> 
+                                                        </RemoveIcon>
+                                                    </IconButton>
                                                     </td>
                                                     <td>
-                                                        <AddIcon onClick={() => handleAddFields()}/>
+                                                        <IconButton color='inherit'>
+                                                            <AddIcon onClick={() => handleAddFields()}/>
+                                                        </IconButton>
                                                     </td>
                                                 </tr>
 
