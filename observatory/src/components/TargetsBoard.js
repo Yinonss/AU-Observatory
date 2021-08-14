@@ -213,17 +213,6 @@ export default function TargetsBoard(props) {
                         </HtmlTooltip>
                     </tr>
                     <tr>
-                        <td>Limit Time</td>
-                        <HtmlTooltip
-                            title={
-                                <React.Fragment>
-                                    <p>???</p>
-                                </React.Fragment>
-                            }>
-                        <td><input type={'time'} id={'limitTime'}/></td>
-                        </HtmlTooltip>
-                    </tr>
-                    <tr>
                         <td>Quit Time</td>
                         <HtmlTooltip
                             title={
@@ -267,7 +256,6 @@ export default function TargetsBoard(props) {
                 let autofocusPlan = document.getElementById("autofocusPlan").value
                 let alwaysSolve =document.getElementById("alwaysSolve").checked
                 let minTime = document.getElementById("minTime").value
-                let limitTime = document.getElementById("limitTime").value
                 let quitTime = document.getElementById("quitTime").value
                 let shutdownTime = document.getElementById("shutdownTime").value
                 let  systemShutdown = document.getElementById("systemShutdown").checked
@@ -277,7 +265,6 @@ export default function TargetsBoard(props) {
                      "autofocusPlan" : autofocusPlan,
                      "alwaysSolve": alwaysSolve,
                      "minTime": minTime,
-                     "limitTime" : limitTime,
                       "quitTime": quitTime,
                       "shutdownTime" : shutdownTime,
                     "systemShutdown" : systemShutdown,
