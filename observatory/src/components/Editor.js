@@ -5,10 +5,11 @@ import AddIcon from "@material-ui/icons/Add";
 import Container from "@material-ui/core/Container";
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import MuiAccordion from '@material-ui/core/Accordion';
 import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
 import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
+import { Form, FormControl,FormGroup, FormLabel, FormText } from 'react-bootstrap';
 import Tooltip from '@material-ui/core/Tooltip';
 import editorStyle from '../Styles/Editor.css';
 //import { Button, Grid } from '@material-ui/core';
@@ -21,6 +22,7 @@ const UNDEFINED = 'undefined';
 /* This function returns a basic form for observation missions. */
 export default function Editor(props) {
 
+    const classes = useStyles();
 
     const Accordion = withStyles({
         root: {
@@ -108,6 +110,7 @@ const HtmlTooltip = withStyles((theme) => ({
     }
     const [count, setCount] = useState(0); // save the id number of the targets on the list
     return (
+        
         <form>
             <table>
                 <tbody>
@@ -410,7 +413,7 @@ const HtmlTooltip = withStyles((theme) => ({
                             <td>Stack Images</td>
                             <HtmlTooltip title={
                                 <React.Fragment>
-                                    <p>This option will take the given number of filter groups of the next target in a row. Limited to 3.</p>
+                                    <p>Combines repeated images within one filter group without aligning into a single image.</p>
                                 </React.Fragment>
                             }>
                             <input type={'radio'} id="align" name={'stackImages'} value={'align'}></input>
@@ -418,7 +421,7 @@ const HtmlTooltip = withStyles((theme) => ({
                             <label htmlFor={'align'}>Align</label>
                             <HtmlTooltip title={
                                 <React.Fragment>
-                                    <p>This option will take the given number of filter groups of the next target in a row. Limited to 3.</p>
+                                    <p>Combines repeated images within one filter group and aligns images into a single image.</p>
                                 </React.Fragment>
                             }>
                             <input type={'radio'} id="noalign" name={'stackImages'} value={'noalign'}></input>
