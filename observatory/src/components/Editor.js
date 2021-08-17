@@ -22,12 +22,13 @@ const UNDEFINED = 'undefined';
 /* This function returns a basic form for observation missions. */
 export default function Editor(props) {
 
-    const classes = useStyles();
-
     const Accordion = withStyles({
         root: {
           border: '#37474f',
           boxShadow: 'none',
+          width: '300px',
+          square: 'false',
+          color: '#009999',
           '&:not(:last-child)': {
             borderBottom: 0,
           },
@@ -110,7 +111,7 @@ const HtmlTooltip = withStyles((theme) => ({
     }
     const [count, setCount] = useState(0); // save the id number of the targets on the list
     return (
-        
+        <div>
         <form>
             <table>
                 <tbody>
@@ -226,8 +227,14 @@ const HtmlTooltip = withStyles((theme) => ({
                         </Container>
                     </td>
                 </tr>
+                </tbody>
+            </table>
+        </form>
+        
+               <table>
+                    <td>
                 <Accordion>
-                    <AccordionSummary>Options</AccordionSummary>
+                    <AccordionSummary>Data Processing</AccordionSummary>
                     <AccordionDetails>
                 <div className={'targetOptions'} id={'targetOptions'}>
                     
@@ -275,81 +282,7 @@ const HtmlTooltip = withStyles((theme) => ({
                             <td><input type={'text'} id={'defocus'}/></td>
                             </HtmlTooltip>
                         </tr>
-                        <tr>
-                            <td>Track On</td>
-                            <HtmlTooltip title={
-                                <React.Fragment>
-                                    <p>Initiates orbital tracking of solar system bodies.</p>
-                                </React.Fragment>
-                            }>
-                            <td><input type={'checkbox'} id={'track'}/></td>
-                            </HtmlTooltip>
-                        </tr>
-                        <tr>
-                            <td>Repeat</td>
-                            <HtmlTooltip title={
-                                <React.Fragment>
-                                    <p>This option will take the given number of filter groups of the next target in a row.</p>
-                                    <p> Limited to 3.</p>
-                                </React.Fragment>
-                            }>
-                                <td><input type="text" id="repeat"></input></td>
-                            </HtmlTooltip>
-                        </tr>
-                        <tr>
-                            <td>Limit Sun Angle</td>
-                            <HtmlTooltip title={
-                                <React.Fragment>
-                                    <p>Pause during a specific set until the Sun gets below the given angle.</p>
-                                    <p>If the set number is 0, it means that this would apply on all of the sets.</p>
-                                </React.Fragment>
-                            }>
-                            <td><input type={'text'} id="waituntilSet" placeholder={'Sets'}></input>
-                                <input type={'text'} id="waituntilDeg" placeholder={'Degrees'}></input></td>
-                            </HtmlTooltip>
-                        </tr>
-                        <tr>
-                            <td>Limit Zenith</td>
-                            <HtmlTooltip title={
-                                <React.Fragment>
-                                    <p>Pause until the target is within the given zenith distance (deg) for up to the given time (min). If the target will never get within the given zenith distance, or won't get there within the time limit, it is skipped.</p>
-                                </React.Fragment>
-                            }>
-                            <td><input type={'text'} id="waitZenithDeg" placeholder={'Degrees'}></input>
-                                <input type={'text'} id="waitZenithMin" placeholder={'Minutes'}></input></td>
-                            </HtmlTooltip>
-                        </tr>
-                        <tr>
-                            <td>Limit Air Mass</td>
-                            <HtmlTooltip title={
-                                <React.Fragment>
-                                    <p>Pause until the target is at or below the given air mass. If the target will never get within the given air mass, or won't Get there within the time limit, it is skipped.</p>
-                                </React.Fragment>
-                            }>
-                            <td><input type={'text'} id="waitairmassMass" placeholder={'Airmass'}></input>
-                                <input type={'text'} id="waitairmassMin" placeholder={'Minutes'}></input></td>
-                            </HtmlTooltip>
-                        </tr>
-                        <tr>
-                            <td>Wait Limit</td>
-                            <HtmlTooltip title={
-                                <React.Fragment>
-                                    <p>???</p>
-                                </React.Fragment>
-                            }>
-                            <td><input type={'text'} id="waitlimit"></input></td>
-                            </HtmlTooltip>
-                        </tr>
-                        <tr>
-                            <td>Delay</td>
-                            <HtmlTooltip title={
-                                <React.Fragment>
-                                    <p>Pause for the given number of seconds before processing the next target.</p>
-                                </React.Fragment>
-                            }>
-                            <td><input type={'text'} id="waitfor" placeholder = "Seconds"></input></td>
-                            </HtmlTooltip>
-                        </tr>
+                       
                         <tr>
                             <td>Calibrate</td>
                         <HtmlTooltip title={
@@ -433,8 +366,92 @@ const HtmlTooltip = withStyles((theme) => ({
                 </div>
                 </AccordionDetails>
                 </Accordion>
-                </tbody>
-            </table>
+                </td>
+                <td>
+                <Accordion>
+                    <AccordionSummary>Observation Settings</AccordionSummary>
+                    <AccordionDetails>
+                    <table>
+                    <tr>
+                            <td>Track On</td>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>Initiates orbital tracking of solar system bodies.</p>
+                                </React.Fragment>
+                            }>
+                            <td><input type={'checkbox'} id={'track'}/></td>
+                            </HtmlTooltip>
+                        </tr>
+                        <tr>
+                            <td>Repeat</td>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>This option will take the given number of filter groups of the next target in a row.</p>
+                                    <p> Limited to 3.</p>
+                                </React.Fragment>
+                            }>
+                                <td><input type="text" id="repeat"></input></td>
+                            </HtmlTooltip>
+                        </tr>
+                        <tr>
+                            <td>Limit Sun Angle</td>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>Pause during a specific set until the Sun gets below the given angle.</p>
+                                    <p>If the set number is 0, it means that this would apply on all of the sets.</p>
+                                </React.Fragment>
+                            }>
+                            <td><input type={'text'} id="waituntilSet" placeholder={'Sets'}></input>
+                                <input type={'text'} id="waituntilDeg" placeholder={'Degrees'}></input></td>
+                            </HtmlTooltip>
+                        </tr>
+                        <tr>
+                            <td>Limit Zenith</td>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>Pause until the target is within the given zenith distance (deg) for up to the given time (min). If the target will never get within the given zenith distance, or won't get there within the time limit, it is skipped.</p>
+                                </React.Fragment>
+                            }>
+                            <td><input type={'text'} id="waitZenithDeg" placeholder={'Degrees'}></input>
+                                <input type={'text'} id="waitZenithMin" placeholder={'Minutes'}></input></td>
+                            </HtmlTooltip>
+                        </tr>
+                        <tr>
+                            <td>Limit Air Mass</td>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>Pause until the target is at or below the given air mass. If the target will never get within the given air mass, or won't Get there within the time limit, it is skipped.</p>
+                                </React.Fragment>
+                            }>
+                            <td><input type={'text'} id="waitairmassMass" placeholder={'Airmass'}></input>
+                                <input type={'text'} id="waitairmassMin" placeholder={'Minutes'}></input></td>
+                            </HtmlTooltip>
+                        </tr>
+                        <tr>
+                            <td>Wait Limit</td>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>???</p>
+                                </React.Fragment>
+                            }>
+                            <td><input type={'text'} id="waitlimit"></input></td>
+                            </HtmlTooltip>
+                        </tr>
+                        <tr>
+                            <td>Delay</td>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>Pause for the given number of seconds before processing the next target.</p>
+                                </React.Fragment>
+                            }>
+                            <td><input type={'text'} id="waitfor" placeholder = "Seconds"></input></td>
+                            </HtmlTooltip>
+                        </tr>
+                        </table>
+                    </AccordionDetails>
+                </Accordion>
+                </td>
+                <td>
             <button className={"add_button"} type="button" id="add_button" onClick={() => {
                 //TODO change the way that we get the elements!
 
@@ -522,7 +539,12 @@ const HtmlTooltip = withStyles((theme) => ({
                         console.error(err)
                 })
             }}><span>Add </span></button>
-        </form>
+            </td>
+                            </table>
+                            </div>
+
+
+
 
     );
 }
