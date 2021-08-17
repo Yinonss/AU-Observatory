@@ -231,10 +231,10 @@ function acpScriptGenerator(plan) {
             if (plan.observations[j].waitZenith[1] != null) {
                 script += '#WAITZENDIST ' + plan.observations[j].waitZenith + '\n';
             }
-
-            /* if (plan.observations[j].waitLimits != null) {
+//TODO: Check this again
+            if (plan.observations[j].waitLimits != null && plan.observations[j].waitLimits != '') {
                  script += '#WAITINLIMITS ' + plan.observations[j].waitLimits +'\n';
-             }*/
+             } 
              if(plan.observations[j].start != null && plan.observations[j].start != '') {
                 script += '#WAITUNTIL  ' + 1 + ', '+ modifyLocalTime(plan.observations[j].start);
              }

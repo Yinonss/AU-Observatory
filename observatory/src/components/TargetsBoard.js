@@ -32,6 +32,7 @@ const HtmlTooltip = withStyles((theme) => ({
 const AccordionStyle = withStyles({
     root: {
       border: '#37474f',
+      color: '#009999',
       boxShadow: 'none',
       '&:not(:last-child)': {
         borderBottom: 0,

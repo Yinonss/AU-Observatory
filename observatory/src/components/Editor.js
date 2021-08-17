@@ -5,10 +5,11 @@ import AddIcon from "@material-ui/icons/Add";
 import Container from "@material-ui/core/Container";
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import MuiAccordion from '@material-ui/core/Accordion';
 import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
 import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
+import { Form, FormControl,FormGroup, FormLabel, FormText } from 'react-bootstrap';
 import Tooltip from '@material-ui/core/Tooltip';
 import editorStyle from '../Styles/Editor.css';
 //import { Button, Grid } from '@material-ui/core';
@@ -21,11 +22,13 @@ const UNDEFINED = 'undefined';
 /* This function returns a basic form for observation missions. */
 export default function Editor(props) {
 
-
     const Accordion = withStyles({
         root: {
           border: '#37474f',
           boxShadow: 'none',
+          width: '300px',
+          square: 'false',
+          color: '#009999',
           '&:not(:last-child)': {
             borderBottom: 0,
           },
@@ -108,6 +111,7 @@ const HtmlTooltip = withStyles((theme) => ({
     }
     const [count, setCount] = useState(0); // save the id number of the targets on the list
     return (
+        <div>
         <form>
             <table>
                 <tbody>
@@ -223,8 +227,14 @@ const HtmlTooltip = withStyles((theme) => ({
                         </Container>
                     </td>
                 </tr>
+                </tbody>
+            </table>
+        </form>
+        
+               <table>
+                    <td>
                 <Accordion>
-                    <AccordionSummary>Options</AccordionSummary>
+                    <AccordionSummary>Data Processing</AccordionSummary>
                     <AccordionDetails>
                 <div className={'targetOptions'} id={'targetOptions'}>
                     
@@ -272,7 +282,97 @@ const HtmlTooltip = withStyles((theme) => ({
                             <td><input type={'text'} id={'defocus'}/></td>
                             </HtmlTooltip>
                         </tr>
+                       
                         <tr>
+                            <td>Calibrate</td>
+                        <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>Forces calibration of the images for this target. This will not cause calibration of pointing exposures, only the final images.</p>
+                                </React.Fragment>
+                            }>
+                            <td> <input type="checkbox" id="calibrate"/></td>
+                            </HtmlTooltip>
+                        </tr>
+                        <tr>
+                            <td>Autoguide</td>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>Forces the next target's images to be guided by the guiding camera.</p>
+                                </React.Fragment>
+                            }>
+                            <td><input type={'checkbox'} id="autoguide"/></td>
+                            </HtmlTooltip>
+                        </tr>
+                        <tr>
+                            <td>Autofocus</td>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>Automatically refocus the optical system before each filter group in the filter group for this target.</p>
+                                </React.Fragment>
+                            }>
+                            <td><input type={'checkbox'} id="autofocus"/></td>
+                            </HtmlTooltip>
+                        </tr>
+                        <tr>
+                            <td>Do Not Solve</td>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>Prevent final/data image plate solving for all of the images of the current target.</p>
+                                </React.Fragment>
+                            }>
+                            <td><input type={'checkbox'} id="nosolve"/></td>
+                            </HtmlTooltip>
+                        </tr>
+                        <tr>
+                            <td>Scehdule Pointing</td>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>Schedule a pointing update prior to the target.</p>
+                                </React.Fragment>
+                            }>
+                            <input type={'radio'} id="pointing" name={'Point'} value={'pointing'}></input>
+                            </HtmlTooltip>
+                            <label htmlFor={'pointing'}>Yes</label>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>Prevent the pointing update prior to the target.</p>
+                                </React.Fragment>
+                            }>
+                            <input type={'radio'} id="nopointing" name={'Point'} value={'nopointing'}></input>
+                            </HtmlTooltip>
+                            <label htmlFor={'noalign'}>No</label>
+                        </tr>
+                        <tr>
+                            <td>Stack Images</td>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>Combines repeated images within one filter group without aligning into a single image.</p>
+                                </React.Fragment>
+                            }>
+                            <input type={'radio'} id="align" name={'stackImages'} value={'align'}></input>
+                            </HtmlTooltip>
+                            <label htmlFor={'align'}>Align</label>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>Combines repeated images within one filter group and aligns images into a single image.</p>
+                                </React.Fragment>
+                            }>
+                            <input type={'radio'} id="noalign" name={'stackImages'} value={'noalign'}></input>
+                            </HtmlTooltip>
+                            <label htmlFor={'noalign'}>Without Align</label>
+
+                        </tr>
+                    </table>
+                </div>
+                </AccordionDetails>
+                </Accordion>
+                </td>
+                <td>
+                <Accordion>
+                    <AccordionSummary>Observation Settings</AccordionSummary>
+                    <AccordionDetails>
+                    <table>
+                    <tr>
                             <td>Track On</td>
                             <HtmlTooltip title={
                                 <React.Fragment>
@@ -347,91 +447,11 @@ const HtmlTooltip = withStyles((theme) => ({
                             <td><input type={'text'} id="waitfor" placeholder = "Seconds"></input></td>
                             </HtmlTooltip>
                         </tr>
-                        <tr>
-                            <td>Calibrate</td>
-                        <HtmlTooltip title={
-                                <React.Fragment>
-                                    <p>Forces calibration of the images for this target. This will not cause calibration of pointing exposures, only the final images.</p>
-                                </React.Fragment>
-                            }>
-                            <td> <input type="checkbox" id="calibrate"/></td>
-                            </HtmlTooltip>
-                        </tr>
-                        <tr>
-                            <td>Autoguide</td>
-                            <HtmlTooltip title={
-                                <React.Fragment>
-                                    <p>Forces the next target's images to be guided by the guiding camera.</p>
-                                </React.Fragment>
-                            }>
-                            <td><input type={'checkbox'} id="autoguide"/></td>
-                            </HtmlTooltip>
-                        </tr>
-                        <tr>
-                            <td>Autofocus</td>
-                            <HtmlTooltip title={
-                                <React.Fragment>
-                                    <p>Automatically refocus the optical system before each filter group in the filter group for this target.</p>
-                                </React.Fragment>
-                            }>
-                            <td><input type={'checkbox'} id="autofocus"/></td>
-                            </HtmlTooltip>
-                        </tr>
-                        <tr>
-                            <td>Do Not Solve</td>
-                            <HtmlTooltip title={
-                                <React.Fragment>
-                                    <p>Prevent final/data image plate solving for all of the images of the current target.</p>
-                                </React.Fragment>
-                            }>
-                            <td><input type={'checkbox'} id="nosolve"/></td>
-                            </HtmlTooltip>
-                        </tr>
-                        <tr>
-                            <td>Scehdule Pointing</td>
-                            <HtmlTooltip title={
-                                <React.Fragment>
-                                    <p>Schedule a pointing update prior to the target.</p>
-                                </React.Fragment>
-                            }>
-                            <input type={'radio'} id="pointing" name={'Point'} value={'pointing'}></input>
-                            </HtmlTooltip>
-                            <label htmlFor={'pointing'}>Yes</label>
-                            <HtmlTooltip title={
-                                <React.Fragment>
-                                    <p>Prevent the pointing update prior to the target.</p>
-                                </React.Fragment>
-                            }>
-                            <input type={'radio'} id="nopointing" name={'Point'} value={'nopointing'}></input>
-                            </HtmlTooltip>
-                            <label htmlFor={'noalign'}>No</label>
-                        </tr>
-                        <tr>
-                            <td>Stack Images</td>
-                            <HtmlTooltip title={
-                                <React.Fragment>
-                                    <p>This option will take the given number of filter groups of the next target in a row. Limited to 3.</p>
-                                </React.Fragment>
-                            }>
-                            <input type={'radio'} id="align" name={'stackImages'} value={'align'}></input>
-                            </HtmlTooltip>
-                            <label htmlFor={'align'}>Align</label>
-                            <HtmlTooltip title={
-                                <React.Fragment>
-                                    <p>This option will take the given number of filter groups of the next target in a row. Limited to 3.</p>
-                                </React.Fragment>
-                            }>
-                            <input type={'radio'} id="noalign" name={'stackImages'} value={'noalign'}></input>
-                            </HtmlTooltip>
-                            <label htmlFor={'noalign'}>Without Align</label>
-
-                        </tr>
-                    </table>
-                </div>
-                </AccordionDetails>
+                        </table>
+                    </AccordionDetails>
                 </Accordion>
-                </tbody>
-            </table>
+                </td>
+                <td>
             <button className={"add_button"} type="button" id="add_button" onClick={() => {
                 //TODO change the way that we get the elements!
 
@@ -519,7 +539,12 @@ const HtmlTooltip = withStyles((theme) => ({
                         console.error(err)
                 })
             }}><span>Add </span></button>
-        </form>
+            </td>
+                            </table>
+                            </div>
+
+
+
 
     );
 }
