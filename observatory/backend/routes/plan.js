@@ -31,7 +31,6 @@ router.route('/add').post((req, res) => {
     plan.autofocusPlan = req.body.autofocusPlan
     plan.alwaysSolve = req.body.alwaysSolve
     plan.minTime = req.body.minTime
-    plan.limitTime = req.body.limitTime
     plan.quitTime = modifyLocalTime(req.body.quitTime)
     plan.shutdownTime = modifyLocalTime(req.body.shutdownTime)
     plan.systemShutdown = req.body.systemShutdown
@@ -167,9 +166,6 @@ function acpScriptGenerator(plan) {
     if(plan.minTime != '') {
         script += '#MINSETTIME ' + plan.minTime + '\n'
     }
-    if (plan.limitTime != '') {
-         script += '#MINSETTIME ' + plan.limitTime + '\n';
-     }
     if (plan.quitTime != '// undefined' && plan.quitTime != '//' ) {
                script += '#QUITAT ' + plan.quitTime +'\n';
         }
@@ -235,10 +231,10 @@ function acpScriptGenerator(plan) {
             if (plan.observations[j].waitZenith[1] != null) {
                 script += '#WAITZENDIST ' + plan.observations[j].waitZenith + '\n';
             }
-
-            /* if (plan.observations[j].waitLimits != null) {
+//TODO: Check this again
+            if (plan.observations[j].waitLimits != null && plan.observations[j].waitLimits != '') {
                  script += '#WAITINLIMITS ' + plan.observations[j].waitLimits +'\n';
-             }*/
+             } 
              if(plan.observations[j].start != null && plan.observations[j].start != '') {
                 script += '#WAITUNTIL  ' + 1 + ', '+ modifyLocalTime(plan.observations[j].start);
              }

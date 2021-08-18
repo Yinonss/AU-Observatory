@@ -34,7 +34,6 @@
     min-width: 1000px;
     overflow-y: scroll;
 
-
 }
 
 button {
@@ -59,10 +58,10 @@ tr td {
 }
 
 
-#plansDisplay table {
+/*#plansDisplay table {
     overflow: scroll;
     table-layout: fixed;
-}
+}*/
 
 #plansDisplay tr td {
     padding-bottom: 1em;
@@ -92,8 +91,9 @@ input {
     background-color: #404040;
     color: #00CED1;
 }
-
-
+.targetOptions  {
+    display: block;
+}
 .targetOptions input {
     width: 80px;
 }
@@ -106,4 +106,9 @@ input {
     text-align: left;
     color: 	#ADFF2F;
     font-size: small;
+}
+
+.Accordion{
+    background-color: #101010;
+    color: #101010;
 }
