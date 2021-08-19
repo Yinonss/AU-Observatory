@@ -39,5 +39,3 @@ function PlanItem(props) {
 }
 
 export default PlanItem
-
-// ReactDOM.render(<App />, appElement);
