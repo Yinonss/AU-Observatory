@@ -95,7 +95,7 @@ export default class planList extends Component {
                             })}
                         </table>
                         <div className="closeModal">
-                            <button onClick={toggleModalShow}>close</button> {/*TODO fix button position*/}
+                            <button onClick={toggleModalShow}>X</button>
                         </div>
                     </Modal>
                 </div>
