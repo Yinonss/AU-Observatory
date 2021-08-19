@@ -1,10 +1,12 @@
 .Modal {
     position: absolute;
-    top: 120px;
-    left: 120px;
-    right: 120px;
-    bottom: 120px;
+    top: 220px;
+    left: 300px;
+    right: 300px;
+    bottom: 200px;
     background-color: #1f1d1d;
+    height: auto;
+    overflow:auto;
 }
 
 .Modal h1 {
@@ -12,14 +14,14 @@
 }
 
 .Modal h2, .modalTable {
-    padding-left: 140px;
+    padding-left: 50px;
 }
 
 .closeModal {
     margin: 0;
     position: absolute;
-    top: 90%;
-    left: 50%;
+    top: 10%;
+    left: 90%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
