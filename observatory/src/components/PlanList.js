@@ -52,6 +52,7 @@ export default class planList extends Component {
                 <div className="planModal">
                     <Modal className="Modal" overlayClassName="Overlay" isOpen={this.state.modalState}>
                         <h1>{this.state.planModal.title}</h1>
+                        <br/>
                         <h2>Targets:</h2>
                         <table className="modalTable">
                             <tr>

@@ -11,8 +11,8 @@
     text-align: center;
 }
 
-.Modal h2 {
-    padding-left: 30px;
+.Modal h2, .modalTable {
+    padding-left: 140px;
 }
 
 .closeModal {
@@ -22,10 +22,6 @@
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-}
-
-.modalTable {
-    padding-left: 30px;
 }
 
 .Overlay {
