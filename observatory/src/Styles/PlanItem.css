@@ -22,4 +22,8 @@ ul {
     list-style-type: none;
 }
 
+.planItem {
+    cursor: pointer;
+}
+
 

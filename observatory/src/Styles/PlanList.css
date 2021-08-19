@@ -1,0 +1,48 @@
+.Modal {
+    position: absolute;
+    top: 120px;
+    left: 120px;
+    right: 120px;
+    bottom: 120px;
+    background-color: #1f1d1d;
+}
+
+.Modal h1 {
+    text-align: center;
+}
+
+.Modal h2 {
+    padding-left: 30px;
+}
+
+.closeModal {
+    margin: 0;
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.modalTable {
+    padding-left: 30px;
+}
+
+.Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(134, 122, 122, 0.83);
+}
+
+.modalTh {
+    letter-spacing: 1px;
+    padding-right: 15px;
+}
+
+.modalTd {
+    letter-spacing: 1px;
+    text-align: center;
+}
