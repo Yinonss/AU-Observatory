@@ -4,6 +4,7 @@ import React from "react";
 import Base from './components/Base.js'
 import NewPlan from "./components/NewPlan";
 import PlanList from "./components/PlanList";
+import Guide from './components/Guide';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
             <Route exact path={"/"}>
                 <PlanList/>
             </Route>
+            <Route path='/guide'><Guide /></Route>
         </Router>
     </div>
   );
