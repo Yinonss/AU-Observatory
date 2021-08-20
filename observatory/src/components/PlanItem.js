@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import Style from './Style.css'
 import ReactTooltip from "react-tooltip";
 import PlanList from "../Styles/PlanItem.css"
+
 
 const formatDate = (dateString) => {  // Function to handle the creation date we get from the plan
     const options = { year: "numeric", month: "numeric", day: "numeric" }
@@ -20,9 +21,11 @@ function planTool(plan) {
             </div>)
 }
 
+
 function PlanItem(props) {
+
     return (
-        <li>
+        <li className="planItem" onClick={ () => props.clickHandle(props.plan)}>
             <div className={"plan_item"}>
                 <h3 className={"title"}>
                     {props.plan.title}
