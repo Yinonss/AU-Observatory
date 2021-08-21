@@ -266,24 +266,15 @@ export default function TargetsBoard(props) {
                 let quitTime = document.getElementById("quitTime").value
                 let shutdownTime = document.getElementById("shutdownTime").value
                 let systemShutdown = document.getElementById("systemShutdown").checked
-                axios.post(server_url, {  // save the plan into the DB
-                    "title" : document.getElementById("planName").value,
-                    "sets" : sets,
-                     "autofocusPlan" : autofocusPlan,
-                     "alwaysSolve": alwaysSolve,
-                     "minTime": minTime,
-                      "quitTime": quitTime,
-                      "shutdownTime" : shutdownTime,
-                    "systemShutdown" : systemShutdown,
-                    "observation" : props.allTargets
-                }).then(res => console.log(res))
+
 
                 let targetsBoard = {
+                    planName : document.getElementById("planName").value,
                     sets : sets,
                     autofocusPlan : autofocusPlan,
                     alwaysSolve : alwaysSolve,
                     minTime : minTime,
-                    limitTime : limitTime,
+                    //limitTime : limitTime,
                     quitTime : quitTime,
                     shutdownTime : shutdownTime,
                     systemShutdown : systemShutdown,
@@ -291,10 +282,20 @@ export default function TargetsBoard(props) {
                 }
 
 
-                axios.post('http://localhost:5001/rules/1', { targetsBoard: targetsBoard})
+                axios.post('http://localhost:5001/rules/2', { targetsBoard: targetsBoard})
                     .then(res => {
                         if (res.data.isValid) {
-                            props.addTarget(targetsBoard)
+                            axios.post(server_url, {  // save the plan into the DB
+                                "title" : document.getElementById("planName").value,
+                                "sets" : sets,
+                                "autofocusPlan" : autofocusPlan,
+                                "alwaysSolve": alwaysSolve,
+                                "minTime": minTime,
+                                "quitTime": quitTime,
+                                "shutdownTime" : shutdownTime,
+                                "systemShutdown" : systemShutdown,
+                                "observation" : props.allTargets
+                            }).then(res => console.log(res))
                         }
                         else {
                             alert(res.data.reason) // TODO::how do not add the plan?
