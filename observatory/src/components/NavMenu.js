@@ -8,8 +8,8 @@ export default function NavMenu(){
             <header>
                 <nav className="navmenu">
                     <li><NavLink to='/'>Home</NavLink></li>
-                    <li><NavLink to='/planlist'>Dashboard</NavLink></li>
                     <li><NavLink to='/newplan'>New Plan</NavLink></li>
+                    <li><NavLink to='/planlist'>Dashboard</NavLink></li>
                     <li><NavLink to='/guide'>Guide</NavLink></li>
                     <li><NavLink to='/about'>About</NavLink></li>
                 </nav>
