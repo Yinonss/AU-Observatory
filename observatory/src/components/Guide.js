@@ -1,11 +1,12 @@
 
 import React from "react";
-
+import './Style.css'
 export default function Guide() {
 
 
 return (
-    <div className='Guide'>
+    <div className='container'>
+        <div className='Guide'>
         <p>
             In order to conduct an astronamical research with AU Observatory Planner you will have to be familiar with  the 
             structure of a plan and the creation flow.
@@ -54,6 +55,7 @@ return (
         You can also run it manually from ACP. Run script called 'AcquireImages.js' and then choose the script from the application's 
         plans folder.
     </p>
+    </div>
 </div>
     );
 }
