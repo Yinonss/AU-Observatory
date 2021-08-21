@@ -9,6 +9,7 @@ export default function NavMenu(){
                 <nav className="navmenu">
                     <li><NavLink to='/'>Home</NavLink></li>
                     <li><NavLink to='/newplan'>New Plan</NavLink></li>
+                    <li><NavLink to='/guide'>Guide</NavLink></li>
                     <li><NavLink to='/about'>About</NavLink></li>
                 </nav>
             </header>

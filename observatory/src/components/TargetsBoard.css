@@ -39,7 +39,7 @@ input {
 .list {
     background: #101010;
     width: 198px;
-    height: 300px;
+    height: 200px;
     margin: auto;
     overflow-y: scroll;
     scrollbar-color: #303030 #b3cccc;

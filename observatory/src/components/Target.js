@@ -4,6 +4,8 @@ import ReactTooltip from 'react-tooltip';
 
 export default function Target(props) {
 
+    console.log('target : ' + props);
+
     return (
         <div>
             <div className="target" data-tip data-for="targetDetails">
@@ -16,7 +18,7 @@ export default function Target(props) {
                     </button>
                     <h5>{props.name}</h5>
             </div>
-            <ReactTooltip id="targetDetails" place="right" props={props}>
+            <ReactTooltip id="targetDetails" place="right" props={props} >
                 <div>
                     <table>
                         <tr>
