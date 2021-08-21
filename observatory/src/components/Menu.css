@@ -16,10 +16,15 @@ body {
     padding-top: 0%;
     padding-right: 0%;
     padding-bottom: 0%;
-    padding-left: 10px;
+    padding-left: 0%;
     display: flex;
+    background-color: #101010;
     justify-content: center;
     transition: 0.5s;
+}
+
+.container:hover {
+    background-color: #000;
 }
 
 .container .card {
@@ -28,7 +33,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 260px;
+    width: 250px;
     height: 500px;
     background: #101010;
     transition: 0.5s;
