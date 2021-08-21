@@ -265,18 +265,45 @@ export default function TargetsBoard(props) {
                 let minTime = document.getElementById("minTime").value
                 let quitTime = document.getElementById("quitTime").value
                 let shutdownTime = document.getElementById("shutdownTime").value
-                let  systemShutdown = document.getElementById("systemShutdown").checked
-                axios.post(server_url, {  // save the plan into the DB
-                    "title" : document.getElementById("planName").value,
-                    "sets" : document.getElementById("sets").value,
-                     "autofocusPlan" : autofocusPlan,
-                     "alwaysSolve": alwaysSolve,
-                     "minTime": minTime,
-                      "quitTime": quitTime,
-                      "shutdownTime" : shutdownTime,
-                    "systemShutdown" : systemShutdown,
-                    "observation" : props.allTargets
-                }).then(res => console.log(res))
+                let systemShutdown = document.getElementById("systemShutdown").checked
+
+
+                let targetsBoard = {
+                    planName : document.getElementById("planName").value,
+                    sets : sets,
+                    autofocusPlan : autofocusPlan,
+                    alwaysSolve : alwaysSolve,
+                    minTime : minTime,
+                    //limitTime : limitTime,
+                    quitTime : quitTime,
+                    shutdownTime : shutdownTime,
+                    systemShutdown : systemShutdown,
+                    observation : props.allTargets
+                }
+
+
+                axios.post('http://localhost:5001/rules/2', { targetsBoard: targetsBoard})
+                    .then(res => {
+                        if (res.data.isValid) {
+                            axios.post(server_url, {  // save the plan into the DB
+                                "title" : document.getElementById("planName").value,
+                                "sets" : sets,
+                                "autofocusPlan" : autofocusPlan,
+                                "alwaysSolve": alwaysSolve,
+                                "minTime": minTime,
+                                "quitTime": quitTime,
+                                "shutdownTime" : shutdownTime,
+                                "systemShutdown" : systemShutdown,
+                                "observation" : props.allTargets
+                            }).then(res => console.log(res))
+                        }
+                        else {
+                            alert(res.data.reason) // TODO::how do not add the plan?
+                        }
+
+                    }).catch(err => {
+                    console.error(err)
+                })
             }
             }>Submit</button>
         </div>
