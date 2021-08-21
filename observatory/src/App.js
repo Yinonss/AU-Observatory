@@ -5,6 +5,7 @@ import Base from './components/Base.js'
 import NewPlan from "./components/NewPlan";
 import PlanList from "./components/PlanList";
 import Guide from './components/Guide';
+import Menu from './components/Menu';
 
 
 function App() {
@@ -12,8 +13,9 @@ function App() {
     <div className="App">
         <Router>
             <Base />
+            <Route exact path="/"><Menu /></Route>
             <Route path="/newplan"><NewPlan /></Route>
-            <Route exact path={"/"}>
+            <Route path={"/planlist"}>
                 <PlanList/>
             </Route>
             <Route path='/guide'><Guide /></Route>
