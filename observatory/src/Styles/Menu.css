@@ -3,7 +3,7 @@
 nav {
     text-transform: uppercase;
     float: right;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 nav li {
@@ -20,9 +20,10 @@ nav li a {
     text-decoration: none;
     border: 25px;
     font-size: 22px;
-    color: white;
+    color: silver;
 }
 
 nav li a:hover {
-    background-color: #303030;
+    color: white;
+
 }

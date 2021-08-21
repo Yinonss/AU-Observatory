@@ -12,7 +12,6 @@ import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
 import { Form, FormControl,FormGroup, FormLabel, FormText } from 'react-bootstrap';
 import Tooltip from '@material-ui/core/Tooltip';
 import editorStyle from '../Styles/Editor.css';
-//import { Button, Grid } from '@material-ui/core';
 import {Accordion, AccordionSummary, AccordionDetails} from '@material-ui/core'
 import {Button} from 'react-bootstrap';
 const NUMBEROFFIELDS = 7;
@@ -455,7 +454,7 @@ const HtmlTooltip = withStyles((theme) => ({
             <button className={"add_button"} type="button" id="add_button" onClick={() => {
                 //TODO change the way that we get the elements!
 
-                let name = document.getElementById("name").value
+                let name = changeTargetNameformat(document.getElementById("name").value)
                 let rightAscension = document.getElementById("rightAscension").value
                 let declination = document.getElementById("declination").value
                 let exposures = inputFields.map(item => item.exposures)
@@ -567,6 +566,24 @@ function validation(declination, rightAscension) {
     else
     {
         return true;
+    }
+}
+
+function changeTargetNameformat(target) {
+    if(target.includes(' ')) {
+        return target;
+    }
+    else {
+        let letters = '';
+        let numbers = '';
+        for(let i = 0; i < target.length; i++) {
+            if (Number(target.charAt(i))) {
+                letters = target.substring(0,i);
+                numbers = target.substring(i);
+                break;
+            }
+        }
+        return (letters + ' ' + numbers);
     }
 }
 
