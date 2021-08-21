@@ -1,11 +1,7 @@
 
-import React, {useState} from "react";
-
-/* This component containing Editor and TargetList components.
-*  It is activated after press on "NEW PLAN" button on the main menu.  */
+import React from "react";
 
 export default function Guide() {
-
 
 
 return (
@@ -48,8 +44,16 @@ return (
         <li>Repeat this process (from step 1 to 6) for every target that is nessesary for the research.</li>
         <li>Optional: add a bias or dark frame to reset photons for reducing image noise.</li>
         <li>Optional: add advanced setting to the whole plan.</li>
-        <li>Click submit.</li>
+        <li>Click 'Submit'.</li>
     </list>
+    <br />
+    <b>Output:</b>
+    <p> After the plan is submitted it is being converted into an ACP script. This is a test file which contain custom
+        directives which oberate the robotic observatory. The file will be located in a directory called 'Files' (inside this reposetory).
+        We recommend to set an ACP scheduler to read from this folder instead of the default folder.
+        You can also run it manually from ACP. Run script called 'AcquireImages.js' and then choose the script from the application's 
+        plans folder.
+    </p>
 </div>
     );
 }
