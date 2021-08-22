@@ -2,8 +2,6 @@ import React from "react";
 import './../components/Menu.css'
 export default function Guide() {
 
-
-
 return (
     <div class="container">
         <div class='card'>

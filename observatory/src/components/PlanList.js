@@ -50,7 +50,8 @@ export default class planList extends Component {
         const  modalInfo = () => {
             return (
                 <div className="planModal">
-                    <Modal className="Modal" overlayClassName="Overlay" isOpen={this.state.modalState}>
+                    <Modal className="Modal" overlayClassName="Overlay" isOpen={this.state.modalState}
+                        onRequestClose={()=> toggleModalShow()}>
                         <h1>{this.state.planModal.title}</h1>
                         <h2>Targets:</h2>
                         <table className="modalTable">
