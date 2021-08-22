@@ -15,9 +15,6 @@ function App() {
             <Base />
             <Route exact path="/">
                 <Menu />
-                <br/>
-                <Weather class="weather"/>
-                <br/>
             </Route>
             <Route path="/newplan"><NewPlan /></Route>
             <Route path={"/planlist"}>
