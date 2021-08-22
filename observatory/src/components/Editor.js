@@ -14,6 +14,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import editorStyle from '../Styles/Editor.css';
 import {Accordion, AccordionSummary, AccordionDetails} from '@material-ui/core'
 import {Button} from 'react-bootstrap';
+
 const NUMBEROFFIELDS = 7;
 const UNDEFINED = 'undefined';
 

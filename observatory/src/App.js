@@ -6,14 +6,19 @@ import NewPlan from "./components/NewPlan";
 import PlanList from "./components/PlanList";
 import Guide from './components/Guide';
 import Menu from './components/Menu';
-
+import Weather from './components/Weather';
 
 function App() {
   return (
     <div className="App">
         <Router>
             <Base />
-            <Route exact path="/"><Menu /></Route>
+            <Route exact path="/">
+                <Menu />
+                <br/>
+                <Weather class="weather"/>
+                <br/>
+            </Route>
             <Route path="/newplan"><NewPlan /></Route>
             <Route path={"/planlist"}>
                 <PlanList/>
