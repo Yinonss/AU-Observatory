@@ -1,5 +1,48 @@
-# Ariel University Observatory
-## Astronomer Web Planner
+[![GitHub contributors](https://img.shields.io/github/contributors/Yinonss/AU-Observatory.svg)](https://github.com/Yinonss/AU-Observatory/graphs/contributors)
+
+
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a>
+    <img src="https://user-images.githubusercontent.com/57867811/130361311-a8e8b83e-55b6-4941-bb6b-aee100b08ddf.png" alt="Logo" width="140" height="140">
+  </a>
+
+  <h1 align="center">Ariel University Observatory </h1>
+
+  <p align="center">
+     Astronomer Web Planner
+    <br />
+    <a href="https://github.com/Yinonss/AU-Observatory"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+  </p>
+</p>
+
+
+<!-- TABLE OF CONTENTS -->
+<details open="open">
+  <summary>Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#Utilzed">Utilzed</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
 In this project we developed a web planner for astronomical research for the new observatory facility in Ariel University.
 
@@ -18,9 +61,47 @@ ACP. This program has a local desktop planner with old and complicated design .
 Our mission was to create an accessible web interface which will be much more intuitive, comely and comfortable
 in order to provide a great user experince. This planner will produce an ACP script file which operate the facility.
 
-### Instructions:
+## Utilzed
+
+* [WebStorm](https://www.jetbrains.com/webstorm/)
+* [MongoDB](https://www.mongodb.com)
+* [Node.js](https://nodejs.org/en/)
+* [React](https://reactjs.org/)
+* [SIMBAD](http://simbad.u-strasbg.fr/simbad/)
+
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+Here is how you can start runing the application:
+
+### Installation
+
 1. Download and install ACP from [here](http://acp.dc3.com/index2.html).
-2. Clone this reposetory.
-3. Open this reposetory in terminal and run 'npm install'.
-4. Run 'npm start'.
-5. Enter 'GUIDE' in the navigation bar to learn more about the application.
+2. Clone the repo
+   ```sh
+   git clone https://github.com/Yinonss/AU-Observatory.git
+   ```
+3. Install NPM packages
+   ```sh
+   npm install
+   
+### Run
+
+   ```sh
+   npm start
+   ```
+   Enter 'GUIDE' in the navigation bar to learn more about the application.
+   
+   <!-- USAGE EXAMPLES -->
+## Usage
+
+   (show picture of creat a new plan)
+   
+   
+<!-- CONTACT -->
+## Contact
+
+   
+ ![GitHub Contributors Image](https://contrib.rocks/image?repo=Yinonss/AU-Observatory)
+
