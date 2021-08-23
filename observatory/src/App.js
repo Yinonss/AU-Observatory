@@ -6,6 +6,7 @@ import NewPlan from "./components/NewPlan";
 import PlanList from "./components/PlanList";
 import Guide from './components/Guide';
 import Menu from './components/Menu';
+import About from './components/About';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
                 <PlanList/>
             </Route>
             <Route path='/guide'><Guide /></Route>
+            <Route path='/about'><About /></Route>
         </Router>
     </div>
   );
