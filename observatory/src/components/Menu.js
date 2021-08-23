@@ -29,7 +29,7 @@ return (
             <div class = 'content'>
                 <h2>About Us</h2>
                 <p>Learn about the facility, the project, and its purpose.</p>
-                <a href='#'>Click Here</a>
+                <a href='/about'>Click Here</a>
             </div>
         </div>
     </div>
