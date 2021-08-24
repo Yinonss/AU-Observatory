@@ -297,12 +297,12 @@ function acpScriptGenerator(plan) {
         }
 
         else if (plan.observations[j].frameKind == 'DARK') {
-            script += '#SETS ' + plan.observations[j].darkFrames + '\n';
+            script += '#REPEAT ' + plan.observations[j].darkFrames + '\n';
             script += '#DARK \n';
             script = script + '\n;=========================================================\n;=========================================================\n';
         }
         else if (plan.observations[j].frameKind == 'BIAS') {
-            script += '#SETS ' + plan.observations[j].biasFrames + '\n';
+            script += '#REPEAT ' + plan.observations[j].biasFrames + '\n';
             script += '#BIAS \n';
             script = script + '\n;=========================================================\n;=========================================================\n';
         }
