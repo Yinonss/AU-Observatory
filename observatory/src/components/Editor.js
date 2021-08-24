@@ -259,7 +259,7 @@ const HtmlTooltip = withStyles((theme) => ({
                                     <p>The value of the position angle ranges from 0 up to but not including 360 degrees. 0 Degrees is pole-up, and the angle increases counterclockwise, that is, north toward east.</p>
                                 </React.Fragment>
                             }>
-                            <td><input type={'text'} id={'rotatorDegree'}/></td>
+                            <td><input type={'text'} placeholder={'Degrees'} id={'rotatorDegree'}/></td>
                             </HtmlTooltip>
                         </tr>
                         <tr>
@@ -387,7 +387,6 @@ const HtmlTooltip = withStyles((theme) => ({
                             <HtmlTooltip title={
                                 <React.Fragment>
                                     <p>This option will take the given number of filter groups of the next target in a row.</p>
-                                    <p> Limited to 3.</p>
                                 </React.Fragment>
                             }>
                                 <td><input type="text" id="repeat"></input></td>
@@ -431,10 +430,11 @@ const HtmlTooltip = withStyles((theme) => ({
                             <td>Wait Limit</td>
                             <HtmlTooltip title={
                                 <React.Fragment>
-                                    <p>???</p>
+                                    <p>Pause until the target is within the observatory limits: minimum elevation, horizon,
+                                         and any tilt-up limit. If target will never meet the criteria, it Is immediately skipped.</p>
                                 </React.Fragment>
                             }>
-                            <td><input type={'text'} id="waitlimit"></input></td>
+                            <td><input type={'text'} placeholder='Minutes' id="waitlimit"></input></td>
                             </HtmlTooltip>
                         </tr>
                         <tr>
