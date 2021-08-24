@@ -101,7 +101,6 @@ const HtmlTooltip = withStyles((theme) => ({
 
         if (values.length > 1) {
             console.log([...values])
-            // TODO: add alert that says the plan need to have at least one imaging session (rules engine).
             values.splice(index, 1);
             console.log(index)
             setInputFields([...values]);
@@ -453,7 +452,6 @@ const HtmlTooltip = withStyles((theme) => ({
                 </td>
                 <td>
             <button className={"add_button"} type="button" id="add_button" onClick={() => {
-                //TODO change the way that we get the elements!
 
                 let name = changeTargetNameformat(document.getElementById("name").value)
                 let rightAscension = document.getElementById("rightAscension").value
