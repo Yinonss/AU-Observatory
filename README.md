@@ -101,8 +101,6 @@ Here is how you can start runing the application:
 In the home-page you will be able to navigate to our Guide and learn more about the application.
 Baside that, you can look of the current weather forecast and also for the next 4 days:
 
-   ![image](https://user-images.githubusercontent.com/57867811/130366751-e4398aef-7a5a-4143-91ba-aae408e8fea1.png)
-
    
    
 <!-- CONTACT -->
