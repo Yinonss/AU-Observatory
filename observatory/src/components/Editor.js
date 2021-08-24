@@ -464,7 +464,6 @@ const HtmlTooltip = withStyles((theme) => ({
                 let bin = inputFields.map(item => item.bin)
                 let start = document.getElementById("start").value
                 let end = document.getElementById("end").value
-                let planIsOK = validation(declination, rightAscension);
                 let repeat = document.getElementById("repeat").value
                 let waituntil = []
                 waituntil[0] = document.getElementById('waituntilSet').value
@@ -549,26 +548,6 @@ const HtmlTooltip = withStyles((theme) => ({
     );
 }
 
-// Check if there is an empty field. If one found, do not approve it.
-function validation(declination, rightAscension) {
-    const inputFields = document.querySelectorAll("input");
-    const validInputs = Array.from(inputFields).filter( input => input.value !== "");
-    /* if (validInputs.length !== NUMBEROFFIELDS)
-     {
-         alert('Please fill in all of the fields')
-         return false;
-     }*/
-    //TODO Make the next condition a rule
-    if(declination === UNDEFINED || rightAscension === UNDEFINED)
-    {
-        alert('Target undefined - please search target again.');
-        return false;
-    }
-    else
-    {
-        return true;
-    }
-}
 
 function changeTargetNameformat(target) {
     if(target.includes(' ')) {
