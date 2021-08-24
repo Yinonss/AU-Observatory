@@ -259,7 +259,7 @@ const HtmlTooltip = withStyles((theme) => ({
                                     <p>The value of the position angle ranges from 0 up to but not including 360 degrees. 0 Degrees is pole-up, and the angle increases counterclockwise, that is, north toward east.</p>
                                 </React.Fragment>
                             }>
-                            <td><input type={'text'} id={'rotatorDegree'}/></td>
+                            <td><input type={'text'} placeholder={'Degrees'} id={'rotatorDegree'}/></td>
                             </HtmlTooltip>
                         </tr>
                         <tr>
@@ -387,7 +387,6 @@ const HtmlTooltip = withStyles((theme) => ({
                             <HtmlTooltip title={
                                 <React.Fragment>
                                     <p>This option will take the given number of filter groups of the next target in a row.</p>
-                                    <p> Limited to 3.</p>
                                 </React.Fragment>
                             }>
                                 <td><input type="text" id="repeat"></input></td>
@@ -431,10 +430,11 @@ const HtmlTooltip = withStyles((theme) => ({
                             <td>Wait Limit</td>
                             <HtmlTooltip title={
                                 <React.Fragment>
-                                    <p>???</p>
+                                    <p>Pause until the target is within the observatory limits: minimum elevation, horizon,
+                                         and any tilt-up limit. If target will never meet the criteria, it Is immediately skipped.</p>
                                 </React.Fragment>
                             }>
-                            <td><input type={'text'} id="waitlimit"></input></td>
+                            <td><input type={'text'} placeholder='Minutes' id="waitlimit"></input></td>
                             </HtmlTooltip>
                         </tr>
                         <tr>
@@ -464,7 +464,6 @@ const HtmlTooltip = withStyles((theme) => ({
                 let bin = inputFields.map(item => item.bin)
                 let start = document.getElementById("start").value
                 let end = document.getElementById("end").value
-                let planIsOK = validation(declination, rightAscension);
                 let repeat = document.getElementById("repeat").value
                 let waituntil = []
                 waituntil[0] = document.getElementById('waituntilSet').value
@@ -549,26 +548,6 @@ const HtmlTooltip = withStyles((theme) => ({
     );
 }
 
-// Check if there is an empty field. If one found, do not approve it.
-function validation(declination, rightAscension) {
-    const inputFields = document.querySelectorAll("input");
-    const validInputs = Array.from(inputFields).filter( input => input.value !== "");
-    /* if (validInputs.length !== NUMBEROFFIELDS)
-     {
-         alert('Please fill in all of the fields')
-         return false;
-     }*/
-    //TODO Make the next condition a rule
-    if(declination === UNDEFINED || rightAscension === UNDEFINED)
-    {
-        alert('Target undefined - please search target again.');
-        return false;
-    }
-    else
-    {
-        return true;
-    }
-}
 
 function changeTargetNameformat(target) {
     if(target.includes(' ')) {
