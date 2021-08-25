@@ -9,7 +9,7 @@ body {
     min-height: 100vh;
 }
 
-.container {
+ .container {
     height: 550px;
     width: 1000px;
     position: relative;
@@ -22,11 +22,14 @@ body {
     justify-content: center;
     transition: 0.5s;
 }
-
+.menu .container {
+    background-color: #101010;
+}
+/*
 .container:hover {
     background-color: #000;
 }
-
+*/
 .container .card {
     padding-top: 50px;
     position: relative;
@@ -60,7 +63,7 @@ body {
     transition: 0.5s;
 }
 
-.container .card:hever:before {
+.container .card:hover:before {
     background: #404040;
     transform: scaleX(1.15);
 
