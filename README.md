@@ -95,12 +95,6 @@ Here is how you can start runing the application:
    ```
    Enter 'GUIDE' in the navigation bar to learn more about the application.
    
-   <!-- USAGE EXAMPLES -->
-## Usage
-
-In the home-page you will be able to navigate to our Guide and learn more about the application.
-Baside that, you can look of the current weather forecast and also for the next 4 days:
-
    
    
 <!-- CONTACT -->
