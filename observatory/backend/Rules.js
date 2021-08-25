@@ -46,7 +46,7 @@ var StartAndEndUndefinedRule = {
     },
     "consequence": function(R) {
         this.result = false;
-        this.reason = "Please fill start-time or end-time of the plan";
+        this.reason = "Please fill start-time and end-time of the plan";
         R.stop();
     }
 }
@@ -101,6 +101,17 @@ var RepeatRule = {
     "consequence": function(R) {
         this.result = false;
         this.reason = "Repeat should be 0-3."
+        R.stop();
+    }
+};
+
+var ImageSessionRule = {
+    "condition": function(R) {
+        R.when(this.filter === '' || this.exposureTime === '');
+    },
+    "consequence": function(R) {
+        this.result = false;
+        this.reason = "Pleas choose filter and duration"
         R.stop();
     }
 };
@@ -201,6 +212,7 @@ var SolveRule = {  //TargetsBoard
 R.register(TargetNameRule);
 R.register(RAAndDERule);
 R.register(StartAndEndUndefinedRule);
+R.register(ImageSessionRule);
 R.register(StartAndEndRule);
 R.register(WaitUntilRule);
 R.register(WaitUntilRule2);
@@ -209,12 +221,12 @@ R.register(RepeatRule);
 
 /* Apply Rules2 */
 R2.register(EmptyTargetsRule);
-R2.register(SolveRule);
+R2.register(PlanTitleRule);
 R2.register(AutoFocusRule);
 R2.register(ShutdownRule);
 R2.register(DitheringRule);
-R2.register(PlanTitleRule);
 //R2.register(SetsRule);
+//R2.register(SolveRule);
 
 // request rules for section 1
 app.post('/rules/1', (req, res) => {
