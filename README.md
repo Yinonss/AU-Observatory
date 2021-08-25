@@ -76,6 +76,8 @@ in order to provide a great user experince. This planner will produce an ACP scr
 ## Getting Started
 
 Here is how you can start runing the application:
+![image](https://user-images.githubusercontent.com/57867811/130870562-5f20b6c4-9b0c-4adc-9052-89fddca07e8f.png)
+
 
 ### Installation
 
