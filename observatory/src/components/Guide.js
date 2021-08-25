@@ -6,7 +6,7 @@ export default function Guide() {
 
 return (
     <div className='container'>
-        <div className='Guide'>
+        <div className='textContainer'>
         <p>
             In order to conduct an astronamical research with AU Observatory Planner you will have to be familiar with  the 
             structure of a plan and the creation flow.

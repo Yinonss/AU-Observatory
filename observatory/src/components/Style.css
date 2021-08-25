@@ -16,9 +16,13 @@
 #add_button {
     background-color: #202020;
 }
+
+.UpperPageHeadLine h1{
+    font-size: 50px;
+}
 /* Guide */
 
-.Guide {
+.textContainer {
     display: block;
     color: #00FFFF;
     font-family: Arial, sans-serif;
@@ -65,11 +69,6 @@ tr td {
     font-weight: bold;
 }
 
-
-/*#plansDisplay table {
-    overflow: scroll;
-    table-layout: fixed;
-}*/
 
 #plansDisplay tr td {
     padding-bottom: 1em;

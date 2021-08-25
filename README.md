@@ -61,19 +61,23 @@ ACP. This program has a local desktop planner with old and complicated design .
 Our mission was to create an accessible web interface which will be much more intuitive, comely and comfortable
 in order to provide a great user experince. This planner will produce an ACP script file which operate the facility.
 
-## Utilzed
+## Utilized
 
 * [WebStorm](https://www.jetbrains.com/webstorm/)
 * [MongoDB](https://www.mongodb.com)
 * [Node.js](https://nodejs.org/en/)
 * [React](https://reactjs.org/)
+* [Material UI](https://material-ui.com/)
 * [SIMBAD](http://simbad.u-strasbg.fr/simbad/)
+* [ACP](http://acp.dc3.com/index2.html)
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
 Here is how you can start runing the application:
+![image](https://user-images.githubusercontent.com/57867811/130870562-5f20b6c4-9b0c-4adc-9052-89fddca07e8f.png)
+
 
 ### Installation
 
@@ -93,10 +97,6 @@ Here is how you can start runing the application:
    ```
    Enter 'GUIDE' in the navigation bar to learn more about the application.
    
-   <!-- USAGE EXAMPLES -->
-## Usage
-
-   (show picture of creat a new plan)
    
    
 <!-- CONTACT -->

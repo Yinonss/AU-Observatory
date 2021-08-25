@@ -67,7 +67,7 @@ router.route('/add').post((req, res) => {
         let frameKind = item.frameKind
         let darkFrames = item.darkFrames
         let biasFrames = item.biasFrames
-        //TODO: Change the flag to ENUM in order to differentiate kinds of frames.
+
             plan.observations[i]  = new Obs({
             name,
             ra,
@@ -143,8 +143,6 @@ router.route('update/:id').post(((req, res) => {
 }))
 
 
-
-//TODO : We need to check if date format is acceptable for Windows OS.
 function acpScriptGenerator(plan) {
     let script = ';=========================================================\n' +
         '; Ariel University Observatory Planner - ACP Script \n' +
@@ -231,7 +229,7 @@ function acpScriptGenerator(plan) {
             if (plan.observations[j].waitZenith[1] != null) {
                 script += '#WAITZENDIST ' + plan.observations[j].waitZenith + '\n';
             }
-//TODO: Check this again
+
             if (plan.observations[j].waitLimits != null && plan.observations[j].waitLimits != '') {
                  script += '#WAITINLIMITS ' + plan.observations[j].waitLimits +'\n';
              } 
@@ -242,7 +240,6 @@ function acpScriptGenerator(plan) {
                 script += '\n#FILTER ';
             
                 for (let i = 0; i < plan.observations[j].filter.length; i++) {
-                    //TODO: When Clear filter is chosen it is appear as null - need to be fixed.
                     console.log('in filter')
                     let filter = plan.observations[j].filter[i];
                     if (filter == '') filter = 'Clear'
@@ -297,12 +294,12 @@ function acpScriptGenerator(plan) {
         }
 
         else if (plan.observations[j].frameKind == 'DARK') {
-            script += '#SETS ' + plan.observations[j].darkFrames + '\n';
+            script += '#REPEAT ' + plan.observations[j].darkFrames + '\n';
             script += '#DARK \n';
             script = script + '\n;=========================================================\n;=========================================================\n';
         }
         else if (plan.observations[j].frameKind == 'BIAS') {
-            script += '#SETS ' + plan.observations[j].biasFrames + '\n';
+            script += '#REPEAT ' + plan.observations[j].biasFrames + '\n';
             script += '#BIAS \n';
             script = script + '\n;=========================================================\n;=========================================================\n';
         }
