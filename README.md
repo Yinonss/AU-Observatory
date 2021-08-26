@@ -76,9 +76,6 @@ in order to provide a great user experince. This planner will produce an ACP scr
 ## Getting Started
 
 Here is how you can start runing the application:
-![image](https://user-images.githubusercontent.com/57867811/130870562-5f20b6c4-9b0c-4adc-9052-89fddca07e8f.png)
-
-
 ### Installation
 
 1. Download and install ACP from [here](http://acp.dc3.com/index2.html).
@@ -94,10 +91,23 @@ Here is how you can start runing the application:
 
    ```sh
    npm start
-   ```
-   Enter 'GUIDE' in the navigation bar to learn more about the application.
+   ```   
    
-   
+ <!-- USAGE EXAMPLES -->
+## Usage
+
+ Enter 'Guide' in the navigation bar to learn more about the application:
+ 
+   ![image](https://user-images.githubusercontent.com/57867811/130967823-3b0045b9-d364-482e-81c3-80b8b7d8fe54.png)
+
+Enter 'Plan list' to look at the current plans in the scheduler and also, you will be able to check the current weather forecast and for the next 4 days:
+
+![image](https://user-images.githubusercontent.com/57867811/130968964-82499ced-dd67-4d50-9942-4be9e31a8650.png)
+
+Enter 'New plan' to create a new plan by adding the plan details.
+
+![image](https://user-images.githubusercontent.com/57867811/130969128-96fb4697-08a1-4787-9ac6-078d301f5a87.png)
+
    
 <!-- CONTACT -->
 ## Contact
