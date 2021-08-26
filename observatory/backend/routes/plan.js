@@ -302,7 +302,7 @@ function acpScriptGenerator(plan) {
 
     }
     if (plan.systemShutdown) {
-        script += '#SHUTDOWN \n';
+        script += '\n#SHUTDOWN \n';
     }
 
     return script;
