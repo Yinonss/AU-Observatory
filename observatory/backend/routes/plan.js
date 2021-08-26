@@ -233,9 +233,9 @@ function acpScriptGenerator(plan) {
             if (plan.observations[j].waitLimits != null && plan.observations[j].waitLimits != '') {
                  script += '#WAITINLIMITS ' + plan.observations[j].waitLimits +'\n';
              } 
-             if(plan.observations[j].start != null && plan.observations[j].start != '') {
+             /*if(plan.observations[j].start != null && plan.observations[j].start != '') {
                 script += '#WAITUNTIL  ' + 1 + ', '+ modifyLocalTime(plan.observations[j].start);
-             }
+             }*/
             if(plan.observations[j].filter != '') {
                 script += '\n#FILTER ';
             
@@ -282,7 +282,7 @@ function acpScriptGenerator(plan) {
             if (plan.observations[j].track) {
                 script += ' \n#TRACKOFF \n'
             }
-            script += '\n' + plan.observations[j].name;
+            script += '\n' + plan.observations[j].name +'   '+ plan.observations[j].ra+'   '+plan.observations[j].dec;
             if (j < plan.observations.length - 1) {
                 script = script + '\n;=========================================================\n;=========================================================\n';
             }
