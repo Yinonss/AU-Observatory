@@ -250,17 +250,7 @@ const HtmlTooltip = withStyles((theme) => ({
                             <td><input type={'text'} id={'frameSize'}/></td>
                             </HtmlTooltip>
                         </tr>
-                        <tr>
-                            <td>Rotator Degree</td>
-                            <HtmlTooltip title={
-                                <React.Fragment>
-                                    <p>Required if a rotator is connected. If a rotator is installed and connected, sets the position angle for subsequent images.</p>
-                                    <p>The value of the position angle ranges from 0 up to but not including 360 degrees. 0 Degrees is pole-up, and the angle increases counterclockwise, that is, north toward east.</p>
-                                </React.Fragment>
-                            }>
-                            <td><input type={'text'} placeholder={'Degrees'} id={'rotatorDegree'}/></td>
-                            </HtmlTooltip>
-                        </tr>
+                        
                         <tr>
                             <td>Dithering</td>
                             <HtmlTooltip title={
@@ -389,6 +379,17 @@ const HtmlTooltip = withStyles((theme) => ({
                                 </React.Fragment>
                             }>
                                 <td><input type="text" id="repeat"></input></td>
+                            </HtmlTooltip>
+                        </tr>
+                        <tr>
+                            <td>Rotator Degree</td>
+                            <HtmlTooltip title={
+                                <React.Fragment>
+                                    <p>Required if a rotator is connected. If a rotator is installed and connected, sets the position angle for subsequent images.</p>
+                                    <p>The value of the position angle ranges from 0 up to but not including 360 degrees. 0 Degrees is pole-up, and the angle increases counterclockwise, that is, north toward east.</p>
+                                </React.Fragment>
+                            }>
+                            <td><input type={'text'} placeholder={'Degrees'} id={'rotatorDegree'}/></td>
                             </HtmlTooltip>
                         </tr>
                         <tr>
