@@ -2,9 +2,9 @@ import ReactWeather, { useOpenWeather } from 'react-open-weather';
 
 const customStyles = {
     fontFamily:  'Helvetica, sans-serif',
-    gradientStart:  '#0181C2',
-    gradientMid:  '#04A7F9',
-    gradientEnd:  '#4BC4F7',
+    gradientStart:  '#01222d',
+    gradientMid:  '#054766',
+    gradientEnd:  '#076286',
     locationFontColor:  '#FFF',
     todayTempFontColor:  '#FFF',
     todayDateFontColor:  '#B5DEF4',
