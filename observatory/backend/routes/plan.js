@@ -240,7 +240,6 @@ function acpScriptGenerator(plan) {
                 script += '\n#FILTER ';
             
                 for (let i = 0; i < plan.observations[j].filter.length; i++) {
-                    console.log('in filter')
                     let filter = plan.observations[j].filter[i];
                     if (filter == '') filter = 'Clear'
                     if (i != plan.observations[j].filter.length - 1) {
@@ -251,7 +250,6 @@ function acpScriptGenerator(plan) {
                 }
             }
             if (plan.observations[j].bin != '') {
-                console.log('in binning')
                 script += '\n#BINNING '
                 for (let i = 0; i < plan.observations[j].bin.length; i++) {
                     if (i != plan.observations[j].filter.length - 1) {
@@ -262,7 +260,6 @@ function acpScriptGenerator(plan) {
                 }
             }
             if (plan.observations[j].exposures != '') {
-                console.log('in exposures')
                 script +=  '\n#COUNT ';
                 for (let i = 0; i < plan.observations[j].exposures.length; i++) {
                     if (i != plan.observations[j].exposures.length - 1) {
@@ -273,7 +270,6 @@ function acpScriptGenerator(plan) {
                 }
              }
             if (plan.observations[j].exposureTime != '') {
-                console.log('in exposureTime')
                 script += '\n#INTERVAL  ';
                 for (let i = 0; i < plan.observations[j].exposureTime.length; i++) {
                     if (i != plan.observations[j].exposureTime.length - 1) {
