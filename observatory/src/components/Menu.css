@@ -25,11 +25,11 @@ body {
 .menu .container {
     background-color: #101010;
 }
-/*
+
 .container:hover {
     background-color: #000;
 }
-*/
+
 .container .card {
     padding-top: 50px;
     position: relative;
@@ -77,11 +77,13 @@ body {
 }
 
 .container .card .content h2{
+    text-shadow: 2px 2px #000;
     font-size: 3em;
 }
 
 .container .card .content p{
-    font-size: 0.9em;
+    font-size: 1.25em; 
+    text-shadow: 2px 2px #000;
 }
 
 .container .card:hover .content{
@@ -103,3 +105,26 @@ body {
 
 }
 
+#planlist, #newplan, #guide, #about{
+    height: 600px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+
+#planlist {
+    background-image: url('./../Images/nebulaeya.jpg');
+}
+
+#newplan {
+    background-image: url('./../Images/observatory.jpg');
+}
+
+#guide {
+    background-image: url('./../Images/books.jpg');
+}
+
+#about {
+    background-image: url('./../Images/university.jpg');
+}
