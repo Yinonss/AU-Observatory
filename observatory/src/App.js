@@ -23,6 +23,8 @@ function App() {
             <Route path={"/planlist"}>
                 <Base />
                 <PlanList/>
+                <br/>
+                <Weather/>
             </Route>
             <Route path='/guide'><Base /><Guide /></Route>
             <Route path='/about'><Base /><About /></Route>

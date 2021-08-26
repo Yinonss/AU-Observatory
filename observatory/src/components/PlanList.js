@@ -4,7 +4,6 @@ import PlanItem from "./PlanItem";
 import Modal from "react-modal";
 import "../Styles/PlanList.css"
 
-
 Modal.setAppElement('#root')
 
 export default class planList extends Component {
