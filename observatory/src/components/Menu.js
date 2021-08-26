@@ -1,6 +1,5 @@
 import React from "react";
 import './../components/Menu.css'
-import andromada from './../Images/andromada.jpg'
 export default function Guide() {
 
 return (
